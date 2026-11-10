@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title: { default: 'TRAIL9INE MEDIA — Creative & Marketing Studio, Toronto', template: '%s | TRAIL9INE MEDIA' },
   description: 'Film, photography, social media and design for restaurants and ambitious brands. A Toronto creative studio.',
   icons: { icon: '/images/logo.png' },
-  openGraph: { siteName: 'TRAIL9INE MEDIA', locale: 'en_CA', type: 'website', images: ['/images/hero-culinary.webp'] },
+  openGraph: { siteName: 'TRAIL9INE MEDIA', locale: 'en_CA', type: 'website', images: ['/images/agency/creative-studio.webp'] },
 }
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const services=await siteServices()

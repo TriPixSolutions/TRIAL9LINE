@@ -21,7 +21,7 @@ export default async function HomePage() {
           <Link href="/services" className="campaign-service-note" aria-label="Explore our strategy, content and growth services"><span>Strategy</span><span aria-hidden="true">/</span><span>Content</span><span aria-hidden="true">/</span><span>Growth</span><Arrow diagonal /></Link>
         </div>
         <div className="campaign-visual">
-          <div className="campaign-scene"><StudioImage src={mediaUrl(content.heroImage,"/images/creative-studio-hero.webp")} alt="Camera, video editing laptop and a mobile campaign preview in a purple-lit creative studio" priority sizes="(max-width:767px) 115vw, (max-width:1100px) 65vw, 68vw" /></div>
+          <div className="campaign-scene"><StudioImage src={mediaUrl(content.heroImage,"/images/agency/film-production.webp")} alt="Professional cinema camera and softbox in a minimal production studio" priority sizes="(max-width:767px) 115vw, (max-width:1100px) 65vw, 68vw" /></div>
 
         </div>
       </div>
@@ -32,7 +32,7 @@ export default async function HomePage() {
       <div className="section-bottom"><p>Content, campaigns and collaborations.</p><Link className="text-link" href="/work">View all projects <Arrow diagonal /></Link></div>
     </section>}
     <section className="studio-container studio-intro" data-reveal><div><h2 className="statement">{content.agencyIntroHeading}</h2><div className="studio-intro-bottom"><p>{content.agencyIntroBody}</p><Link className="text-link" href="/about">Meet the studio <Arrow diagonal /></Link></div></div></section>
-    <section className="capability-section"><div className="studio-container capability-layout"><div data-reveal><h2 className="section-title">Good thinking.<br />Better making.</h2><p>A single production or a connected brand presence. We bring the right skills to the table.</p><div className="media-frame"><StudioImage src="/images/food-reel-cover.webp" alt="Food preparation during a restaurant shoot" sizes="250px" /></div></div>
+    <section className="capability-section"><div className="studio-container capability-layout"><div data-reveal><h2 className="section-title">Good thinking.<br />Better making.</h2><p>A single production or a connected brand presence. We bring the right skills to the table.</p><div className="media-frame"><StudioImage src="/images/agency/social-strategy.webp" alt="Content planning and social media campaign direction" sizes="250px" /></div></div>
       <div>{studioServices.map((service, i) => <Link className="service-line" href={'/services/' + service.slug} key={service.slug}><span className="service-index">0{i + 1}</span><h3>{service.shortTitle}</h3><Arrow diagonal /></Link>)}</div>
     </div></section>
     <section className="studio-container section-pad"><div className="section-intro"><div><StudioAccent /><h2 className="section-title">Simple process.<br />Considered work.</h2></div><p>Understanding the business comes first. Everything we make follows from there.</p></div><div className="process-row">{studioProcess.map((step, i) => <div className="process-item" key={step.title} data-reveal><span>0{i + 1}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}</div></section>

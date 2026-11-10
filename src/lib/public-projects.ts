@@ -4,23 +4,18 @@ import { cache } from 'react'
 import { getPayloadClient } from './payload'
 import type { ProjectCardData } from '@/components/public/ProjectCard'
 
-const presentationAssets: Record<string, string> = {
-  '/images/tharavadu-case-study.png': '/images/tharavadu-macro.webp',
-  '/images/social-marketing.png': '/images/social-reel-cover.webp',
-  '/images/work-grid.png': '/images/hero-culinary.webp',
-}
+import { agencyAsset, agencyAlt } from './agency-imagery'
 export function mediaUrl(media: unknown, fallback?: string | null): string {
   const source = media && typeof media === 'object' && ('cloudinaryUrl' in media || 'url' in media) ? String((media as any).cloudinaryUrl || (media as any).url || '') : fallback || ''
   if (!source) return ''
   const safe = source.startsWith('/') && !source.startsWith('//') || /^https?:\/\//i.test(source)
   if (!safe) return ''
-  if (presentationAssets[source]) return presentationAssets[source]
-  const localPhotos = ['hero-culinary', 'food-reel-cover', 'social-reel-cover', 'interior-dining', 'tharavadu-macro']
-  for (const name of localPhotos) if (source === '/images/' + name + '.png') return '/images/' + name + '.webp'
+  const replacement = agencyAsset(media, source)
+  if (replacement) return replacement.src
   return source
 }
 export function projectCard(doc: any): ProjectCardData {
-  return { title: doc.title, slug: doc.slug, editorialHeadline: doc.editorialHeadline, servicesSummary: doc.servicesSummary, coverImageUrl: mediaUrl(doc.coverImage, doc.coverImageUrl), coverAlt: doc.coverImage?.alt || doc.title, coverPosition: doc.coverImage ? `${doc.coverImage.focalX??50}% ${doc.coverImage.focalY??50}%` : undefined, categories: (doc.categories || []).filter((c: any) => c && typeof c === 'object') }
+  return { title: doc.title, slug: doc.slug, editorialHeadline: doc.editorialHeadline, servicesSummary: doc.servicesSummary, coverImageUrl: mediaUrl(doc.coverImage, doc.coverImageUrl), coverAlt: agencyAlt(doc.coverImage, doc.coverImageUrl, doc.coverImage?.alt || doc.title), coverPosition: doc.coverImage && !agencyAsset(doc.coverImage, doc.coverImageUrl) ? `${doc.coverImage.focalX??50}% ${doc.coverImage.focalY??50}%` : undefined, categories: (doc.categories || []).filter((c: any) => c && typeof c === 'object') }
 }
 export async function publicProjects(options: { limit?: number; page?: number; categoryId?: string | number; slugs?: string[]; placement?: 'home'|'work'|'discovery' } = {}) {
   const payload = await getPayloadClient()

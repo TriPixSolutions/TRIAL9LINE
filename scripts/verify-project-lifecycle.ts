@@ -35,13 +35,13 @@ async function run() {
       industry: 'Hospitality & Bakery',
       servicesSummary: 'Social Strategy • Food Photography',
       overview: 'Our production team documented the early morning baking ritual at this artisanal bakery.',
-      coverImageUrl: '/images/hero-culinary.png',
+      coverImageUrl: '/images/agency/film-production.webp',
       categories: [categoryId],
       _status: 'draft',
       gallery: [
         {
           blockType: 'wideImage',
-          imageUrl: '/images/tharavadu-macro.png',
+          imageUrl: '/images/agency/commercial-photography.webp',
           caption: 'Freshly baked sourdough boules cooling on cedar racks.',
         },
       ],

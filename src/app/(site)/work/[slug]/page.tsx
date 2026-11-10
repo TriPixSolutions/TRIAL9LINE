@@ -4,6 +4,7 @@ import { permanentRedirect, notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { publicProject, publicProjects, mediaUrl, redirectProject } from '@/lib/public-projects'
 import { getPayloadClient } from '@/lib/payload'
+import { agencyAsset, agencyAlt } from '@/lib/agency-imagery'
 import { GalleryBlock, type GalleryBlockItem } from '@/components/public/GalleryBlock'
 import { Arrow, InquiryCTA, StudioImage } from '@/components/public/Studio'
 export const dynamic = 'force-dynamic'
@@ -35,10 +36,11 @@ export default async function ProjectPage({ params, searchParams }: Props) {
   const chosen=nextId&&nextId!==doc.id?(await payload.find({collection:'projects',where:{and:[{id:{equals:nextId}},{_status:{equals:'published'}}]},limit:1,depth:1,overrideAccess:false,draft:false})).docs[0]:null
   const next=chosen||(await publicProjects({placement:'discovery',limit:2})).docs.find(p=>p.id!==doc.id)
   const gallery: GalleryBlockItem[] = (doc.gallery || []).map((item: any) => ({
-    ...item, imageAlt:item.mediaItem?.alt, imageLeftAlt:item.mediaLeft?.alt, imageRightAlt:item.mediaRight?.alt, imageUrl: mediaUrl(item.mediaItem, item.imageUrl),
+    ...item, caption: agencyAsset(item.mediaItem,item.imageUrl)||agencyAsset(item.mediaLeft,item.imageLeftUrl)||agencyAsset(item.videoPoster,item.videoPosterUrl) ? 'Illustrative creative process imagery.' : item.caption,
+    imageAlt:agencyAlt(item.mediaItem,item.imageUrl,item.mediaItem?.alt || ''), imageLeftAlt:agencyAlt(item.mediaLeft,item.imageLeftUrl,item.mediaLeft?.alt || ''), imageRightAlt:agencyAlt(item.mediaRight,item.imageRightUrl,item.mediaRight?.alt || ''), imageUrl: mediaUrl(item.mediaItem, item.imageUrl),
     imageLeftUrl: mediaUrl(item.mediaLeft, item.imageLeftUrl), imageRightUrl: mediaUrl(item.mediaRight, item.imageRightUrl),
     videoPosterUrl: mediaUrl(item.videoPoster, item.videoPosterUrl),
-    stripImages: (item.stripImages || []).map((image: any) => ({ url: mediaUrl(image.media, image.url), caption: image.caption, alt:image.media?.alt })),
+    stripImages: (item.stripImages || []).map((image: any) => ({ url: mediaUrl(image.media, image.url), caption: agencyAsset(image.media,image.url)?'Illustrative creative process imagery.':image.caption, alt:agencyAlt(image.media,image.url,image.media?.alt || '') })),
   }))
   return <div className={'project-presentation layout-'+(doc.layout||'editorial')+' hero-ratio-'+(doc.heroRatio||'wide')+' gallery-spacing-'+(doc.gallerySpacing||'comfortable')}>
     {query.preview === 'true' && <div className="preview-banner">Private draft preview · This version is visible only to authorised staff.</div>}
@@ -46,7 +48,7 @@ export default async function ProjectPage({ params, searchParams }: Props) {
       <div className="project-title-row"><h1 className="page-title">{doc.title}</h1>{doc.editorialHeadline && <p>{doc.editorialHeadline}</p>}</div>
       <dl className="project-facts"><div><dt>Client</dt><dd>{doc.clientName || doc.title}</dd></div>{doc.industry && <div><dt>Industry</dt><dd>{doc.industry}</dd></div>}<div><dt>What we did</dt><dd>{doc.servicesSummary || (doc.categories || []).map((c: any) => c.name).filter(Boolean).join(' · ')}</dd></div></dl>
     </section>
-    {cover && <div className="studio-container"><div className="media-frame project-hero"><StudioImage src={cover} alt={doc.coverImage?.alt || doc.editorialHeadline || doc.title} priority /></div></div>}
+    {cover && <div className="studio-container"><div className="media-frame project-hero"><StudioImage src={cover} alt={agencyAlt(doc.coverImage,doc.coverImageUrl,doc.coverImage?.alt || doc.editorialHeadline || doc.title)} priority /></div>{agencyAsset(doc.coverImage,doc.coverImageUrl)&&<p className="people-support">Illustrative creative process imagery; client deliverables can be added through the project gallery.</p>}</div>}
     <section className="studio-container project-overview"><div><p>{doc.overview}</p>{doc.externalLink && /^https?:\/\//i.test(doc.externalLink) && <Link className="text-link project-external" href={doc.externalLink} target="_blank" rel="noopener noreferrer">Visit the client <Arrow diagonal /></Link>}</div></section>
     {gallery.length > 0 && <section className="studio-container project-gallery" aria-label="Project gallery">{gallery.map((block, i) => <GalleryBlock key={block.id || i} block={block} />)}</section>}
     {next && <div className="studio-container"><Link href={'/work/' + encodeURIComponent(next.slug)} className="next-project"><div><h2>{next.title}</h2></div><Arrow diagonal /></Link></div>}

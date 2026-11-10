@@ -1,0 +1,32 @@
+{
+  "tool": "Built-in image_gen",
+  "style": "Warm neutral editorial photography with subtle plum accents; illustrative agency imagery, not documentation of actual client work or premises.",
+  "assets": [
+    {
+      "file": "public/images/agency/social-strategy.webp",
+      "prompt": "Overhead editorial photograph of a minimal social media strategist's desk: a smartphone showing a clean abstract tiled social feed with no readable words, a paper content calendar with simple blocks, a silver laptop corner, a plum colour swatch and pencil. Warm off-white desk, naturally lit, restrained deep plum accents."
+    },
+    {
+      "file": "public/images/agency/film-production.webp",
+      "prompt": "Editorial photograph of a professional cinema camera rig on a tripod with a matte box, in a minimal daylight film studio, pale backdrop and a single softbox visible, a blurred editing station behind. Thoughtful quiet composition, black equipment, ivory walls, muted plum accent. No food, no restaurant."
+    },
+    {
+      "file": "public/images/agency/commercial-photography.webp",
+      "prompt": "Editorial behind-the-scenes photograph of a commercial photography set: black mirrorless camera in foreground, a sculptural matte ivory skincare bottle on a pale stone plinth, large softbox and seamless warm-grey backdrop, a subtle plum fabric at the edge. Quiet premium lighting, beautifully composed."
+    },
+    {
+      "file": "public/images/agency/brand-design.webp",
+      "prompt": "High-end editorial overhead photo of a graphic designer's work table: neatly layered off-white brand stationery with abstract geometric plum marks, thick uncoated paper, colour swatches, typography specimen sheets, metal ruler, corner of a tablet with vector artwork. Minimal refined art direction, no readable words, no logos."
+    },
+    {
+      "file": "public/images/agency/digital-campaigns.webp",
+      "prompt": "Premium editorial photograph of a minimal digital marketing desk, silver laptop showing understated analytics charts and campaign thumbnails without readable words, slim tablet with abstract ad creative, notebook with a hand-drawn audience diagram, plum pencil. Off-white desk, soft side daylight, quiet sophisticated composition."
+    },
+    {
+      "file": "public/images/agency/creative-studio.webp",
+      "prompt": "Wide architectural editorial photograph of a small independent creative studio: sunlit communal oak table with design proofs, laptop, camera and paper moodboards, two empty task chairs, a neat shelving unit, soft ivory walls with restrained plum accents. Calm lived-in professional workspace, no people, no food."
+    }
+  ],
+  "sharedPrefix": "Use case: photorealistic-natural. Asset type: premium creative agency website photography, landscape 3:2 composition, high resolution. ",
+  "sharedSuffix": " Cohesive photographic series: realistic materials, soft natural light, gentle film grain, warm neutral palette, deep aubergine detail, generous breathing room, central subject safe for portrait crops. No collage, no typography overlays, no watermarks, no food, no drinks, no restaurant, no neon, no invented logos. Save the generated image so it can be used in the project."
+}

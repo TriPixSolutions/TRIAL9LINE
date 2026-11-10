@@ -10,12 +10,12 @@ export default async function AboutPage() {
     <section className="studio-container page-heading about-hero">
 
       <div className="about-hero-grid"><h1 className="page-title">{content.heroHeadline}</h1><p>{content.heroIntro}</p></div>
-      <div className="media-frame about-image"><StudioImage src={mediaUrl(content.heroImage,"/images/interior-dining.webp")} alt="A lively restaurant filled with people, warm light and conversation" priority /></div>
+      <div className="media-frame about-image"><StudioImage src={mediaUrl(content.heroImage,"/images/agency/creative-studio.webp")} alt="Illustrative creative workspace with design proofs, a camera and moodboards" priority /></div>
 
     </section>
     <section className="studio-container section-pad story-grid">
       <div className="story-copy" data-reveal><h2 className="section-title">{content.storyHeading}</h2><p>{content.storyBody}</p><p>Today, our work spans social media, film, photography, branding and digital marketing. Different skills, working towards one consistent impression.</p><p>We have a particular appetite for restaurants and hospitality. The preparation, the people, the atmosphere: there is always more to the story than what is on the menu.</p></div>
-      <div className="media-frame story-image" data-reveal><StudioImage src={mediaUrl(content.storyImage,"/images/food-reel-cover.webp")} alt="Hands preparing and presenting a restaurant dish" sizes="(max-width:767px) 100vw, 50vw" /></div>
+      <div className="media-frame story-image" data-reveal><StudioImage src={mediaUrl(content.storyImage,"/images/agency/brand-design.webp")} alt="Brand stationery, colour swatches and graphic design materials" sizes="(max-width:767px) 100vw, 50vw" /></div>
     </section>
     <section className="people-section"><div className="studio-container">
       <div className="section-intro"><div><h2 className="section-title">Small studio.<br />Shared ambition.</h2></div><p>Co-founded by Riyan and Shamil, bringing together creative production and marketing expertise.</p></div>

@@ -201,7 +201,7 @@ export const Projects: CollectionConfig = {
               type: 'text',
               label: 'Cover Image URL (Direct / Fallback)',
               admin: {
-                description: 'Enter a direct path (e.g. /images/tharavadu-case-study.png) or external image link.',
+                description: 'Enter a direct path (e.g. /images/agency/commercial-photography.webp) or external image link.',
               },
             },
             {

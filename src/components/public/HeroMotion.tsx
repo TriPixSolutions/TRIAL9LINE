@@ -158,10 +158,10 @@ export function HeroMotion() {
           ref={mediaContainerRef}
           className="relative max-w-5xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border border-white/15 aspect-[16/9] md:aspect-[21/9] bg-black/40 mt-2 sm:mt-4"
         >
-          {/* Main culinary centerpiece image */}
+          {/* Main production studio image */}
           <Image
-            src="/images/hero-culinary.png"
-            alt="Cinematic high-angle culinary editorial capture"
+            src="/images/agency/film-production.webp"
+            alt="Cinema camera in a minimal film studio"
             fill
             priority
             sizes="(max-width: 1200px) 100vw, 1100px"
@@ -188,8 +188,8 @@ export function HeroMotion() {
             className="hidden sm:block absolute top-6 right-6 w-44 md:w-52 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-white/25 bg-black/60 z-20"
           >
             <Image
-              src="/images/food-reel-cover.png"
-              alt="Vertical social reel frame"
+              src="/images/agency/social-strategy.webp"
+              alt="Social media content planning"
               fill
               sizes="220px"
               className="object-cover opacity-90"

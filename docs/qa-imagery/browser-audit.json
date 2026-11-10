@@ -1,0 +1,832 @@
+[
+  {
+    "width": 1440,
+    "path": "/",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Professional cinema camera and softbox in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Content planning and social media campaign direction",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "TRAIL9INE MEDIA — Creative & Marketing Studio, Toronto"
+  },
+  {
+    "width": 1440,
+    "path": "/about",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "broken": false,
+        "src": "/images/agency/creative-studio.webp"
+      },
+      {
+        "alt": "Brand stationery, colour swatches and graphic design materials",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "About the Studio | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Brand identity materials, typography samples and colour swatches",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      },
+      {
+        "alt": "A commercial product photography set with camera and studio lighting",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and lighting arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Brand identity design: printed guidelines, type samples and plum colour swatches",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      },
+      {
+        "alt": "A creative reviewing digital advertising concepts and audience planning at a studio desk",
+        "broken": false,
+        "src": "/images/agency/digital-campaigns.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Services & Capabilities | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/social-media-marketing",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Social Media Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/content-creation-video-production",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Content Creation & Video Production Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/food-commercial-photography",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Camera and lighting arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Food & Commercial Photography Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/branding-graphic-design",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Brand identity design: printed guidelines, type samples and plum colour swatches",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Branding & Graphic Design Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/paid-advertising-digital-marketing",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "A creative reviewing digital advertising concepts and audience planning at a studio desk",
+        "broken": false,
+        "src": "/images/agency/digital-campaigns.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Paid Advertising & Digital Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Selected Work | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/tharavadu",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "broken": false,
+        "src": "/images/agency/creative-studio.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Tharavadu | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/90s-lounge",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "broken": false,
+        "src": "/images/agency/creative-studio.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "90’s Lounge | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/piravi",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Piravi | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/biryani-and-barbeque",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Biryani & Barbeque | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/contact",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Let’s Talk | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/privacy",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Privacy Policy | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Professional cinema camera and softbox in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Content planning and social media campaign direction",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "TRAIL9INE MEDIA — Creative & Marketing Studio, Toronto"
+  },
+  {
+    "width": 390,
+    "path": "/about",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "broken": false,
+        "src": "/images/agency/creative-studio.webp"
+      },
+      {
+        "alt": "Brand stationery, colour swatches and graphic design materials",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "About the Studio | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Brand identity materials, typography samples and colour swatches",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      },
+      {
+        "alt": "A commercial product photography set with camera and studio lighting",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and lighting arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Brand identity design: printed guidelines, type samples and plum colour swatches",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      },
+      {
+        "alt": "A creative reviewing digital advertising concepts and audience planning at a studio desk",
+        "broken": false,
+        "src": "/images/agency/digital-campaigns.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Services & Capabilities | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/social-media-marketing",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Social Media Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/content-creation-video-production",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Content Creation & Video Production Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/food-commercial-photography",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Camera and lighting arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Food & Commercial Photography Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/branding-graphic-design",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Brand identity design: printed guidelines, type samples and plum colour swatches",
+        "broken": false,
+        "src": "/images/agency/brand-design.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Branding & Graphic Design Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/paid-advertising-digital-marketing",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "A creative reviewing digital advertising concepts and audience planning at a studio desk",
+        "broken": false,
+        "src": "/images/agency/digital-campaigns.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Paid Advertising & Digital Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Selected Work | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/tharavadu",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "broken": false,
+        "src": "/images/agency/creative-studio.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Tharavadu | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/90s-lounge",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "broken": false,
+        "src": "/images/agency/creative-studio.webp"
+      },
+      {
+        "alt": "Social feed planning, a content calendar and brand colour swatches",
+        "broken": false,
+        "src": "/images/agency/social-strategy.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "90’s Lounge | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/piravi",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      },
+      {
+        "alt": "Camera and softbox arranged for a commercial product photoshoot",
+        "broken": false,
+        "src": "/images/agency/commercial-photography.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Piravi | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/biryani-and-barbeque",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Professional cinema camera and lighting in a minimal production studio",
+        "broken": false,
+        "src": "/images/agency/film-production.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Biryani & Barbeque | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/contact",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Let’s Talk | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/privacy",
+    "images": [
+      {
+        "alt": "",
+        "broken": false,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Privacy Policy | TRAIL9INE MEDIA"
+  }
+]
