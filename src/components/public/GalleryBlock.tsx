@@ -5,14 +5,14 @@ export interface GalleryBlockItem {
   imageRatio?:string; id?: string; blockType: 'wideImage' | 'imagePair' | 'portraitStrip' | 'video' | 'captionedImage' | 'textBlock'
   imageAlt?:string; imageLeftAlt?:string; imageRightAlt?:string; imageUrl?: string | null; imageLeftUrl?: string | null; imageRightUrl?: string | null
   stripImages?: Array<{ url: string; alt?:string; caption?: string | null }>
-  videoUrl?: string | null; videoPosterUrl?: string | null; heading?: string | null; title?: string | null; caption?: string | null; body?: string | null
+  videoPosterAlt?:string; videoUrl?: string | null; videoPosterUrl?: string | null; heading?: string | null; title?: string | null; caption?: string | null; body?: string | null
 }
 export function GalleryBlock({ block }: { block: GalleryBlockItem }) {
   const caption = block.caption ? <figcaption>{block.caption}</figcaption> : null
   if (block.blockType === 'textBlock') return <div className="gallery-text">{block.heading && <h3>{block.heading}</h3>}{block.body && <p>{block.body}</p>}</div>
   if (block.blockType === 'video') {
     const source = resolveProjectVideo(block.videoUrl)
-    if (!source) return null
+    if (!source) return block.videoPosterUrl ? <figure className="gallery-block"><div className="media-frame"><StudioImage src={block.videoPosterUrl} alt={block.videoPosterAlt || 'Project preview'} /></div>{caption}</figure> : null
     return <figure className="gallery-block"><ProjectVideo source={source} title={block.heading || block.title || 'Project film'} poster={block.videoPosterUrl} />{caption}</figure>
   }
   if (block.blockType === 'imagePair') {

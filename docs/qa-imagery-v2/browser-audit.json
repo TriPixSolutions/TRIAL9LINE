@@ -1,0 +1,909 @@
+[
+  {
+    "width": 1440,
+    "path": "/",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "A creative director reviewing a photographic print in natural studio light",
+        "currentSrc": "http://localhost:3005/images/editorial/home-hero.webp",
+        "loaded": true,
+        "src": "/images/editorial/home-hero.webp"
+      },
+      {
+        "alt": "Close-up of a beautifully arranged Kerala banana leaf meal, small brass bowls of colourful curries, crisp dosa and coconut chutney, restrained overhead composition on a dark wood restaurant table, beautiful soft natural window light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-home-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-home.webp"
+      },
+      {
+        "alt": "Premium close-up photograph of an elegant citrus cocktail in a low tumbler with a single clear ice cube, low-lit contemporary lounge in soft background, amber glass reflections, restrained cinematic atmosphere.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-home-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-home.webp"
+      },
+      {
+        "alt": "Bright premium cafe photography of a cappuccino with delicate latte art and a flaky croissant on a small oak table beside a large window, simple warm white ceramics, appetising natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-home-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-home.webp"
+      },
+      {
+        "alt": "A beautiful close-up of fragrant chicken biryani in a dark earthenware bowl, individual long rice grains, saffron and fresh herbs visible, understated dark restaurant backdrop, realistic appetising side light.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-home-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/biryani-and-barbeque-home.webp"
+      },
+      {
+        "alt": "A professional video editing workstation in natural daylight",
+        "currentSrc": "http://localhost:3005/images/editorial/home-capability-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/home-capability.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "TRAIL9INE MEDIA — Creative & Marketing Studio, Toronto"
+  },
+  {
+    "width": 1440,
+    "path": "/about",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "currentSrc": "http://localhost:3005/images/editorial/about-studio.webp",
+        "loaded": true,
+        "src": "/images/editorial/about-studio.webp"
+      },
+      {
+        "alt": "Designers arranging photographic prints and paper samples on a moodboard",
+        "currentSrc": "http://localhost:3005/images/editorial/about-process-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/about-process.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "About the Studio | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Sculptural folded paper and brushed aluminium in natural light",
+        "currentSrc": "http://localhost:3005/images/editorial/services-hero-design-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/services-hero-design.webp"
+      },
+      {
+        "alt": "Close-up of a professional cinema lens and matte box",
+        "currentSrc": "http://localhost:3005/images/editorial/services-hero-camera-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/services-hero-camera.webp"
+      },
+      {
+        "alt": "Overhead photograph of a content creator desk with a smartphone showing a colourful but tasteful social post grid, a paper weekly calendar, a silver laptop corner and a black pencil",
+        "currentSrc": "http://localhost:3005/images/editorial/service-social-list-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-social-list.webp"
+      },
+      {
+        "alt": "Wide photograph of a documentary cinema camera on a compact tripod beside a large frosted studio window, natural side light, uncluttered grey studio, cables neatly coiled, no people.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-film-list-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-film-list.webp"
+      },
+      {
+        "alt": "Minimal professional product photoshoot setup with a mirrorless camera, a large diffusion panel and a sculptural clear glass perfume bottle on a pale block. Crisp natural light, refined neutral tones.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-photo-list-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-photo-list.webp"
+      },
+      {
+        "alt": "An editorial flat lay of beautifully textured blank stationery, black typography specimen sheets with subtle tiny illegible type, a metal ruler and cobalt blue colour samples on a white design desk",
+        "currentSrc": "http://localhost:3005/images/editorial/service-brand-list-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-brand-list.webp"
+      },
+      {
+        "alt": "A minimal laptop and paper media planning sheet on a pale grey desk, understated blue analytics charts visible on screen with no readable words, simple black pen, generous space and daylight.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-ads-list-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-ads-list.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Services & Capabilities | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/social-media-marketing",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Candid editorial close-up of a content strategist holding a smartphone while reviewing a social content calendar on a laptop, over-shoulder framing with no face visible, natural blue denim and white shirt, clean daylight office.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-social-detail-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-social-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Social Media Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/content-creation-video-production",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Over-shoulder documentary photo of a film editor at a professional dual monitor editing desk, natural short hair, simple black shirt, visible colour grading wheel on one screen, light neutral studio, realistic quiet working moment.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-film-detail-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-film-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Content Creation & Video Production Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/food-commercial-photography",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Candid side view of a photographer carefully adjusting a camera on tripod facing a white sneaker on a seamless light grey cyclorama, one softbox, clean daylight studio, understated wardrobe.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-photo-detail-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-photo-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Food & Commercial Photography Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/branding-graphic-design",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Close-up of a graphic designer using a digital drawing tablet and stylus with abstract vector shapes visible on a desktop monitor, natural light, beautifully uncluttered studio, hands only, crisp realistic textures.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-brand-detail-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-brand-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Branding & Graphic Design Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/services/paid-advertising-digital-marketing",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Candid editorial photo of two marketing professionals reviewing a campaign dashboard at a shared laptop in a clean bright meeting space, cropped to hands and shoulders, fine natural skin texture, neutral wardrobes, no staged smiles.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-ads-detail-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-ads-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Paid Advertising & Digital Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Three-quarter view of a South Indian restaurant table with a crisp golden dosa on a matte ceramic plate, brass tumbler in background, teak texture and soft green leaves, thoughtful appetising natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-work-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-work.webp"
+      },
+      {
+        "alt": "Wide editorial photograph of a sophisticated small lounge bar with walnut counter, amber lamps and upholstered dark green chairs, no people, natural believable moody interior lighting.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-work-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-work.webp"
+      },
+      {
+        "alt": "Architectural editorial photo of a minimal independent cafe, pale oak counter, white tile, espresso machine and soft morning sunlight across the empty room, no readable sign, welcoming realistic setting.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-work-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-work.webp"
+      },
+      {
+        "alt": "Editorial commercial photograph of charcoal grilled chicken skewers on a simple matte black plate with a small herb garnish and lemon, subtle smoke, dark neutral table and cinematic natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-work-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/biryani-and-barbeque-work.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Selected Work | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/tharavadu",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Wide architectural editorial photograph of a warm contemporary Kerala restaurant with teak chairs, woven cane details, soft cream walls and banana leaf greenery, a quietly set dining table in foreground",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-detail.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-detail.webp"
+      },
+      {
+        "alt": "Close macro editorial photograph of a golden crisp dosa edge and a small bowl of coconut chutney on dark handmade ceramic, beautifully restrained fine food photography.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-1-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-1.webp"
+      },
+      {
+        "alt": "Intimate wide editorial photograph of a South Indian dining room with carved wooden chairs, warm plaster walls and filtered afternoon sunlight, natural green plants and no people.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-2-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-2.webp"
+      },
+      {
+        "alt": "Vertical-friendly close-up photograph of hands serving steaming Kerala appam into a ceramic bowl with vegetable stew, real restaurant food texture, warm natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-3-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-3.webp"
+      },
+      {
+        "alt": "Minimal close-up photograph of South Indian filter coffee in a stainless steel tumbler and dabarah on a simple worn wood cafe table, a fine trail of steam, elegant natural morning light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-4-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-4.webp"
+      },
+      {
+        "alt": "Overhead minimal photograph of a small brass bowl of richly textured vegetable curry with curry leaves and one folded white linen napkin, muted stone surface, lovely window light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-5-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-5.webp"
+      },
+      {
+        "alt": "Wide cinematic photo of a quiet restaurant table after service, banana leaf plate with a carefully composed Kerala meal, brass accents, warm teak background, inviting natural evening light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-6.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-6.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Tharavadu | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/90s-lounge",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "A beautifully set lounge dining table with two craft cocktails, a small appetiser plate and folded linen, intimate modern interior in background, refined realistic evening light and no logos.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-detail.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-detail.webp"
+      },
+      {
+        "alt": "Architectural photograph along a quiet boutique lounge with ribbed oak bar, understated pendant lights and olive velvet banquette seating, moody real-world evening lighting, no signage.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-gallery-1.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-gallery-1.webp"
+      },
+      {
+        "alt": "Close-up of a bartender hands carefully expressing orange peel above a coupe glass, realistic skin and glass reflections, cinematic amber light, restaurant commercial photography.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-gallery-2-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-gallery-2.webp"
+      },
+      {
+        "alt": "Minimal editorial photograph of a small plate of crisp restaurant appetisers with a subtle dipping sauce on dark slate, elegant lounge table, directional soft light and realistic texture.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-gallery-3-960.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-gallery-3.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "90’s Lounge | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/piravi",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Cinematic wide photo of a contemporary cafe dining corner with cream banquette, little round tables and a daylight window, a coffee cup in foreground, warm natural textures and no people.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-detail.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-detail.webp"
+      },
+      {
+        "alt": "Close-up editorial photograph of a barista hands pouring latte art into a clean white cup, stainless espresso machine softly blurred behind, natural realistic cafe light.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-gallery-1.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-gallery-1.webp"
+      },
+      {
+        "alt": "Premium food editorial overhead photo of an open cafe sandwich with fresh greens and a small black coffee on a clean pale stone table, simple composition, natural afternoon light.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-gallery-2.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-gallery-2.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Piravi | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/work/biryani-and-barbeque",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Wide premium restaurant table photograph of a biryani bowl and a platter of grilled kebabs with minimal accompaniments, warm natural evening side light and tactile wood, no text or logos.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-detail.webp",
+        "loaded": true,
+        "src": "/images/editorial/biryani-and-barbeque-detail.webp"
+      },
+      {
+        "alt": "Cinematic close-up of a chef hands lifting the lid from a steaming clay biryani pot, delicate steam and detailed grains of rice visible, a real restaurant kitchen blurred behind, dramatic but natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-gallery-1.webp",
+        "loaded": true,
+        "src": "/images/editorial/biryani-and-barbeque-gallery-1.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Biryani & Barbeque | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/contact",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Let’s Talk | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 1440,
+    "path": "/privacy",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Privacy Policy | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "rendered": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "A creative director reviewing a photographic print in natural studio light",
+        "currentSrc": "http://localhost:3005/images/editorial/home-hero-480.webp",
+        "loaded": true,
+        "rendered": true,
+        "src": "/images/editorial/home-hero.webp"
+      },
+      {
+        "alt": "Close-up of a beautifully arranged Kerala banana leaf meal, small brass bowls of colourful curries, crisp dosa and coconut chutney, restrained overhead composition on a dark wood restaurant table, beautiful soft natural window light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-home-480.webp",
+        "loaded": true,
+        "rendered": true,
+        "src": "/images/editorial/tharavadu-home.webp"
+      },
+      {
+        "alt": "Premium close-up photograph of an elegant citrus cocktail in a low tumbler with a single clear ice cube, low-lit contemporary lounge in soft background, amber glass reflections, restrained cinematic atmosphere.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-home-480.webp",
+        "loaded": true,
+        "rendered": true,
+        "src": "/images/editorial/90s-lounge-home.webp"
+      },
+      {
+        "alt": "Bright premium cafe photography of a cappuccino with delicate latte art and a flaky croissant on a small oak table beside a large window, simple warm white ceramics, appetising natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-home-480.webp",
+        "loaded": true,
+        "rendered": true,
+        "src": "/images/editorial/piravi-home.webp"
+      },
+      {
+        "alt": "A beautiful close-up of fragrant chicken biryani in a dark earthenware bowl, individual long rice grains, saffron and fresh herbs visible, understated dark restaurant backdrop, realistic appetising side light.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-home-480.webp",
+        "loaded": true,
+        "rendered": true,
+        "src": "/images/editorial/biryani-and-barbeque-home.webp"
+      },
+      {
+        "alt": "A professional video editing workstation in natural daylight",
+        "currentSrc": "",
+        "loaded": false,
+        "rendered": false,
+        "src": "/images/editorial/home-capability.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "TRAIL9INE MEDIA — Creative & Marketing Studio, Toronto"
+  },
+  {
+    "width": 390,
+    "path": "/about",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Illustrative creative workspace with design proofs, a camera and moodboards",
+        "currentSrc": "http://localhost:3005/images/editorial/about-studio-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/about-studio.webp"
+      },
+      {
+        "alt": "Designers arranging photographic prints and paper samples on a moodboard",
+        "currentSrc": "http://localhost:3005/images/editorial/about-process-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/about-process.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "About the Studio | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Sculptural folded paper and brushed aluminium in natural light",
+        "currentSrc": "http://localhost:3005/images/editorial/services-hero-design-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/services-hero-design.webp"
+      },
+      {
+        "alt": "Close-up of a professional cinema lens and matte box",
+        "currentSrc": "http://localhost:3005/images/editorial/services-hero-camera-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/services-hero-camera.webp"
+      },
+      {
+        "alt": "Overhead photograph of a content creator desk with a smartphone showing a colourful but tasteful social post grid, a paper weekly calendar, a silver laptop corner and a black pencil",
+        "currentSrc": "http://localhost:3005/images/editorial/service-social-list-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-social-list.webp"
+      },
+      {
+        "alt": "Wide photograph of a documentary cinema camera on a compact tripod beside a large frosted studio window, natural side light, uncluttered grey studio, cables neatly coiled, no people.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-film-list-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-film-list.webp"
+      },
+      {
+        "alt": "Minimal professional product photoshoot setup with a mirrorless camera, a large diffusion panel and a sculptural clear glass perfume bottle on a pale block. Crisp natural light, refined neutral tones.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-photo-list-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-photo-list.webp"
+      },
+      {
+        "alt": "An editorial flat lay of beautifully textured blank stationery, black typography specimen sheets with subtle tiny illegible type, a metal ruler and cobalt blue colour samples on a white design desk",
+        "currentSrc": "http://localhost:3005/images/editorial/service-brand-list-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-brand-list.webp"
+      },
+      {
+        "alt": "A minimal laptop and paper media planning sheet on a pale grey desk, understated blue analytics charts visible on screen with no readable words, simple black pen, generous space and daylight.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-ads-list-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-ads-list.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Services & Capabilities | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/social-media-marketing",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Candid editorial close-up of a content strategist holding a smartphone while reviewing a social content calendar on a laptop, over-shoulder framing with no face visible, natural blue denim and white shirt, clean daylight office.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-social-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-social-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Social Media Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/content-creation-video-production",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Over-shoulder documentary photo of a film editor at a professional dual monitor editing desk, natural short hair, simple black shirt, visible colour grading wheel on one screen, light neutral studio, realistic quiet working moment.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-film-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-film-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Content Creation & Video Production Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/food-commercial-photography",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Candid side view of a photographer carefully adjusting a camera on tripod facing a white sneaker on a seamless light grey cyclorama, one softbox, clean daylight studio, understated wardrobe.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-photo-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-photo-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Food & Commercial Photography Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/branding-graphic-design",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Close-up of a graphic designer using a digital drawing tablet and stylus with abstract vector shapes visible on a desktop monitor, natural light, beautifully uncluttered studio, hands only, crisp realistic textures.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-brand-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-brand-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Branding & Graphic Design Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/services/paid-advertising-digital-marketing",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Candid editorial photo of two marketing professionals reviewing a campaign dashboard at a shared laptop in a clean bright meeting space, cropped to hands and shoulders, fine natural skin texture, neutral wardrobes, no staged smiles.",
+        "currentSrc": "http://localhost:3005/images/editorial/service-ads-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/service-ads-detail.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Paid Advertising & Digital Marketing Toronto | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Three-quarter view of a South Indian restaurant table with a crisp golden dosa on a matte ceramic plate, brass tumbler in background, teak texture and soft green leaves, thoughtful appetising natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-work-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-work.webp"
+      },
+      {
+        "alt": "Wide editorial photograph of a sophisticated small lounge bar with walnut counter, amber lamps and upholstered dark green chairs, no people, natural believable moody interior lighting.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-work-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-work.webp"
+      },
+      {
+        "alt": "Architectural editorial photo of a minimal independent cafe, pale oak counter, white tile, espresso machine and soft morning sunlight across the empty room, no readable sign, welcoming realistic setting.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-work-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-work.webp"
+      },
+      {
+        "alt": "Editorial commercial photograph of charcoal grilled chicken skewers on a simple matte black plate with a small herb garnish and lemon, subtle smoke, dark neutral table and cinematic natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-work-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/biryani-and-barbeque-work.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Selected Work | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/tharavadu",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Wide architectural editorial photograph of a warm contemporary Kerala restaurant with teak chairs, woven cane details, soft cream walls and banana leaf greenery, a quietly set dining table in foreground",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-detail.webp"
+      },
+      {
+        "alt": "Close macro editorial photograph of a golden crisp dosa edge and a small bowl of coconut chutney on dark handmade ceramic, beautifully restrained fine food photography.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-1-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-1.webp"
+      },
+      {
+        "alt": "Intimate wide editorial photograph of a South Indian dining room with carved wooden chairs, warm plaster walls and filtered afternoon sunlight, natural green plants and no people.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-2-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-2.webp"
+      },
+      {
+        "alt": "Vertical-friendly close-up photograph of hands serving steaming Kerala appam into a ceramic bowl with vegetable stew, real restaurant food texture, warm natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-3-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-3.webp"
+      },
+      {
+        "alt": "Minimal close-up photograph of South Indian filter coffee in a stainless steel tumbler and dabarah on a simple worn wood cafe table, a fine trail of steam, elegant natural morning light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-4-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-4.webp"
+      },
+      {
+        "alt": "Overhead minimal photograph of a small brass bowl of richly textured vegetable curry with curry leaves and one folded white linen napkin, muted stone surface, lovely window light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-5-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-5.webp"
+      },
+      {
+        "alt": "Wide cinematic photo of a quiet restaurant table after service, banana leaf plate with a carefully composed Kerala meal, brass accents, warm teak background, inviting natural evening light.",
+        "currentSrc": "http://localhost:3005/images/editorial/tharavadu-gallery-6-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/tharavadu-gallery-6.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Tharavadu | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/90s-lounge",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "A beautifully set lounge dining table with two craft cocktails, a small appetiser plate and folded linen, intimate modern interior in background, refined realistic evening light and no logos.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-detail.webp"
+      },
+      {
+        "alt": "Architectural photograph along a quiet boutique lounge with ribbed oak bar, understated pendant lights and olive velvet banquette seating, moody real-world evening lighting, no signage.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-gallery-1-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-gallery-1.webp"
+      },
+      {
+        "alt": "Close-up of a bartender hands carefully expressing orange peel above a coupe glass, realistic skin and glass reflections, cinematic amber light, restaurant commercial photography.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-gallery-2-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-gallery-2.webp"
+      },
+      {
+        "alt": "Minimal editorial photograph of a small plate of crisp restaurant appetisers with a subtle dipping sauce on dark slate, elegant lounge table, directional soft light and realistic texture.",
+        "currentSrc": "http://localhost:3005/images/editorial/90s-lounge-gallery-3-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/90s-lounge-gallery-3.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "90’s Lounge | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/piravi",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Cinematic wide photo of a contemporary cafe dining corner with cream banquette, little round tables and a daylight window, a coffee cup in foreground, warm natural textures and no people.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-detail.webp"
+      },
+      {
+        "alt": "Close-up editorial photograph of a barista hands pouring latte art into a clean white cup, stainless espresso machine softly blurred behind, natural realistic cafe light.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-gallery-1-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-gallery-1.webp"
+      },
+      {
+        "alt": "Premium food editorial overhead photo of an open cafe sandwich with fresh greens and a small black coffee on a clean pale stone table, simple composition, natural afternoon light.",
+        "currentSrc": "http://localhost:3005/images/editorial/piravi-gallery-2-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/piravi-gallery-2.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Piravi | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/work/biryani-and-barbeque",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      },
+      {
+        "alt": "Wide premium restaurant table photograph of a biryani bowl and a platter of grilled kebabs with minimal accompaniments, warm natural evening side light and tactile wood, no text or logos.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-detail-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/biryani-and-barbeque-detail.webp"
+      },
+      {
+        "alt": "Cinematic close-up of a chef hands lifting the lid from a steaming clay biryani pot, delicate steam and detailed grains of rice visible, a real restaurant kitchen blurred behind, dramatic but natural light.",
+        "currentSrc": "http://localhost:3005/images/editorial/biryani-and-barbeque-gallery-1-480.webp",
+        "loaded": true,
+        "src": "/images/editorial/biryani-and-barbeque-gallery-1.webp"
+      }
+    ],
+    "overflow": false,
+    "title": "Biryani & Barbeque | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/contact",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Let’s Talk | TRAIL9INE MEDIA"
+  },
+  {
+    "width": 390,
+    "path": "/privacy",
+    "images": [
+      {
+        "alt": "",
+        "currentSrc": "http://localhost:3005/images/brand-mark.svg",
+        "loaded": true,
+        "src": "/images/brand-mark.svg"
+      }
+    ],
+    "overflow": false,
+    "title": "Privacy Policy | TRAIL9INE MEDIA"
+  }
+]

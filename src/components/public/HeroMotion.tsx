@@ -160,7 +160,7 @@ export function HeroMotion() {
         >
           {/* Main production studio image */}
           <Image
-            src="/images/agency/film-production.webp"
+            src="/images/editorial/home-hero.webp"
             alt="Cinema camera in a minimal film studio"
             fill
             priority
@@ -188,7 +188,7 @@ export function HeroMotion() {
             className="hidden sm:block absolute top-6 right-6 w-44 md:w-52 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-white/25 bg-black/60 z-20"
           >
             <Image
-              src="/images/agency/social-strategy.webp"
+              src="/images/editorial/home-capability.webp"
               alt="Social media content planning"
               fill
               sizes="220px"

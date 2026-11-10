@@ -9,7 +9,7 @@ export default async function ServicesPage() {
     <section className="services-hero-v2">
       <div className="studio-container services-hero-inner">
         <div><h1>Creative work.<br />From every<br /><span>angle.</span></h1><p>Film, photography, design and marketing. Different skills, working together around your business.</p><a className="text-link" href="#capabilities">Explore our services <Arrow /></a></div>
-        <div className="services-hero-images"><div className="media-frame"><StudioImage src="/images/agency/brand-design.webp" alt="Brand identity materials, typography samples and colour swatches" priority sizes="(max-width:767px) 50vw, 27vw" /></div><div className="media-frame"><StudioImage src="/images/agency/commercial-photography.webp" alt="A commercial product photography set with camera and studio lighting" priority sizes="(max-width:767px) 50vw, 27vw" /></div></div>
+        <div className="services-hero-images"><div className="media-frame"><StudioImage src="/images/editorial/services-hero-design.webp" alt="Sculptural folded paper and brushed aluminium in natural light" priority sizes="(max-width:767px) 50vw, 27vw" /></div><div className="media-frame"><StudioImage src="/images/editorial/services-hero-camera.webp" alt="Close-up of a professional cinema lens and matte box" priority sizes="(max-width:767px) 50vw, 27vw" /></div></div>
       </div>
     </section>
     <section className="studio-container" id="capabilities" aria-label="Our services">{studioServices.map((service, i) => <article className="service-editorial" key={service.slug} data-reveal>

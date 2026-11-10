@@ -1,5 +1,6 @@
 import {siteGlobal} from '@/lib/site-content'
 import {mediaUrl} from '@/lib/public-projects'
+import {isTemplateImage} from '@/lib/editorial-presentation'
 import type { Metadata } from 'next'
 import { Action, InquiryCTA, StudioImage } from '@/components/public/Studio'
 import { studioProcess } from '@/lib/studio-content'
@@ -10,12 +11,12 @@ export default async function AboutPage() {
     <section className="studio-container page-heading about-hero">
 
       <div className="about-hero-grid"><h1 className="page-title">{content.heroHeadline}</h1><p>{content.heroIntro}</p></div>
-      <div className="media-frame about-image"><StudioImage src={mediaUrl(content.heroImage,"/images/agency/creative-studio.webp")} alt="Illustrative creative workspace with design proofs, a camera and moodboards" priority /></div>
+      <div className="media-frame about-image"><StudioImage src={!content.heroImage||isTemplateImage(content.heroImage)?'/images/editorial/about-studio.webp':mediaUrl(content.heroImage)} alt="Illustrative creative workspace with design proofs, a camera and moodboards" priority /></div>
 
     </section>
     <section className="studio-container section-pad story-grid">
       <div className="story-copy" data-reveal><h2 className="section-title">{content.storyHeading}</h2><p>{content.storyBody}</p><p>Today, our work spans social media, film, photography, branding and digital marketing. Different skills, working towards one consistent impression.</p><p>We have a particular appetite for restaurants and hospitality. The preparation, the people, the atmosphere: there is always more to the story than what is on the menu.</p></div>
-      <div className="media-frame story-image" data-reveal><StudioImage src={mediaUrl(content.storyImage,"/images/agency/brand-design.webp")} alt="Brand stationery, colour swatches and graphic design materials" sizes="(max-width:767px) 100vw, 50vw" /></div>
+      <div className="media-frame story-image" data-reveal><StudioImage src={!content.storyImage||isTemplateImage(content.storyImage)?'/images/editorial/about-process.webp':mediaUrl(content.storyImage)} alt="Designers arranging photographic prints and paper samples on a moodboard" sizes="(max-width:767px) 100vw, 50vw" /></div>
     </section>
     <section className="people-section"><div className="studio-container">
       <div className="section-intro"><div><h2 className="section-title">Small studio.<br />Shared ambition.</h2></div><p>Co-founded by Riyan and Shamil, bringing together creative production and marketing expertise.</p></div>

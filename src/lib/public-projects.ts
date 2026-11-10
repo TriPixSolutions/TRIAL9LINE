@@ -4,6 +4,7 @@ import { cache } from 'react'
 import { getPayloadClient } from './payload'
 import type { ProjectCardData } from '@/components/public/ProjectCard'
 
+import {projectEditorialImage} from './editorial-presentation'
 import { agencyAsset, agencyAlt } from './agency-imagery'
 export function mediaUrl(media: unknown, fallback?: string | null): string {
   const source = media && typeof media === 'object' && ('cloudinaryUrl' in media || 'url' in media) ? String((media as any).cloudinaryUrl || (media as any).url || '') : fallback || ''
@@ -14,8 +15,9 @@ export function mediaUrl(media: unknown, fallback?: string | null): string {
   if (replacement) return replacement.src
   return source
 }
-export function projectCard(doc: any): ProjectCardData {
-  return { title: doc.title, slug: doc.slug, editorialHeadline: doc.editorialHeadline, servicesSummary: doc.servicesSummary, coverImageUrl: mediaUrl(doc.coverImage, doc.coverImageUrl), coverAlt: agencyAlt(doc.coverImage, doc.coverImageUrl, doc.coverImage?.alt || doc.title), coverPosition: doc.coverImage && !agencyAsset(doc.coverImage, doc.coverImageUrl) ? `${doc.coverImage.focalX??50}% ${doc.coverImage.focalY??50}%` : undefined, categories: (doc.categories || []).filter((c: any) => c && typeof c === 'object') }
+export function projectCard(doc: any, placement: 'home'|'work'='work'): ProjectCardData {
+  const image=projectEditorialImage(doc,placement)
+  return { title: doc.title, slug: doc.slug, editorialHeadline: doc.editorialHeadline, servicesSummary: doc.servicesSummary, coverImageUrl: image?.src || mediaUrl(doc.coverImage, doc.coverImageUrl), coverAlt: image?.alt || agencyAlt(doc.coverImage, doc.coverImageUrl, doc.coverImage?.alt || doc.title), coverPosition: doc.coverImage && !agencyAsset(doc.coverImage, doc.coverImageUrl) ? `${doc.coverImage.focalX??50}% ${doc.coverImage.focalY??50}%` : undefined, categories: (doc.categories || []).filter((c: any) => c && typeof c === 'object') }
 }
 export async function publicProjects(options: { limit?: number; page?: number; categoryId?: string | number; slugs?: string[]; placement?: 'home'|'work'|'discovery' } = {}) {
   const payload = await getPayloadClient()

@@ -45,7 +45,7 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Social Strategy • Food Videography • Macro Photography • Creative Campaigns',
       categories: [categoryMap.social, categoryMap.video, categoryMap.photo].filter(Boolean),
-      coverImageUrl: '/images/agency/commercial-photography.webp',
+      coverImageUrl: '/images/editorial/tharavadu-work.webp',
       overview:
         'Our work for Tharavadu brings South Indian cuisine, restaurant experiences and promotional campaigns into engaging social content across its locations. By balancing dish-led imagery with content that introduces the atmosphere and promotional moments, the brand maintains a vibrant, authentic presence in Toronto’s competitive dining landscape.',
       approach:
@@ -57,16 +57,15 @@ async function seed() {
       gallery: [
         {
           blockType: 'imagePair',
-          imageLeftUrl: '/images/agency/commercial-photography.webp',
-          imageRightUrl: '/images/agency/creative-studio.webp',
-          caption: 'Culinary details and ambient room lighting captured on location.',
+          imageLeftUrl: '/images/editorial/tharavadu-gallery-1.webp',
+          imageRightUrl: '/images/editorial/tharavadu-gallery-2.webp',
         },
         {
           blockType: 'portraitStrip',
           stripImages: [
-            { url: '/images/agency/film-production.webp', caption: 'Illustrative film production setup' },
-            { url: '/images/agency/social-strategy.webp', caption: 'Illustrative social strategy planning' },
-            { url: '/images/agency/commercial-photography.webp', caption: 'Illustrative product photography setup' },
+            { url: '/images/editorial/tharavadu-gallery-3.webp' },
+            { url: '/images/editorial/tharavadu-gallery-4.webp' },
+            { url: '/images/editorial/tharavadu-gallery-5.webp' },
           ],
         },
         {
@@ -76,8 +75,7 @@ async function seed() {
         },
         {
           blockType: 'wideImage',
-          imageUrl: '/images/agency/film-production.webp',
-          caption: 'A closer look at the dining experience.',
+          imageUrl: '/images/editorial/tharavadu-gallery-6.webp',
         },
       ],
       _status: 'published',
@@ -90,7 +88,7 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Social Media Marketing • Video Production • Creative Content',
       categories: [categoryMap.social, categoryMap.video].filter(Boolean),
-      coverImageUrl: '/images/agency/social-strategy.webp',
+      coverImageUrl: '/images/editorial/90s-lounge-work.webp',
       overview:
         'For 90’s Lounge, our work includes food and beverage content, promotional reels and social campaigns that highlight the menu and atmosphere. We gave the food and drinks room to stand out while capturing the feeling of the space, developing short-form sequences that connect menu details with the wider nightlife experience.',
       featured: true,
@@ -100,14 +98,12 @@ async function seed() {
       gallery: [
         {
           blockType: 'wideImage',
-          imageUrl: '/images/agency/creative-studio.webp',
-          caption: 'Atmospheric dining lounge and craft mixology bar under low warm lighting.',
+          imageUrl: '/images/editorial/90s-lounge-gallery-1.webp',
         },
         {
           blockType: 'imagePair',
-          imageLeftUrl: '/images/agency/social-strategy.webp',
-          imageRightUrl: '/images/agency/film-production.webp',
-          caption: 'Cocktail craftsmanship and late-night culinary bites.',
+          imageLeftUrl: '/images/editorial/90s-lounge-gallery-2.webp',
+          imageRightUrl: '/images/editorial/90s-lounge-gallery-3.webp',
         },
       ],
       _status: 'published',
@@ -120,7 +116,7 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Content · Social media · Video',
       categories: [categoryMap.social, categoryMap.video].filter(Boolean),
-      coverImageUrl: '/images/agency/film-production.webp',
+      coverImageUrl: '/images/editorial/piravi-work.webp',
       overview:
         'Our social content for Piravi showcases the restaurant’s food, identity and dining experience through content creation and video production. Connecting dishes with the wider character of the restaurant, we used focused food visuals and short-form storytelling to introduce the dining experience to both new and regular patrons.',
       featured: true,
@@ -130,13 +126,11 @@ async function seed() {
       gallery: [
         {
           blockType: 'wideImage',
-          imageUrl: '/images/agency/film-production.webp',
-          caption: 'Intimate culinary plating and tableside service captures.',
+          imageUrl: '/images/editorial/piravi-gallery-1.webp',
         },
         {
           blockType: 'captionedImage',
-          imageUrl: '/images/agency/commercial-photography.webp',
-          caption: 'Food at the centre of the narrative.',
+          imageUrl: '/images/editorial/piravi-gallery-2.webp',
         },
       ],
       _status: 'published',
@@ -149,7 +143,7 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Film · Creative direction · Commercial content',
       categories: [categoryMap.video, categoryMap.campaigns, categoryMap.photo].filter(Boolean),
-      coverImageUrl: '/images/agency/film-production.webp',
+      coverImageUrl: '/images/editorial/biryani-and-barbeque-work.webp',
       overview:
         'A cinematic food production presenting Biryani & Barbeque’s dishes through detailed visuals, creative lighting and engaging storytelling. Letting close-up detail and lighting carry the visual direction, we built a film around the dishes and their on-screen presence.',
       featured: true,
@@ -159,9 +153,8 @@ async function seed() {
       gallery: [
         {
           blockType: 'video',
-          videoPosterUrl: '/images/agency/film-production.webp',
+          videoPosterUrl: '/images/editorial/biryani-and-barbeque-gallery-1.webp',
           heading: 'Watch the Production Reel',
-          caption: 'Cinematic commercial film grading for Biryani & Barbeque.',
         },
       ],
       _status: 'published',
