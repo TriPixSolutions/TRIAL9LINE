@@ -1,0 +1,70 @@
+{
+  "name": "trail9ine-media",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "node server.mjs",
+    "test": "node scripts/run-tests.mjs",
+    "seed": "node --import tsx scripts/with-env.mjs src/scripts/seed.ts",
+    "worker": "node --import tsx src/scripts/worker.ts",
+    "setup:connections": "node scripts/setup-connections.mjs",
+    "migrate:legacy": "node --import tsx scripts/with-env.mjs src/scripts/migrate-legacy.ts",
+    "generate:importmap": "node --import tsx scripts/with-env.mjs src/scripts/generate-import-map.ts",
+    "migrate:media": "node --import tsx scripts/with-env.mjs src/scripts/migrate-media.ts",
+    "postbuild": "node scripts/package-standalone.mjs",
+    "build:hostinger": "node scripts/check-hostinger-env.mjs && npm run build",
+    "start:next": "next start",
+    "check:deployment": "node scripts/check-hostinger-env.mjs",
+    "cron:notifications": "node scripts/cron-notifications.mjs",
+    "typecheck": "next typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@hookform/resolvers": "^5.0.0",
+    "@payloadcms/db-mongodb": "3.93.0",
+    "@payloadcms/db-postgres": "3.93.0",
+    "@payloadcms/db-sqlite": "3.93.0",
+    "@payloadcms/email-resend": "3.93.0",
+    "@payloadcms/next": "3.93.0",
+    "@payloadcms/storage-s3": "3.93.0",
+    "@payloadcms/ui": "3.93.0",
+    "cloudinary": "2.11.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "gsap": "^3.15.1",
+    "lottie-react": "2.4.1",
+    "motion": "^12.0.0",
+    "next": "16.4.6",
+    "payload": "3.93.0",
+    "pg": "^8.13.1",
+    "postcss": "8.5.32",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "resend": "^4.0.1",
+    "sharp": "0.35.5",
+    "tailwind-merge": "^2.6.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.10",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.6.2",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "overrides": {
+    "dompurify": "^3.4.17",
+    "sharp": "$sharp",
+    "postcss": "$postcss"
+  }
+}

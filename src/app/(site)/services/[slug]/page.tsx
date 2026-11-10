@@ -1,0 +1,30 @@
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
+import { siteServices } from '@/lib/site-content'
+import { projectCard, publicProjects } from '@/lib/public-projects'
+import { ProjectCard } from '@/components/public/ProjectCard'
+import { Action, Arrow, InquiryCTA, StudioImage } from '@/components/public/Studio'
+export const dynamic = 'force-dynamic'
+type Props = { params: Promise<{ slug: string }> }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const service = (await siteServices()).find(s => s.slug === slug)
+  return { title: service ? service.title + ' Toronto' : 'Service not found', description: service?.description }
+}
+export default async function ServiceDetailPage({ params }: Props) {
+  const { slug } = await params
+  const service = (await siteServices()).find(s => s.slug === slug)
+  if (!service) notFound()
+  const related = service.related.length ? (await publicProjects({ slugs: service.related, limit: 2, placement:'discovery' })).docs : []
+  const contact = '/contact?service=' + encodeURIComponent(service.contactValue||service.slug)
+  return <>
+    <section className="studio-container service-detail-hero">
+      <div><div className="page-breadcrumb"><Link href="/services">Services</Link><span>/</span><span>{service.title}</span></div><h1>{service.headline}</h1><p>{service.description}</p><Action href={contact}>Discuss your project</Action></div>
+      <div className="media-frame"><StudioImage src={service.image} alt={service.imageAlt} priority sizes="(max-width:767px) 100vw, 45vw" /></div>
+    </section>
+    <section className="studio-container scope-section"><div><h2>Good work starts<br />with a clear plan.</h2></div><ul className="scope-list">{service.scope.map((item, i) => <li key={item}><span>0{i + 1}</span>{item}</li>)}</ul></section>
+    {related.length > 0 && <section className="studio-container related-work"><div className="section-intro"><div><h2 className="section-title">See it in the work.</h2></div><Link href="/work" className="text-link">All projects <Arrow diagonal /></Link></div><div className="related-grid">{related.map(doc => <ProjectCard key={doc.id} project={projectCard(doc)} />)}</div></section>}
+    <InquiryCTA heading="Let’s make it happen." text="Tell us what you have in mind. We’ll take it from there." href={contact} label="Discuss this service" />
+  </>
+}
