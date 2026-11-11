@@ -16,6 +16,7 @@ export const NotificationOutbox: CollectionConfig = {
   },
   fields: [
     {name:'leaseToken',type:'text',admin:{hidden:true}},
+    { name: 'recipient', type: 'email', admin: { hidden: true, readOnly: true } },
     {
       name: 'inquiry',
       type: 'relationship',

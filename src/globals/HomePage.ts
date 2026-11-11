@@ -20,7 +20,7 @@ export const HomePage: GlobalConfig = {
     {
       name: 'heroHeadline',
       type: 'text',
-      defaultValue: 'Creative marketing\nfor brands\nthat grow.',
+      defaultValue: 'Creative work\nthat moves brands.',
     },
     {
       name: 'heroIntro',

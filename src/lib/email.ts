@@ -19,14 +19,17 @@ function escapeHtml(unsafe: string): string {
     .replace(/'/g, '&#039;')
 }
 
-export async function sendInquiryNotification(payload: InquiryEmailPayload, idempotencyKey?: string): Promise<{
+export function defaultInquiryRecipient() {
+  return process.env.BUSINESS_NOTIFICATION_EMAIL?.trim() || 'inquiries@trail9ine.com'
+}
+
+export async function sendInquiryNotification(payload: InquiryEmailPayload, idempotencyKey?: string, recipient = defaultInquiryRecipient()): Promise<{
   success: boolean
   providerMessageId?: string
   error?: string
 }> {
   const apiKey = process.env.RESEND_API_KEY
   const sender = process.env.RESEND_SENDER_EMAIL || 'TRAIL9INE MEDIA <inquiries@trail9ine.com>'
-  const recipient = process.env.BUSINESS_NOTIFICATION_EMAIL || 'inquiries@trail9ine.com'
   const adminBaseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
   const subject = `[New Inquiry] ${payload.businessName} (${payload.reference})`

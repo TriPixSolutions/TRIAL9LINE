@@ -30,6 +30,13 @@ export const SiteSettings: GlobalConfig = {
       required: true,
     },
     {
+      name: 'inquiryNotificationEmail',
+      type: 'email',
+      label: 'Inquiry notification email',
+      access: { read: ({ req }) => req.user?.role === 'owner' },
+      admin: { description: 'New inquiry notifications go to this inbox. Leave blank to use the hosting configuration.' },
+    },
+    {
       name: 'location',
       type: 'text',
       defaultValue: 'Toronto, Ontario, Canada',

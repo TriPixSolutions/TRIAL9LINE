@@ -8,6 +8,10 @@ try {
   const response=await fetch(url,{method:'POST',headers:{authorization:'Bearer '+secret},signal:AbortSignal.timeout(95000),redirect:'error'})
   if(!response.ok)throw new Error('Worker returned HTTP '+response.status)
   const result=await response.json()
-  console.log('Notification pass completed:',result.processed,'jobs processed.')
+  if (result.skipped === 'email-not-configured') {
+    console.log('Notifications are waiting for a Resend API key.')
+  } else {
+    console.log('Notification pass completed:',result.processed,'jobs processed.')
+  }
   if(result.results?.some(item=>!item.success))process.exitCode=1
 } catch {console.error('Notification cron failed. Inspect the application inbox and runtime logs.');process.exitCode=1}

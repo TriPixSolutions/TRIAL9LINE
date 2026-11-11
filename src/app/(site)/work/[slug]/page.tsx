@@ -46,7 +46,7 @@ export default async function ProjectPage({ params, searchParams }: Props) {
   const gallery: GalleryBlockItem[] = editorialGallery(doc,mediaUrl)
   return <div className={'project-presentation layout-'+(doc.layout||'editorial')+' hero-ratio-'+(doc.heroRatio||'wide')+' gallery-spacing-'+(doc.gallerySpacing||'comfortable')}>
     {query.preview === 'true' && <div className="preview-banner">Private draft preview · This version is visible only to authorised staff.</div>}
-    <section className="studio-container project-heading"><div className="page-breadcrumb"><Link href="/work">All work</Link><span>/</span><span>{doc.title}</span></div>
+    <section className="studio-container project-heading">
       <div className="project-title-row"><h1 className="page-title">{doc.title}</h1>{doc.editorialHeadline && <p>{doc.editorialHeadline}</p>}</div>
       <dl className="project-facts"><div><dt>Client</dt><dd>{doc.clientName || doc.title}</dd></div>{doc.industry && <div><dt>Industry</dt><dd>{doc.industry}</dd></div>}<div><dt>What we did</dt><dd>{doc.servicesSummary || (doc.categories || []).map((c: any) => c.name).filter(Boolean).join(' · ')}</dd></div></dl>
     </section>

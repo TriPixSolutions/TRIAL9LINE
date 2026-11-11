@@ -12,7 +12,11 @@ export default async function HomePage() {
   const [content,studioServices]=await Promise.all([siteGlobal('home-page'),siteServices()])
   const customHero = content.heroImage && !isTemplateImage(content.heroImage) ? content.heroImage : null
   const heroSource = mediaUrl(customHero) || '/images/editorial/home-restaurant-campaign.webp'
-  const heroLines=String(content.heroHeadline||'Creative marketing\nfor brands\nthat grow.').split('\n')
+  const oldHeadline = 'Creative marketing\nfor brands\nthat grow.'
+  const headline = content.heroHeadline && content.heroHeadline !== oldHeadline
+    ? content.heroHeadline
+    : 'Creative work\nthat moves brands.'
+  const heroLines = String(headline).split('\n').filter(Boolean)
   const result = await publicProjects({ limit: Number(content.homeProjectLimit)||4, placement:'home' })
   return <>
     <section className="campaign-hero" aria-labelledby="hero-title">
@@ -26,9 +30,9 @@ export default async function HomePage() {
       </div>
       <div className="studio-container campaign-hero-inner">
         <div className="campaign-copy">
-          <h1 id="hero-title">{heroLines.map((line,i)=><span key={i} className={i===2?"campaign-grow":"hero-copy-line"}>{line}{i<heroLines.length-1&&<br/>}</span>)}</h1>
+          <h1 id="hero-title">{heroLines.map((line,i)=><span key={i} className={i === heroLines.length - 1 && i > 0 ?"campaign-grow":"hero-copy-line"}>{line}{i<heroLines.length-1&&<br/>}</span>)}</h1>
           <p className="campaign-description">{content.heroIntro}</p>
-          <div className="campaign-actions"><Action href="/contact" light>Let’s talk about your brand</Action><Link href="/work" className="campaign-work-link">See what we make <Arrow diagonal /></Link></div>
+          <div className="campaign-actions"><Action href="/contact" light>Start a project</Action><Link href={result.docs.length ? "#selected-work" : "/work"} className="campaign-work-link">View selected work <Arrow diagonal /></Link></div>
         </div>
         <Link href="/services" className="campaign-service-note" aria-label="Explore our strategy, content and growth services">
           <span>Strategy</span>

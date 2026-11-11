@@ -8,6 +8,9 @@ async function run(req:NextRequest){
  const expected=process.env.WORKER_AUTH_SECRET
  const provided=req.headers.get('authorization')?.replace(/^Bearer\s+/i,'').trim()||''
  if(!expected||provided.length!==expected.length||!timingSafeEqual(Buffer.from(provided),Buffer.from(expected)))return NextResponse.json({error:'Unauthorized worker invocation'},{status:401})
+ if (!process.env.RESEND_API_KEY && process.env.NODE_ENV === 'production') {
+  return NextResponse.json({ processed: 0, results: [], skipped: 'email-not-configured' })
+ }
  try{return NextResponse.json(await runNotificationWorker(await getPayloadClient()))}catch{return NextResponse.json({error:'Worker could not complete this pass'},{status:500})}
 }
 export const POST=run

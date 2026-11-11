@@ -10,11 +10,18 @@ afterAll(async()=>{const p=await getPayloadClient();for(const id of ids){await p
 describe('Durable contact workflow',()=>{
  it('validates before accepting a submission',async()=>{const r=await POST(request({}));expect(r.status).toBe(400)})
  it('persists exactly one inquiry and notification job on a repeated submission',async()=>{
-  const first=await POST(request(data)),second=await POST(request(data))
+  const p=await getPayloadClient()
+  await p.updateGlobal({slug:'site-settings',data:{inquiryNotificationEmail:'studio@example.com'}})
+  const first=await POST(request(data))
+  await p.updateGlobal({slug:'site-settings',data:{inquiryNotificationEmail:'new-inbox@example.com'}})
+  const second=await POST(request(data))
   expect(first.status).toBe(201);expect(second.status).toBe(200)
   expect((await first.json()).reference).toBe((await second.json()).reference)
-  const p=await getPayloadClient(),found=await p.find({collection:'inquiries',where:{idempotencyKey:{equals:key}}});expect(found.totalDocs).toBe(1);ids.push(found.docs[0].id)
+  const found=await p.find({collection:'inquiries',where:{idempotencyKey:{equals:key}}});expect(found.totalDocs).toBe(1);ids.push(found.docs[0].id)
   const jobs=await p.find({collection:'notification-outbox',where:{inquiry:{equals:found.docs[0].id}}});expect(jobs.totalDocs).toBe(1);expect(jobs.docs[0].status).toBe('pending')
+  expect(jobs.docs[0].recipient).toBe('studio@example.com')
+  const publicSettings=await p.findGlobal({slug:'site-settings',overrideAccess:false})
+  expect(publicSettings).not.toHaveProperty('inquiryNotificationEmail')
  })
  it('records a bounded failure when email is not configured, without losing the inquiry',async()=>{
   const p=await getPayloadClient(),jobs=await p.find({collection:'notification-outbox',where:{inquiry:{equals:ids[0]}}}),id=jobs.docs[0].id
