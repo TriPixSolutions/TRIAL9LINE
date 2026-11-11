@@ -33,7 +33,18 @@ export const Users: CollectionConfig = {
     },
     delete: ({ req }) => req.user?.role === 'owner',
   },
-  hooks: { beforeChange: [async ({data, operation, req}) => {
+  hooks: { afterError: [({ error, req }) => {
+    if (req.method !== 'POST' || !req.pathname?.endsWith('/first-register')) return
+    const failure = error as Error & { code?: number | string; status?: number; codeName?: string }
+    if (failure.status && failure.status < 500) return
+    const frames = failure.stack?.split('\n').filter((line) => line.trimStart().startsWith('at ')).slice(0, 8)
+    console.error('First admin registration failed', JSON.stringify({
+      name: failure.name,
+      code: failure.code,
+      codeName: failure.codeName,
+      frames,
+    }))
+  }], beforeChange: [async ({data, operation, req}) => {
     if (operation === 'create' && !req.user) {
       const existing = await req.payload.count({collection:'users', overrideAccess:true, req})
       if (existing.totalDocs === 0) data.role = 'owner'
