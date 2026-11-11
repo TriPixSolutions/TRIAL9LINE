@@ -1,4 +1,4 @@
-import type { Field } from 'payload'
+import type { Condition, Field } from 'payload'
 import { galleryLayouts } from '../lib/project-presentation'
 import { resolveProjectVideo } from '../lib/project-video'
 
@@ -10,11 +10,13 @@ const videoSection = showFor('video', 'videoResults')
 const resultsSection = showFor('videoResults')
 const imageSection = showFor('wideImage', 'captionedImage', 'textBlock')
 const pairSection = showFor('imagePair')
+const reelItem = (_data: unknown, row: { kind?: string }) => row?.kind === 'video'
 
-function upload(name: string, label: string, kind: 'image' | 'video' = 'image'): Field {
+function upload(name: string, label: string, kind: 'image' | 'video' = 'image', condition?: Condition): Field {
   return {
     name, label, type: 'upload', relationTo: 'media',
     filterOptions: { mimeType: { in: kind === 'image' ? imageMimeTypes : videoMimeTypes } },
+    admin: { condition },
   }
 }
 
@@ -22,18 +24,19 @@ function imageLink(name: string, label: string): Field {
   return { name, label, type: 'text' }
 }
 
-function videoLink(): Field {
+function videoLink(condition?: Condition): Field {
   return {
     name: 'videoUrl', label: 'Video link', type: 'text',
     validate: (value: string | null | undefined) =>
       !value || resolveProjectVideo(value) !== null || 'Use a YouTube, Instagram, Vimeo, MP4 or WebM link.',
-    admin: { description: 'Use a public video link. If you upload a video, the uploaded file takes priority.' },
+    admin: { condition, description: 'Use a public video link. If you upload a video, the uploaded file takes priority.' },
   }
 }
 
-function videoShape(): Field {
+function videoShape(condition?: Condition): Field {
   return {
     name: 'videoShape', label: 'Video shape', type: 'select', defaultValue: 'auto',
+    admin: { condition },
     options: [
       { label: 'Automatic', value: 'auto' },
       { label: 'Tall reel (9:16)', value: 'portrait' },
@@ -132,10 +135,9 @@ export const projectGalleryField: Field = {
         { name: 'title', type: 'text', label: 'Title' },
         upload('media', 'Photo or video thumbnail'),
         imageLink('url', 'Photo or thumbnail link (optional)'),
-        {
-          type: 'group', label: 'Video', admin: { condition: (_data, row) => row?.kind === 'video' },
-          fields: [upload('videoFile', 'Upload or choose a video', 'video'), videoLink(), videoShape()],
-        },
+        upload('videoFile', 'Upload or choose a video', 'video', reelItem),
+        videoLink(reelItem),
+        videoShape(reelItem),
         { name: 'caption', type: 'text', label: 'Caption' },
       ],
     },
