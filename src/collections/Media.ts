@@ -18,6 +18,7 @@ export const Media:CollectionConfig={
    if(context.mediaImport) return data
    // Provider metadata is written only from an actual server upload, never from submitted form fields.
    for(const key of providerFields) data[key]=originalDoc?.[key]||null
+   if(req.file) data.mediaType=req.file.mimetype.startsWith('video/')?'video':'image'
    if(req.file&&usesCloudinary()){
     try{
      const asset=await uploadMediaFile(req.file.data,req.file.mimetype)
@@ -28,7 +29,7 @@ export const Media:CollectionConfig={
   }],
   afterRead:[({doc})=>{if(doc.cloudinaryUrl){doc.url=doc.cloudinaryUrl;doc.thumbnailURL=doc.cloudinaryUrl}return doc}],
   beforeDelete:[async({id,req})=>{
-   const paths=['coverImage','gallery.mediaItem','gallery.mediaLeft','gallery.mediaRight','gallery.videoPoster','gallery.stripImages.media']
+   const paths=['coverImage','bannerImage','gallery.mediaItem','gallery.mediaLeft','gallery.mediaRight','gallery.videoPoster','gallery.videoFile','gallery.stripImages.media','gallery.gridItems.media','gallery.gridItems.videoFile']
    const projects=await req.payload.find({collection:'projects',where:{or:paths.map(p=>({[p]:{equals:id}}))},limit:1,depth:0,draft:true,overrideAccess:true,req})
    const published=await req.payload.find({collection:'projects',where:{or:paths.map(p=>({[p]:{equals:id}}))},limit:1,depth:0,draft:false,overrideAccess:true,req})
    const globals=await Promise.all(['home-page','about-page'].map(slug=>req.payload.findGlobal({slug,depth:0,overrideAccess:true,req})))

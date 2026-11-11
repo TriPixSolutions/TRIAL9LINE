@@ -32,6 +32,12 @@ describe('Project Workflow & Publication Lifecycle', () => {
         editorialHeadline: 'Testing automated project publication flow.',
         overview: 'Comprehensive verification test for Payload project workflow.',
         categories: [categoryId],
+        layout: 'social',
+        bannerImageUrl: '/images/editorial/piravi-detail.webp',
+        gallery: [
+          { blockType: 'videoResults', videoUrl: 'https://www.instagram.com/reel/QAExample/', videoSide: 'right', views: 48200, saves: 0, reportingPeriod: 'First 30 days', caption: 'The campaign reel' },
+          { blockType: 'mediaGrid', gridItems: [{ kind: 'photo', url: '/images/editorial/piravi-gallery-1.webp', title: 'Campaign still' }] },
+        ],
         _status: 'draft',
       },
       draft: true,
@@ -75,6 +81,18 @@ describe('Project Workflow & Publication Lifecycle', () => {
     expect(publishedQuery.docs.length).toBe(1)
     expect(publishedQuery.docs[0].title).toBe('Vitest Automated Case Study')
     expect(publishedQuery.docs[0].editorialHeadline).toBe('Testing automated project publication flow.')
+    expect(publishedQuery.docs[0].bannerImageUrl).toBe('/images/editorial/piravi-detail.webp')
+    expect(publishedQuery.docs[0].gallery.map((block: any) => block.blockType)).toEqual(['videoResults', 'mediaGrid'])
+    expect(publishedQuery.docs[0].gallery[0]).toMatchObject({ views: 48200, saves: 0, videoSide: 'right', caption: 'The campaign reel' })
+    expect(publishedQuery.docs[0].gallery[1].gridItems[0]).toMatchObject({ kind: 'photo', title: 'Campaign still' })
+  })
+
+  it('rejects invalid counts without replacing the published results', async () => {
+    await expect(payload.update({ collection: 'projects', id: testProjectId, data: {
+      gallery: [{ blockType: 'videoResults', views: -1 }],
+    } })).rejects.toThrow()
+    const project = await payload.findByID({ collection: 'projects', id: testProjectId, draft: false })
+    expect(project.gallery[0].views).toBe(48200)
   })
 
   it('unpublishes the project so it is removed from public queries', async () => {

@@ -10,22 +10,31 @@ import { Action, Arrow, InquiryCTA, StudioImage } from '@/components/public/Stud
 export const dynamic = 'force-dynamic'
 export default async function HomePage() {
   const [content,studioServices]=await Promise.all([siteGlobal('home-page'),siteServices()])
-  const heroSource=!content.heroImage||isTemplateImage(content.heroImage)?'/images/editorial/home-hero.webp':mediaUrl(content.heroImage)
+  const customHero = content.heroImage && !isTemplateImage(content.heroImage) ? content.heroImage : null
+  const heroSource = mediaUrl(customHero) || '/images/editorial/home-restaurant-campaign.webp'
   const heroLines=String(content.heroHeadline||'Creative marketing\nfor brands\nthat grow.').split('\n')
   const result = await publicProjects({ limit: Number(content.homeProjectLimit)||4, placement:'home' })
   return <>
     <section className="campaign-hero" aria-labelledby="hero-title">
+      <div className="campaign-scene">
+        <StudioImage
+          src={heroSource}
+          alt={customHero?.alt || 'An editor checks social insights on a phone while editing a restaurant reel, with a camera and storyboard nearby'}
+          priority
+          sizes="(max-width:1100px) 100vw, 74vw"
+        />
+      </div>
       <div className="studio-container campaign-hero-inner">
         <div className="campaign-copy">
           <h1 id="hero-title">{heroLines.map((line,i)=><span key={i} className={i===2?"campaign-grow":"hero-copy-line"}>{line}{i<heroLines.length-1&&<br/>}</span>)}</h1>
           <p className="campaign-description">{content.heroIntro}</p>
           <div className="campaign-actions"><Action href="/contact" light>Let’s talk about your brand</Action><Link href="/work" className="campaign-work-link">See what we make <Arrow diagonal /></Link></div>
-          <Link href="/services" className="campaign-service-note" aria-label="Explore our strategy, content and growth services"><span>Strategy</span><span aria-hidden="true">/</span><span>Content</span><span aria-hidden="true">/</span><span>Growth</span><Arrow diagonal /></Link>
         </div>
-        <div className="campaign-visual">
-          <div className="campaign-scene"><StudioImage src={heroSource} alt="A creative director reviewing a photographic print in natural studio light" priority sizes="(max-width:767px) 115vw, (max-width:1100px) 65vw, 68vw" /></div>
-
-        </div>
+        <Link href="/services" className="campaign-service-note" aria-label="Explore our strategy, content and growth services">
+          <span>Strategy</span>
+          <span>Content</span>
+          <span>Growth <Arrow diagonal /></span>
+        </Link>
       </div>
     </section>
     {result.docs.length>0&&<section className="studio-container section-pad" id="selected-work">

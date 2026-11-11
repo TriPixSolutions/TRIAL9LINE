@@ -1,8 +1,8 @@
 import type { CollectionConfig } from 'payload'
 import { revalidatePath } from 'next/cache'
-import { projectLayouts, galleryLayouts } from '../lib/project-presentation'
+import { projectLayouts } from '../lib/project-presentation'
+import { projectCoverFields, projectGalleryField } from './project-media-fields'
 import { privateContent } from '../lib/access'
-import { resolveProjectVideo } from '../lib/project-video'
 
 const formatSlug = (val: string): string =>
   val
@@ -185,165 +185,15 @@ export const Projects: CollectionConfig = {
           ],
         },
         {
-          label: '2. Images & films',
+          label: '2. Build the page',
           fields: [
-            {
-              name: 'coverImage',
-              type: 'upload',
-              relationTo: 'media',
-              label: 'Cover Image (Media Library)',
-              admin: {
-                description: 'Primary project cover image for the 4:3 portfolio grid and header.',
-              },
-            },
-            {
-              name: 'coverImageUrl',
-              type: 'text',
-              label: 'Cover Image URL (Direct / Fallback)',
-              admin: {
-                description: 'Enter a direct path (e.g. /images/agency/commercial-photography.webp) or external image link.',
-              },
-            },
-            {
-              name: 'externalLink',
-              type: 'text',
-              label: 'Client Website / Social Link (Optional)',
-              admin: {
-                description: 'Verified external link to the client venue or published campaign.',
-              },
-            },
-            {
-              name: 'gallery',
-              type: 'array',
-              label: 'Project gallery',
-              labels: {singular:'Gallery section', plural:'Gallery sections'},
-              admin: {
-                description: 'Add and reorder modular visual blocks for the project detail page.',
-              },
-              fields: [
-                {
-                  name: 'blockType',
-                  type: 'select',
-                  required: true,
-                  defaultValue: 'wideImage',
-                  options: galleryLayouts,
-                },
-                {
-                  name: 'mediaItem',
-                  type: 'relationship',
-                  relationTo: 'media',
-                  label: 'Image from Media Library',
-                  admin: {
-                    condition: (data, siblingData) =>
-                      siblingData?.blockType === 'wideImage' ||
-                      siblingData?.blockType === 'captionedImage',
-                  },
-                },
-                {
-                  name: 'imageUrl',
-                  type: 'text',
-                  label: 'Image URL',
-                  admin: {
-                    condition: (data, siblingData) =>
-                      siblingData?.blockType === 'wideImage' ||
-                      siblingData?.blockType === 'captionedImage',
-                  },
-                },
-                {
-                  name: 'mediaLeft',
-                  type: 'relationship',
-                  relationTo: 'media',
-                  label: 'Left Image (Media Library)',
-                  admin: {
-                    condition: (data, siblingData) => siblingData?.blockType === 'imagePair',
-                  },
-                },
-                {
-                  name: 'imageLeftUrl',
-                  type: 'text',
-                  label: 'Left Image URL',
-                  admin: {
-                    condition: (data, siblingData) => siblingData?.blockType === 'imagePair',
-                  },
-                },
-                {
-                  name: 'mediaRight',
-                  type: 'relationship',
-                  relationTo: 'media',
-                  label: 'Right Image (Media Library)',
-                  admin: {
-                    condition: (data, siblingData) => siblingData?.blockType === 'imagePair',
-                  },
-                },
-                {
-                  name: 'imageRightUrl',
-                  type: 'text',
-                  label: 'Right Image URL',
-                  admin: {
-                    condition: (data, siblingData) => siblingData?.blockType === 'imagePair',
-                  },
-                },
-                {
-                  name: 'stripImages',
-                  type: 'array',
-                  label: 'Vertical Strip Images (9:16)',
-                  admin: {
-                    condition: (data, siblingData) => siblingData?.blockType === 'portraitStrip',
-                  },
-                  fields: [
-                    { name: 'media', type: 'upload', relationTo: 'media', label: 'Media' },
-                    { name: 'url', type: 'text', label: 'Image URL' },
-                    { name: 'caption', type: 'text', label: 'Caption' },
-                  ],
-                },
-                {
-                  name: 'videoUrl',
-                  type: 'text',
-                  label: 'Video link',
-                  validate: (value: string | null | undefined) => !value || resolveProjectVideo(value) !== null || 'Use a YouTube, Instagram post/reel, Vimeo, MP4 or WebM link.',
-                  admin: {
-                    description: 'Paste a YouTube watch/Shorts link, a public Instagram post/reel link, Vimeo, or a direct MP4/WebM URL. Social posts must allow embedding.',
-                    condition: (data, siblingData) => siblingData?.blockType === 'video',
-                  },
-                },
-                {name:'videoPoster',type:'upload',relationTo:'media',label:'Video poster image',admin:{condition:(_data,siblingData)=>siblingData?.blockType==='video'}},
-                {name:'imageRatio',type:'select',defaultValue:'landscape',label:'Image shape',options:[{label:'Landscape · 16:9',value:'landscape'},{label:'Cinematic · 21:9',value:'cinematic'},{label:'Square · 1:1',value:'square'}],admin:{condition:(_data,siblingData)=>['wideImage','captionedImage'].includes(siblingData?.blockType)}},
-                {
-                  name: 'videoPosterUrl',
-                  type: 'text',
-                  label: 'Video Poster Image URL',
-                  admin: {
-                    condition: (data, siblingData) => siblingData?.blockType === 'video',
-                  },
-                },
-                {
-                  name: 'heading',
-                  type: 'text',
-                  label: 'Heading / Callout',
-                  admin: {
-                    condition: (data, siblingData) =>
-                      siblingData?.blockType === 'textBlock' ||
-                      siblingData?.blockType === 'video',
-                  },
-                },
-                {
-                  name: 'caption',
-                  type: 'text',
-                  label: 'Caption Note',
-                },
-                {
-                  name: 'body',
-                  type: 'textarea',
-                  label: 'Narrative Text',
-                  admin: {
-                    condition: (data, siblingData) => siblingData?.blockType === 'textBlock',
-                  },
-                },
-              ],
-            },
+            { name: 'sectionTemplate', type: 'ui', admin: { components: { Field: '/src/components/admin/ProjectFields#SectionTemplate' } } },
+            ...projectCoverFields,
+            { name: 'externalLink', type: 'text', label: 'Client website or social link' },
+            projectGalleryField,
           ],
         },
-        { label:'3. Appearance', fields:[
+        { label:'3. Page appearance', fields:[
           {name:'layout',type:'select',defaultValue:'editorial',options:projectLayouts,admin:{components:{Field:'/src/components/admin/ProjectFields#LayoutPicker'}}},
           {name:'heroRatio',type:'select',defaultValue:'wide',admin:{condition:data=>data.layout!=='film'},options:[{label:'Wide · 2:1',value:'wide'},{label:'Cinematic · 21:9',value:'cinematic'},{label:'Classic · 4:3',value:'classic'}]},
           {name:'gallerySpacing',type:'select',defaultValue:'comfortable',options:[{label:'Comfortable',value:'comfortable'},{label:'Compact',value:'compact'}]},

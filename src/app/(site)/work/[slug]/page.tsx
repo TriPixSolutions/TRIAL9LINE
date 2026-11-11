@@ -31,8 +31,14 @@ export default async function ProjectPage({ params, searchParams }: Props) {
   const query = await searchParams
   const doc = await loadProject(slug, query.preview)
   if (!doc) { if(query.preview!=='true'){const target=await redirectProject(slug);if(target)permanentRedirect('/work/'+encodeURIComponent(target))}notFound() }
-  const coverImage=projectEditorialImage(doc,'detail')
-  const cover = coverImage?.src || mediaUrl(doc.coverImage, doc.coverImageUrl)
+  const banner = mediaUrl(doc.bannerImage, doc.bannerImageUrl)
+  const coverImage = banner ? undefined : projectEditorialImage(doc, 'detail')
+  const cover = banner || coverImage?.src || mediaUrl(doc.coverImage, doc.coverImageUrl)
+  const coverAlt = banner
+    ? doc.bannerImage?.alt || doc.title
+    : coverImage?.alt || agencyAlt(doc.coverImage, doc.coverImageUrl, doc.coverImage?.alt || doc.editorialHeadline || doc.title)
+  const focalImage = banner ? doc.bannerImage : coverImage ? undefined : doc.coverImage
+  const coverPosition = focalImage ? `${focalImage.focalX ?? 50}% ${focalImage.focalY ?? 50}%` : undefined
   const payload=await getPayloadClient()
   const nextId=typeof doc.nextProject==='object'&&doc.nextProject?doc.nextProject.id:doc.nextProject
   const chosen=nextId&&nextId!==doc.id?(await payload.find({collection:'projects',where:{and:[{id:{equals:nextId}},{_status:{equals:'published'}}]},limit:1,depth:1,overrideAccess:false,draft:false})).docs[0]:null
@@ -44,9 +50,9 @@ export default async function ProjectPage({ params, searchParams }: Props) {
       <div className="project-title-row"><h1 className="page-title">{doc.title}</h1>{doc.editorialHeadline && <p>{doc.editorialHeadline}</p>}</div>
       <dl className="project-facts"><div><dt>Client</dt><dd>{doc.clientName || doc.title}</dd></div>{doc.industry && <div><dt>Industry</dt><dd>{doc.industry}</dd></div>}<div><dt>What we did</dt><dd>{doc.servicesSummary || (doc.categories || []).map((c: any) => c.name).filter(Boolean).join(' · ')}</dd></div></dl>
     </section>
-    {cover && <div className="studio-container"><div className="media-frame project-hero"><StudioImage src={cover} alt={coverImage?.alt || agencyAlt(doc.coverImage,doc.coverImageUrl,doc.coverImage?.alt || doc.editorialHeadline || doc.title)} priority /></div>{(coverImage || agencyAsset(doc.coverImage,doc.coverImageUrl))&&<p className="people-support">Illustrative hospitality imagery. Original client photography can be added through the project gallery.</p>}</div>}
+    {cover && <div className="studio-container"><div className="media-frame project-hero"><StudioImage src={cover} alt={coverAlt} position={coverPosition} priority /></div>{!banner && (coverImage || agencyAsset(doc.coverImage, doc.coverImageUrl)) && <p className="people-support">Illustrative hospitality imagery.</p>}</div>}
     <section className="studio-container project-overview"><div><p>{doc.overview}</p>{doc.externalLink && /^https?:\/\//i.test(doc.externalLink) && <Link className="text-link project-external" href={doc.externalLink} target="_blank" rel="noopener noreferrer">Visit the client <Arrow diagonal /></Link>}</div></section>
-    {gallery.length > 0 && <section className="studio-container project-gallery" aria-label="Project gallery">{gallery.map((block, i) => <GalleryBlock key={block.id || i} block={block} />)}</section>}
+    {gallery.length > 0 && <section className="studio-container project-gallery" aria-label="Project story and media">{gallery.map((block, i) => <GalleryBlock key={block.id || i} block={block} clientName={doc.clientName || doc.title} />)}</section>}
     {next && <div className="studio-container"><Link href={'/work/' + encodeURIComponent(next.slug)} className="next-project"><div><h2>{next.title}</h2></div><Arrow diagonal /></Link></div>}
     <InquiryCTA heading="Your story, next." text="Have something in mind? We’d love to hear about it." />
   </div>

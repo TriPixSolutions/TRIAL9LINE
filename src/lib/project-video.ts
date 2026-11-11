@@ -4,6 +4,21 @@ export type ProjectVideoSource = {
   originalUrl: string
   portrait: boolean
 }
+export type VideoShape = 'auto' | 'portrait' | 'landscape'
+
+export function resolveSectionVideo(upload: unknown, link?: string | null, shape?: VideoShape | null): ProjectVideoSource | null {
+  const file = upload && typeof upload === 'object'
+    ? upload as { url?: string; cloudinaryUrl?: string; mimeType?: string; width?: number; height?: number }
+    : null
+  const uploaded = file?.mimeType?.startsWith('video/')
+    ? resolveProjectVideo(file.cloudinaryUrl || file.url)
+    : null
+  const source = uploaded?.kind === 'file' ? uploaded : resolveProjectVideo(link)
+  if (!source) return null
+  if (shape === 'portrait' || shape === 'landscape') return { ...source, portrait: shape === 'portrait' }
+  if (uploaded?.kind === 'file' && file?.width && file.height) return { ...source, portrait: file.height > file.width }
+  return source
+}
 export function resolveProjectVideo(value?: string | null): ProjectVideoSource | null {
   if (!value?.trim()) return null
   const source = value.trim()

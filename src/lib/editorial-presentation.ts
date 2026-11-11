@@ -23,6 +23,8 @@ export function editorialGallery(doc:any,resolveMedia:(media:unknown,fallback?:s
   const image=pick(item.mediaItem,item.imageUrl),left=pick(item.mediaLeft,item.imageLeftUrl),right=pick(item.mediaRight,item.imageRightUrl),poster=pick(item.videoPoster,item.videoPosterUrl)
   const strip=(item.stripImages || []).map((row:any)=>{const value=pick(row.media,row.url);return {url:value.src,alt:value.alt,caption:value.illustrative?null:row.caption}})
   return {...item,imageUrl:image.src,imageAlt:image.alt,imageLeftUrl:left.src,imageLeftAlt:left.alt,imageRightUrl:right.src,imageRightAlt:right.alt,videoPosterUrl:poster.src,videoPosterAlt:poster.alt,
-   stripImages:strip,caption:[image,left,right,poster].some(value=>value.illustrative)?null:item.caption}
+   stripImages:strip,
+   gridItems:(item.gridItems || []).map((row:any)=>({ ...row, url:resolveMedia(row.media,row.url), alt:row.media?.alt })),
+   caption:[image,left,right,poster].some(value=>value.illustrative)?null:item.caption}
  })
 }

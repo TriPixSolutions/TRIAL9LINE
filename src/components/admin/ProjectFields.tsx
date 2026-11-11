@@ -1,10 +1,40 @@
 'use client'
 import React, {useEffect,useState} from 'react'
-import {useDocumentInfo, useField, useFormFields} from '@payloadcms/ui'
-import {projectLayouts} from '../../lib/project-presentation'
+import {useDocumentInfo, useField, useForm, useFormFields} from '@payloadcms/ui'
+import {projectLayouts, projectTemplateSections} from '../../lib/project-presentation'
+
+export function SectionTemplate() {
+ const {addFieldRow, disabled} = useForm()
+ const {setValue} = useField<string>({path: 'layout'})
+ const hasSections = useFormFields(([fields]) => Boolean(fields.gallery?.rows?.length))
+ const [selected, setSelected] = useState('social')
+
+ if (hasSections) return null
+
+ function addSections() {
+   setValue(selected)
+   projectTemplateSections[selected].sections.forEach((value, rowIndex) => {
+     addFieldRow({path: 'gallery', schemaPath: 'gallery', rowIndex, subFieldState: {
+       blockType: {value, initialValue: value, valid: true},
+     }})
+   })
+ }
+
+ return <fieldset className="studio-template-start" disabled={disabled}>
+   <legend>Start with a template</legend>
+   <label htmlFor="project-section-template">Project template</label>
+   <div>
+     <select id="project-section-template" value={selected} onChange={event => setSelected(event.target.value)}>
+       {projectLayouts.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+     </select>
+     <button type="button" onClick={addSections}>Add starter sections</button>
+   </div>
+   <p>{projectTemplateSections[selected].summary}</p>
+ </fieldset>
+}
 export function LayoutPicker({path}:{path:string}) {
  const {value,setValue}=useField<string>({path})
- return <fieldset className="studio-layout-picker"><legend>Project presentation</legend><p>Choose a starting point. Your images and story stay saved when you change layouts.</p><div>{projectLayouts.map((o,i)=><label className={'studio-layout-option'+((value||'editorial')===o.value?' selected':'')} key={o.value}><input type="radio" name={path} value={o.value} checked={(value||'editorial')===o.value} onChange={()=>setValue(o.value)}/><span className={'studio-layout-sketch sketch-'+o.value}><i/><i/><i/></span><strong>{o.label.split(' — ')[0]}</strong><small>{['A balanced story with generous space.','Wide frames and a cinematic rhythm.','A closer look, with images leading.'][i]}</small></label>)}</div></fieldset>
+ return <fieldset className="studio-layout-picker"><legend>Page template</legend><p>Choose how this project looks.</p><div>{projectLayouts.map(option=><label className={'studio-layout-option'+((value||'editorial')===option.value?' selected':'')} key={option.value}><input type="radio" name={path} value={option.value} checked={(value||'editorial')===option.value} onChange={()=>setValue(option.value)}/><span className={'studio-layout-sketch sketch-'+option.value} aria-hidden="true"><i/><i/><i/></span><strong>{option.label}</strong></label>)}</div></fieldset>
 }
 export function PlacementToggle({path,field}:{path:string;field:{label?:string;admin?:{description?:string}}}){
  const {value,setValue}=useField<boolean>({path})
