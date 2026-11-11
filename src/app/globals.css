@@ -828,3 +828,62 @@ body.studio-site { margin: 0; background: var(--paper); color: var(--ink); font:
   .service-dropdown, .mobile-navigation, .campaign-copy { animation: none; }
   .campaign-work-link, .campaign-work-link .arrow-icon { transition: none; }
 }
+
+/* Home capabilities */
+.capability-services .service-line {
+  position: relative;
+  isolation: isolate;
+}
+.capability-services .service-line::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #d9c6e4, transparent 85%);
+  opacity: 0;
+  pointer-events: none;
+}
+.capability-services .service-line:is(:hover, :focus-visible)::before { opacity: .65; }
+
+@media (hover: hover) and (pointer: fine) {
+  .project-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), #f0d9ff45, transparent 55%);
+    opacity: 0;
+    transition: opacity .24s ease;
+    pointer-events: none;
+  }
+  .project-card:hover .project-cover::after { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes capability-enter {
+    from { opacity: .38; translate: 0 12px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  @keyframes capability-sweep {
+    from { opacity: 0; scale: 0 1; }
+    35% { opacity: .65; }
+    to { opacity: 0; scale: 1 1; }
+  }
+
+  .capability-visible .service-line {
+    animation: capability-enter .5s cubic-bezier(.22, 1, .36, 1) var(--capability-delay, 0ms) backwards;
+  }
+  .capability-services .service-line::before {
+    transform-origin: left;
+    transition: opacity .2s ease;
+  }
+  .capability-visible .service-line:not(:hover, :focus-visible)::before {
+    animation: capability-sweep .65s ease-out var(--capability-delay, 0ms);
+  }
+  .capability-services .service-line:nth-child(2) { --capability-delay: 65ms; }
+  .capability-services .service-line:nth-child(3) { --capability-delay: 130ms; }
+  .capability-services .service-line:nth-child(4) { --capability-delay: 195ms; }
+  .capability-services .service-line:nth-child(5) { --capability-delay: 260ms; }
+
+  .capability-services .service-line .arrow-icon { transition: translate .24s ease; }
+  .capability-services .service-line:is(:hover, :focus-visible) .arrow-icon { translate: 4px -4px; }
+}
