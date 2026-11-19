@@ -11,7 +11,7 @@ export const inquirySchema = z.object({
     'photography',
     'branding-design',
     'digital-marketing',
-    'not-sure',
+    'website-designing', 'not-sure',
   ], {
     error: 'Please select a service interest.',
   }),

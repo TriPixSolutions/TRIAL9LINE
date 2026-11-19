@@ -887,3 +887,5 @@ body.studio-site { margin: 0; background: var(--paper); color: var(--ink); font:
   .capability-services .service-line .arrow-icon { transition: translate .24s ease; }
   .capability-services .service-line:is(:hover, :focus-visible) .arrow-icon { translate: 4px -4px; }
 }
+.portfolio-contribution { padding-block: 32px; border-top: 1px solid var(--line); }
+.portfolio-intro { max-width: 750px; margin-bottom: 32px; color: var(--muted); }

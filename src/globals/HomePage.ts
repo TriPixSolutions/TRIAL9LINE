@@ -10,7 +10,7 @@ export const HomePage: GlobalConfig = {
     update: ({ req }) => req.user?.role === 'owner' || req.user?.role === 'editor',
   },
   fields: [
-    {name:'homeProjectLimit',type:'number',label:'Selected work: maximum projects',defaultValue:4,min:1,max:12,required:true,admin:{description:'Home-enabled published projects appear in Home order, up to this number.'}},
+    {name:'homeProjectLimit',type:'number',label:'Selected work: maximum projects',defaultValue:4,min:1,max:12,required:true,admin:{hidden:true}},
     {name:'heroImage',type:'upload',relationTo:'media',label:'Hero image (optional)'},
     {
       name: 'heroEyebrow',

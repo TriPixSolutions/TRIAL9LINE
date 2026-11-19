@@ -1,3 +1,4 @@
+import { initializeServices } from './lib/initialize-services'
 import {randomBytes} from 'node:crypto'
 import {deploymentErrors} from '../scripts/deployment-env.mjs'
 import { buildConfig } from 'payload'
@@ -39,6 +40,7 @@ if(!process.env.CLOUDINARY_CLOUD_NAME&&process.env.S3_BUCKET&&process.env.S3_ACC
  plugins.push(s3Storage({collections:{media:true},bucket:process.env.S3_BUCKET,config:{credentials:{accessKeyId:process.env.S3_ACCESS_KEY_ID,secretAccessKey:process.env.S3_SECRET_ACCESS_KEY},region:process.env.S3_REGION||'auto',endpoint:process.env.S3_ENDPOINT,forcePathStyle:true}}))
 }
 return buildConfig({
+  onInit: initializeServices,
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname, '..') },

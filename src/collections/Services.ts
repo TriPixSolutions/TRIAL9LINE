@@ -12,7 +12,7 @@ export const Services: CollectionConfig = {
     {name:'imageAlt',type:'text',label:'Image description'},
     {name:'scope',type:'array',label:'What is included',fields:[{name:'text',type:'text',required:true}]},
     {name:'relatedProjects',type:'relationship',relationTo:'projects',hasMany:true,label:'Related projects'},
-    {name:'contactValue',type:'select',required:true,label:'Inquiry service',options:['social-media','video-production','photography','branding-design','digital-marketing','not-sure']},
+    {name:'contactValue',type:'select',required:true,label:'Inquiry service',options:['social-media','video-production','photography','branding-design','digital-marketing','website-designing', 'not-sure']},
     {name:'displayOrder',type:'number',defaultValue:0}, {name:'active',type:'checkbox',defaultValue:true},
   ],
 }

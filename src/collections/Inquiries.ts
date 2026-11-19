@@ -56,6 +56,7 @@ export const Inquiries: CollectionConfig = {
         { label: 'Food & Commercial Photography', value: 'photography' },
         { label: 'Branding & Graphic Design', value: 'branding-design' },
         { label: 'Paid Advertising & Digital Marketing', value: 'digital-marketing' },
+        { label: 'Website Designing', value: 'website-designing' },
         { label: 'Not sure yet', value: 'not-sure' },
       ],
     },

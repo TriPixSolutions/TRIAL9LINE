@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { portfolioSections } from '../lib/portfolio-sections'
 import { revalidatePath } from 'next/cache'
 import { projectLayouts } from '../lib/project-presentation'
 import { projectCoverFields, projectGalleryField } from './project-media-fields'
@@ -13,10 +14,11 @@ const formatSlug = (val: string): string =>
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
+  labels: { singular: 'Portfolio work', plural: 'Portfolio work' },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', '_status', 'showOnHome', 'showOnWorks', 'updatedAt'],
-    description: 'Add your story, upload images, preview and publish. Choose Home and Works placements independently.',
+    defaultColumns: ['title', '_status', 'portfolioSections', 'showOnWorks', 'updatedAt'],
+    description: 'Choose portfolio sections, upload work and publish. Works placement controls inclusion in the service portfolios.',
     components: { beforeList: ['/src/components/admin/Overview#ProjectGuide'] },
     group: 'Portfolio',
     preview: (doc) => {
@@ -74,6 +76,7 @@ export const Projects: CollectionConfig = {
         try {
           revalidatePath('/work')
           revalidatePath('/')
+          portfolioSections.forEach(({ slug }) => revalidatePath(`/work/sections/${slug}`))
           if (doc?.slug) {
             revalidatePath(`/work/${doc.slug}`)
           }
@@ -90,6 +93,7 @@ export const Projects: CollectionConfig = {
         try {
           revalidatePath('/work')
           revalidatePath('/')
+          portfolioSections.forEach(({ slug }) => revalidatePath(`/work/sections/${slug}`))
           if (doc?.slug) {
             revalidatePath(`/work/${doc.slug}`)
           }
@@ -100,6 +104,7 @@ export const Projects: CollectionConfig = {
     ],
   },
   fields: [
+    { name: 'portfolioSections', type: 'select', hasMany: true, label: 'Portfolio sections', options: portfolioSections.map(({ slug, title }) => ({ value: slug, label: title })), admin: { description: 'Choose where this work appears. Older work is grouped from its services and categories until you select sections here.' } },
     {name:'legacyVersionId',type:'text',admin:{hidden:true},access:{read:privateContent}},
     {name:'legacyId',type:'text',unique:true,admin:{hidden:true},access:{read:privateContent}},
     {name:'previousSlugs',type:'array',admin:{hidden:true},fields:[{name:'slug',type:'text',required:true}]},
@@ -108,16 +113,16 @@ export const Projects: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: '1. Project story',
+          label: '1. Work overview',
           fields: [
             {
               name: 'title',
               type: 'text',
               required: true,
-              label: 'Project Name',
+              label: 'Internal work name',
               admin: {
                 components: { Cell: '/src/components/admin/CoverCell#CoverCell' },
-                description: 'Client or venue name (e.g. Tharavadu, 90’s Lounge)',
+                description: 'Internal name for this body of work. Public portfolio cards use service names.',
               },
             },
             {
@@ -179,6 +184,7 @@ export const Projects: CollectionConfig = {
               type: 'text',
               label: 'Client Name (Optional)',
               admin: {
+                hidden: true,
                 description: 'Enter if distinct from project title.',
               },
             },
@@ -201,9 +207,9 @@ export const Projects: CollectionConfig = {
         {
           label: '4. Visibility & publish',
           fields: [
-            {name:'showOnHome',type:'checkbox',defaultValue:false,label:'Show on Home',admin:{components:{Field:'/src/components/admin/ProjectFields#PlacementToggle'},description:'Include this published project in selected work. Projects are shown by Home order, up to the section limit.'}},
+            {name:'showOnHome',type:'checkbox',defaultValue:false,label:'Show on Home',admin:{hidden:true}},
             {name:'showOnWorks',type:'checkbox',defaultValue:true,label:'Show on Works',admin:{components:{Field:'/src/components/admin/ProjectFields#PlacementToggle'},description:'Include this published project in the portfolio grid. To make the detail page private, unpublish the project.'}},
-            {name:'homeOrder',type:'number',defaultValue:0,label:'Home order',admin:{description:'Lower numbers appear first.'}},
+            {name:'homeOrder',type:'number',defaultValue:0,label:'Home order',admin:{hidden:true}},
             {
               name: 'featured',
               type: 'checkbox',

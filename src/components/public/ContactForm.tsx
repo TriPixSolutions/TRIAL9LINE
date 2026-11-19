@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { inquirySchema, type InquiryInput } from '@/lib/inquiries'
 import { Arrow } from './Studio'
 const serviceMap: Record<string, InquiryInput['serviceInterest']> = {
+  'website-designing': 'website-designing',
   'social-media-marketing': 'social-media', 'social-media': 'social-media',
   'content-creation-video-production': 'video-production', 'video-production': 'video-production',
   'food-commercial-photography': 'photography', photography: 'photography',
@@ -46,7 +47,7 @@ export function ContactForm({ initialService = 'not-sure' }: { initialService?: 
           <div className="form-field"><label htmlFor="email">Email address *</label><input id="email" type="email" autoComplete="email" placeholder="you@company.com" {...register('email')} {...inputProps('email')} />{errorText('email')}</div>
           <div className="form-field"><label htmlFor="phone">Phone number <span>(optional)</span></label><input id="phone" type="tel" autoComplete="tel" placeholder="Your phone number" {...register('phone')} />{errorText('phone')}</div>
           <div className="form-field full"><label htmlFor="serviceInterest">What can we help with? *</label><select id="serviceInterest" {...register('serviceInterest')} {...inputProps('serviceInterest')}>
-            <option value="not-sure">Let’s figure it out together</option><option value="social-media">Social Media Marketing</option><option value="video-production">Content Creation & Video Production</option><option value="photography">Food & Commercial Photography</option><option value="branding-design">Branding & Graphic Design</option><option value="digital-marketing">Paid Advertising & Digital Marketing</option>
+            <option value="not-sure">Let’s figure it out together</option><option value="social-media">Social Media Marketing</option><option value="video-production">Content Creation & Video Production</option><option value="photography">Food & Commercial Photography</option><option value="branding-design">Branding & Graphic Design</option><option value="digital-marketing">Paid Advertising & Digital Marketing</option><option value="website-designing">Website Designing</option>
           </select>{errorText('serviceInterest')}</div>
           <div className="form-field full"><label htmlFor="message">Tell us about your project *</label><textarea id="message" rows={4} placeholder="A little about your business, your plans and what you need." {...register('message')} {...inputProps('message')} />{errorText('message')}</div>
         </div>
