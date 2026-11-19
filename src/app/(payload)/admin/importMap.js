@@ -1,3 +1,4 @@
+import { CategorySelector as CategorySelector_6648da99bcc18ca4e6849e696d989a54 } from '../../../../src/components/admin/ProjectFields'
 import { EditorIntro as EditorIntro_6648da99bcc18ca4e6849e696d989a54 } from '../../../../src/components/admin/ProjectFields'
 import { CoverCell as CoverCell_041bde679014ff3912b4c2b7f009158f } from '../../../../src/components/admin/CoverCell'
 import { SlugField as SlugField_6648da99bcc18ca4e6849e696d989a54 } from '../../../../src/components/admin/ProjectFields'
@@ -13,6 +14,7 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 
 /** @type import('payload').ImportMap */
 export const importMap = {
+  "/src/components/admin/ProjectFields#CategorySelector": CategorySelector_6648da99bcc18ca4e6849e696d989a54,
   "/src/components/admin/ProjectFields#EditorIntro": EditorIntro_6648da99bcc18ca4e6849e696d989a54,
   "/src/components/admin/CoverCell#CoverCell": CoverCell_041bde679014ff3912b4c2b7f009158f,
   "/src/components/admin/ProjectFields#SlugField": SlugField_6648da99bcc18ca4e6849e696d989a54,

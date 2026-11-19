@@ -1,14 +1,8 @@
-import type { Condition, Field } from 'payload'
+import type { Field } from 'payload'
 import { resolveProjectVideo } from '../lib/project-video'
 
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif']
 const videoMimeTypes = ['video/mp4', 'video/webm']
-
-const selected = (section: string): Condition => (data) => {
-  const value = String(data?.portfolioCategory || '')
-  if (section === 'content-production') return ['content-production', 'video-production', 'content-creation'].includes(value)
-  return value === section
-}
 
 function upload(name: string, label: string, kind: 'image' | 'video'): Field {
   return {
@@ -49,7 +43,7 @@ export const portfolioContentFields: Field[] = [
     label: 'Videos & reels',
     labels: { singular: 'Video', plural: 'Videos' },
     admin: {
-      condition: selected('content-production'),
+      className: 'studio-category-fields studio-content-videos',
       description: 'Add the finished videos in display order. No thumbnail is needed—the original player appears in the portfolio grid.',
     },
     fields: [
@@ -68,6 +62,7 @@ export const portfolioContentFields: Field[] = [
       upload('videoFile', 'Upload a video', 'video'),
       videoLink(),
       { name: 'caption', type: 'text', label: 'Short caption (optional)' },
+      { name: 'displayOrder', type: 'number', label: 'Display order', admin: { description: 'Optional. Lower numbers appear first.' } },
     ],
   },
   {
@@ -76,7 +71,7 @@ export const portfolioContentFields: Field[] = [
     label: 'Campaign reports',
     labels: { singular: 'Campaign report', plural: 'Campaign reports' },
     admin: {
-      condition: selected('performance-marketing'),
+      className: 'studio-category-fields studio-marketing-reports',
       description: 'Add a campaign screenshot and the confirmed Meta Ads figures. Leave a metric empty if it should not be shown.',
     },
     fields: [
@@ -98,6 +93,7 @@ export const portfolioContentFields: Field[] = [
         ],
       },
       { name: 'summary', type: 'text', label: 'Result highlight (optional)' },
+      { name: 'displayOrder', type: 'number', label: 'Display order', admin: { description: 'Optional. Lower numbers appear first.' } },
     ],
   },
   {
@@ -106,7 +102,7 @@ export const portfolioContentFields: Field[] = [
     label: 'Food photography',
     labels: { singular: 'Photo', plural: 'Photos' },
     admin: {
-      condition: selected('food-photography'),
+      className: 'studio-category-fields studio-food-photos',
       description: 'Upload finished photographs in the order they should appear in the grid.',
     },
     fields: [
@@ -114,6 +110,7 @@ export const portfolioContentFields: Field[] = [
       imageLink('photoUrl'),
       { name: 'title', type: 'text', label: 'Dish or photo title' },
       { name: 'description', type: 'text', label: 'Short description (optional)' },
+      { name: 'displayOrder', type: 'number', label: 'Display order', admin: { description: 'Optional. Lower numbers appear first.' } },
     ],
   },
   {
@@ -122,7 +119,7 @@ export const portfolioContentFields: Field[] = [
     label: 'Posters & designs',
     labels: { singular: 'Design', plural: 'Designs' },
     admin: {
-      condition: selected('creative-designs'),
+      className: 'studio-category-fields studio-design-posters',
       description: 'Upload each poster separately. The public page automatically builds the responsive poster grid.',
     },
     fields: [
@@ -130,6 +127,7 @@ export const portfolioContentFields: Field[] = [
       imageLink('posterUrl'),
       { name: 'title', type: 'text', label: 'Design title' },
       { name: 'description', type: 'text', label: 'Short description (optional)' },
+      { name: 'displayOrder', type: 'number', label: 'Display order', admin: { description: 'Optional. Lower numbers appear first.' } },
     ],
   },
 ]

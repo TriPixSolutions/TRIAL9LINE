@@ -45,7 +45,12 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Social Strategy • Food Videography • Macro Photography • Creative Campaigns',
       categories: [categoryMap.social, categoryMap.video, categoryMap.photo].filter(Boolean),
-      portfolioCategory: 'content-production',
+      portfolioCategory: 'food-photography',
+      foodPhotos: [
+        { photoUrl: '/images/editorial/tharavadu-gallery-1.webp', title: 'South Indian thali', displayOrder: 1 },
+        { photoUrl: '/images/editorial/tharavadu-gallery-2.webp', title: 'Restaurant detail', displayOrder: 2 },
+        { photoUrl: '/images/editorial/tharavadu-gallery-4.webp', title: 'Dish detail', displayOrder: 3 },
+      ],
       coverImageUrl: '/images/editorial/tharavadu-work.webp',
       overview:
         'Our work for Tharavadu brings South Indian cuisine, restaurant experiences and promotional campaigns into engaging social content across its locations. By balancing dish-led imagery with content that introduces the atmosphere and promotional moments, the brand maintains a vibrant, authentic presence in Toronto’s competitive dining landscape.',
@@ -89,7 +94,12 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Social Media Marketing • Video Production • Creative Content',
       categories: [categoryMap.social, categoryMap.video].filter(Boolean),
-      portfolioCategory: 'content-production',
+      portfolioCategory: 'creative-designs',
+      designPosters: [
+        { posterUrl: '/images/editorial/creative-poster-01.webp', title: 'Restaurant campaign', displayOrder: 1 },
+        { posterUrl: '/images/editorial/creative-poster-06.webp', title: 'Social promotion', displayOrder: 2 },
+        { posterUrl: '/images/editorial/creative-poster-10.webp', title: 'Seasonal campaign', displayOrder: 3 },
+      ],
       coverImageUrl: '/images/editorial/90s-lounge-work.webp',
       overview:
         'For 90’s Lounge, our work includes food and beverage content, promotional reels and social campaigns that highlight the menu and atmosphere. We gave the food and drinks room to stand out while capturing the feeling of the space, developing short-form sequences that connect menu details with the wider nightlife experience.',
@@ -118,7 +128,7 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Content · Social media · Video',
       categories: [categoryMap.social, categoryMap.video].filter(Boolean),
-      portfolioCategory: 'content-production',
+      portfolioCategory: 'content-creation',
       coverImageUrl: '/images/editorial/piravi-work.webp',
       overview:
         'Our social content for Piravi showcases the restaurant’s food, identity and dining experience through content creation and video production. Connecting dishes with the wider character of the restaurant, we used focused food visuals and short-form storytelling to introduce the dining experience to both new and regular patrons.',
@@ -146,7 +156,7 @@ async function seed() {
       industry: 'Restaurant & Hospitality',
       servicesSummary: 'Film · Creative direction · Commercial content',
       categories: [categoryMap.video, categoryMap.campaigns, categoryMap.photo].filter(Boolean),
-      portfolioCategory: 'content-production',
+      portfolioCategory: 'video-production',
       coverImageUrl: '/images/editorial/biryani-and-barbeque-work.webp',
       overview:
         'A cinematic food production presenting Biryani & Barbeque’s dishes through detailed visuals, creative lighting and engaging storytelling. Letting close-up detail and lighting carry the visual direction, we built a film around the dishes and their on-screen presence.',

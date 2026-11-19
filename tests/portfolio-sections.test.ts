@@ -5,11 +5,12 @@ import { inquirySchema } from '../src/lib/inquiries'
 describe('Service portfolios', () => {
   it('uses legacy services and populated categories without relying on client names', () => {
     expect(belongsToSection({ title: 'A restaurant', categories: [{ name: 'Photography' }] }, 'food-photography')).toBe(true)
-    expect(belongsToSection({ title: 'Video restaurant' }, 'content-production')).toBe(false)
+    expect(belongsToSection({ title: 'Video restaurant' }, 'video-production')).toBe(false)
   })
   it('honours explicit assignments and handles normalized legacy selections', () => {
-    expect(belongsToSection({ portfolioSections: [], servicesSummary: 'Video' }, 'content-production')).toBe(true)
-    expect(normalizePortfolioSections(['video-production', 'content-creation'])).toEqual(['content-production'])
+    expect(belongsToSection({ portfolioSections: [], servicesSummary: 'Video' }, 'video-production')).toBe(true)
+    expect(normalizePortfolioSections(['content-production', 'content-creation'])).toEqual(['video-production', 'content-creation'])
+    expect(belongsToSection({ portfolioCategory: 'content-production' }, 'video-production')).toBe(true)
     expect(belongsToSection({ portfolioSections: ['creative-designs'] }, 'creative-designs')).toBe(true)
   })
   it('groups legacy results and campaign visuals from their content blocks', () => {
@@ -24,7 +25,8 @@ describe('Service portfolios', () => {
   it('keeps images and videos in their corresponding sections', () => {
     const blocks = [{ blockType: 'mediaGrid', gridItems: [{ kind: 'video' }, { kind: 'image' }] }, { blockType: 'videoResults' }]
     expect(sectionGallery(blocks, 'food-photography')[0].gridItems).toEqual([{ kind: 'image' }])
-    expect(sectionGallery(blocks, 'content-production')[0].gridItems).toEqual([{ kind: 'video' }])
+    expect(sectionGallery(blocks, 'video-production')[0].gridItems).toEqual([{ kind: 'video' }])
+    expect(sectionGallery(blocks, 'content-creation')[0].gridItems).toEqual([{ kind: 'video' }])
     expect(sectionGallery(blocks, 'performance-marketing')).toEqual([blocks[1]])
   })
   it('accepts website design inquiries', () => {

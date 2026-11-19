@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { normalizePortfolioSections, portfolioSections } from '../lib/portfolio-sections'
+import { normalizePortfolioCategory, normalizePortfolioSections, portfolioSections } from '../lib/portfolio-sections'
 import { revalidatePath } from 'next/cache'
 import { projectLayouts } from '../lib/project-presentation'
 import { projectCoverFields, projectGalleryField } from './project-media-fields'
@@ -12,6 +12,11 @@ const formatSlug = (val: string): string =>
     .replace(/[^\w-]+/g, '')
     .toLowerCase()
     .replace(/^-+|-+$/g, '')
+
+const portfolioCategoryOptions = [
+  ...portfolioSections.map(({ slug, title }) => ({ value: slug, label: title })),
+  { value: 'content-production', label: 'Legacy content production (defaults to Video Production)' },
+]
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
@@ -65,7 +70,11 @@ export const Projects: CollectionConfig = {
         if (data) {
           if (!data.portfolioCategory && originalDoc?.portfolioCategory) data.portfolioCategory = originalDoc.portfolioCategory
           if (!data.portfolioCategory) data.portfolioCategory = normalizePortfolioSections(data.portfolioSections || originalDoc?.portfolioSections)[0]
-          if (data.portfolioCategory) data.portfolioSections = [data.portfolioCategory]
+          const normalizedCategory = normalizePortfolioCategory(data.portfolioCategory)
+          if (normalizedCategory && (operation === 'create' || data.portfolioCategory !== originalDoc?.portfolioCategory)) {
+            data.portfolioCategory = normalizedCategory
+          }
+          if (data.portfolioCategory) data.portfolioSections = [normalizePortfolioCategory(data.portfolioCategory) || data.portfolioCategory]
           if (!data.slug && data.title) {
             data.slug = formatSlug(data.title)
           } else if (data.slug) {
@@ -113,11 +122,15 @@ export const Projects: CollectionConfig = {
       type: 'select',
       required: true,
       label: 'Portfolio category',
-      options: portfolioSections.map(({ slug, title }) => ({ value: slug, label: title })),
-      hooks: { afterRead: [({ value, data }) => value || normalizePortfolioSections(data?.portfolioSections)[0]] },
-      admin: { className: 'studio-category-select', description: 'This choice controls the upload fields and the public portfolio grid.' },
+      options: portfolioCategoryOptions,
+      hooks: { afterRead: [({ value, data }) => normalizePortfolioCategory(value) || normalizePortfolioSections(data?.portfolioSections)[0]] },
+      admin: {
+        className: 'studio-category-select',
+        description: 'This choice controls the upload fields and the public portfolio grid.',
+        components: { Field: '/src/components/admin/ProjectFields#CategorySelector' },
+      },
     },
-    { name: 'portfolioSections', type: 'select', hasMany: true, options: portfolioSections.map(({ slug, title }) => ({ value: slug, label: title })), admin: { hidden: true } },
+    { name: 'portfolioSections', type: 'select', hasMany: true, options: portfolioCategoryOptions, admin: { hidden: true } },
     {name:'legacyVersionId',type:'text',admin:{hidden:true},access:{read:privateContent}},
     {name:'legacyId',type:'text',unique:true,admin:{hidden:true},access:{read:privateContent}},
     {name:'previousSlugs',type:'array',admin:{hidden:true},fields:[{name:'slug',type:'text',required:true}]},
@@ -151,6 +164,11 @@ export const Projects: CollectionConfig = {
               },
             },
             {
+              type: 'collapsible',
+              label: 'Optional project page details',
+              admin: { initCollapsed: true },
+              fields: [
+            {
               name: 'editorialHeadline',
               type: 'text',
               label: 'Short Headline',
@@ -161,7 +179,6 @@ export const Projects: CollectionConfig = {
             {
               name: 'overview',
               type: 'textarea',
-              required: true,
               label: 'Project Overview',
               admin: {
                 description: 'Confirmed project narrative and creative scope.',
@@ -172,7 +189,6 @@ export const Projects: CollectionConfig = {
               type: 'relationship',
               relationTo: 'categories',
               hasMany: true,
-              required: true,
               label: 'Categories',
               admin: {
                 description: 'Select one or more active categories for public portfolio filtering.',
@@ -201,6 +217,8 @@ export const Projects: CollectionConfig = {
                 description: 'Enter if distinct from project title.',
               },
             },
+              ],
+            },
           ],
         },
         {
@@ -220,7 +238,7 @@ export const Projects: CollectionConfig = {
             },
           ],
         },
-        { label:'3. Page appearance', fields:[
+        { label:'3. Advanced page', fields:[
           {name:'layout',type:'select',defaultValue:'editorial',options:projectLayouts,admin:{components:{Field:'/src/components/admin/ProjectFields#LayoutPicker'}}},
           {name:'heroRatio',type:'select',defaultValue:'wide',admin:{condition:data=>data.layout!=='film'},options:[{label:'Wide · 2:1',value:'wide'},{label:'Cinematic · 21:9',value:'cinematic'},{label:'Classic · 4:3',value:'classic'}]},
           {name:'gallerySpacing',type:'select',defaultValue:'comfortable',options:[{label:'Comfortable',value:'comfortable'},{label:'Compact',value:'compact'}]},

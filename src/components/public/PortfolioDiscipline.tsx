@@ -39,7 +39,7 @@ type ContentVideo = {
 }
 
 function contentVideos(projects: Project[]): ContentVideo[] {
-  const dedicated = projects.flatMap(project => (project.contentVideos || []).flatMap((video: any, index: number) => {
+  const dedicated = projects.flatMap(project => [...(project.contentVideos || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((video: any, index: number) => {
     const source = resolveSectionVideo(video.videoFile, video.videoUrl, video.format)
     return source ? [{
       id: `${project.id}-content-${video.id || index}`,
@@ -60,12 +60,12 @@ function contentVideos(projects: Project[]): ContentVideo[] {
   }] : [])
 }
 
-function ContentProduction({ projects }: { projects: Project[] }) {
+function VideoPortfolio({ projects, contentCreation = false }: { projects: Project[]; contentCreation?: boolean }) {
   const videos = contentVideos(projects)
-  return <section className="portfolio-showcase content-showcase">
+  return <section className={`portfolio-showcase content-showcase ${contentCreation?'content-creation-showcase':'video-production-showcase'}`}>
     <header className="showcase-heading">
-      <h2>Made to be watched.</h2>
-      <p>Films, restaurant stories and social-first reels—presented in their original format.</p>
+      <h2>{contentCreation?'Made for the feed.':'Made to be watched.'}</h2>
+      <p>{contentCreation?'Social-first reels and everyday brand stories, presented in their original format.':'Films, commercials and cinematic reels—presented in their original format.'}</p>
     </header>
     <div className="content-video-grid">
       {videos.map(video => <article className={video.source.portrait ? 'content-video is-portrait' : 'content-video is-landscape'} key={video.id}>
@@ -99,7 +99,7 @@ type MarketingReport = {
 }
 
 function marketingReports(projects: Project[]): MarketingReport[] {
-  const dedicated = projects.flatMap(project => (project.marketingReports || []).map((report: any, index: number) => ({
+  const dedicated = projects.flatMap(project => [...(project.marketingReports || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).map((report: any, index: number) => ({
     id: `${project.id}-report-${report.id || index}`,
     project: project.title,
     campaign: report.campaignName || project.title,
@@ -174,6 +174,12 @@ function PerformanceMarketing({ projects }: { projects: Project[] }) {
         </aside>
       </div>
     </div>
+    <div className="marketing-report-grid">{reports.map(report=><article key={`${report.id}-details`}>
+      <header><div><span>{report.period || 'Campaign report'}</span><h3>{report.campaign}</h3></div>{report.spend&&<strong>{report.spend}<small>Amount spent</small></strong>}</header>
+      {report.image&&<div className="marketing-report-image"><StudioImage src={report.image} alt={`${report.campaign} Meta Ads screenshot`} sizes="(max-width:900px) 100vw, 50vw" /></div>}
+      <dl>{[['Reach',report.reach],['Impressions',report.impressions],['Link clicks',report.clicks],['Leads',report.leads],['CTR',report.ctr!=null?`${report.ctr}%`:undefined]].map(([label,value])=><div key={String(label)}><dt>{label}</dt><dd>{typeof value==='number'?compactMetric(value):value||'—'}</dd></div>)}</dl>
+      {report.summary&&<p>{report.summary}</p>}
+    </article>)}</div>
     {illustrative && <p className="report-disclaimer">Sample figures are illustrative and can be replaced with confirmed Meta Ads results in the dashboard.</p>}
   </section>
 }
@@ -181,7 +187,7 @@ function PerformanceMarketing({ projects }: { projects: Project[] }) {
 type PortfolioImage = { id: string; project: string; title?: string; description?: string; url: string }
 
 function foodPhotos(projects: Project[]): PortfolioImage[] {
-  const dedicated = projects.flatMap(project => (project.foodPhotos || []).flatMap((photo: any, index: number) => {
+  const dedicated = projects.flatMap(project => [...(project.foodPhotos || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((photo: any, index: number) => {
     const url = assetUrl(photo.photo, photo.photoUrl)
     return url ? [{ id: `${project.id}-food-${photo.id || index}`, project: project.title, title: photo.title, description: photo.description, url }] : []
   }))
@@ -206,7 +212,7 @@ function FoodPhotography({ projects }: { projects: Project[] }) {
 }
 
 function designPosters(projects: Project[]): PortfolioImage[] {
-  const dedicated = projects.flatMap(project => (project.designPosters || []).flatMap((poster: any, index: number) => {
+  const dedicated = projects.flatMap(project => [...(project.designPosters || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((poster: any, index: number) => {
     const url = assetUrl(poster.poster, poster.posterUrl)
     return url ? [{ id: `${project.id}-design-${poster.id || index}`, project: project.title, title: poster.title, description: poster.description, url }] : []
   }))
@@ -241,7 +247,8 @@ function CreativeDesigns({ projects }: { projects: Project[] }) {
 }
 
 export function PortfolioDiscipline({ slug, projects }: { slug: string; projects: Project[] }) {
-  if (slug === 'content-production') return <ContentProduction projects={projects} />
+  if (slug === 'video-production') return <VideoPortfolio projects={projects} />
+  if (slug === 'content-creation') return <VideoPortfolio projects={projects} contentCreation />
   if (slug === 'performance-marketing') return <PerformanceMarketing projects={projects} />
   if (slug === 'food-photography') return <FoodPhotography projects={projects} />
   return <CreativeDesigns projects={projects} />

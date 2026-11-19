@@ -4,7 +4,7 @@ import {publicProjects,publicProject} from '@/lib/public-projects'
 import type {Payload} from 'payload'
 describe('Agency portfolio placement and permissions',()=>{
  let p:Payload,id:string|number;const slug='qa-placement-'+Date.now()
- beforeAll(async()=>{p=await getPayloadClient();const category=(await p.find({collection:'categories',limit:1})).docs[0];const doc=await p.create({collection:'projects',data:{title:'Placement QA',slug,overview:'A project created to verify independent website placements.',categories:[category.id],portfolioCategory:'content-production',showOnHome:false,showOnWorks:true,approach:'Private staff production notes',_status:'published'}});id=doc.id})
+ beforeAll(async()=>{p=await getPayloadClient();const category=(await p.find({collection:'categories',limit:1})).docs[0];const doc=await p.create({collection:'projects',data:{title:'Placement QA',slug,overview:'A project created to verify independent website placements.',categories:[category.id],portfolioCategory:'video-production',showOnHome:false,showOnWorks:true,approach:'Private staff production notes',_status:'published'}});id=doc.id})
  afterAll(async()=>{if(id)await p.delete({collection:'projects',id})})
  it('supports Works-only placement and keeps private fields out of public reads',async()=>{
   expect((await publicProjects({slugs:[slug],placement:'home'})).totalDocs).toBe(0)

@@ -1,7 +1,37 @@
 'use client'
-import React, {useEffect,useState} from 'react'
+import React, {useEffect,useRef,useState} from 'react'
 import {useDocumentInfo, useField, useForm, useFormFields} from '@payloadcms/ui'
 import {projectLayouts, projectTemplateSections} from '../../lib/project-presentation'
+
+const categoryOptions = [
+ {value:'video-production',label:'Video Production',description:'Films, commercials and cinematic reels',icon:'▶'},
+ {value:'content-creation',label:'Content Creation',description:'Social-first reels and feed content',icon:'▦'},
+ {value:'performance-marketing',label:'Performance Marketing',description:'Campaign reports and Meta Ads results',icon:'↗'},
+ {value:'food-photography',label:'Food Photography',description:'Restaurant and dish photography',icon:'◉'},
+ {value:'creative-designs',label:'Creative Designs',description:'Posters and social-media designs',icon:'◇'},
+]
+
+export function CategorySelector({path}:{path:string}) {
+ const {value,setValue,showError,errorMessage}=useField<string>({path})
+ const requestedApplied=useRef(false)
+ useEffect(()=>{
+   const requested=new URLSearchParams(window.location.search).get('category')
+   if(!requestedApplied.current&&!value&&categoryOptions.some(option=>option.value===requested)){
+    requestedApplied.current=true
+    const timer=window.setTimeout(()=>setValue(requested as string),100)
+    return ()=>window.clearTimeout(timer)
+   }
+ },[value,setValue])
+ return <fieldset className="studio-category-picker" aria-describedby="portfolio-category-help">
+  <legend>What kind of work are you adding?</legend>
+  <p id="portfolio-category-help">Choose one category. The upload fields will update immediately.</p>
+  <div>{categoryOptions.map(option=><label className={value===option.value?'selected':''} key={option.value}>
+   <input type="radio" name={path} value={option.value} checked={value===option.value} onChange={()=>setValue(option.value)}/>
+   <span aria-hidden="true">{option.icon}</span><strong>{option.label}</strong><small>{option.description}</small>
+  </label>)}</div>
+  {showError&&<p className="studio-field-error" role="alert">{String(errorMessage)}</p>}
+ </fieldset>
+}
 
 export function SectionTemplate() {
  const {addFieldRow, disabled} = useForm()

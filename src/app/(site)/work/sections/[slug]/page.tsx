@@ -10,13 +10,13 @@ import { InquiryCTA, StudioImage } from '@/components/public/Studio'
 type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  if (slug === 'video-production' || slug === 'content-creation') return { title: 'Content Production', description: 'Films, reels and social-first stories made for screens of every shape.' }
+  if (slug === 'content-production') return { title: 'Video Production', description: 'Cinematic films, campaign videos and reels by Trail9ine Media.' }
   const section = portfolioSections.find(item => item.slug === slug)
   return { title: section?.title || 'Work not found', description: section?.description }
 }
 export default async function PortfolioSectionPage({ params }: Props) {
   const { slug } = await params
-  if (slug === 'video-production' || slug === 'content-creation') permanentRedirect('/work/sections/content-production')
+  if (slug === 'content-production') permanentRedirect('/work/sections/video-production')
   const section = portfolioSections.find(item => item.slug === slug)
   if (!section) notFound()
   const payload = await getPayloadClient()

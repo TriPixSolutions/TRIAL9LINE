@@ -32,7 +32,7 @@ describe('Project Workflow & Publication Lifecycle', () => {
         editorialHeadline: 'Testing automated project publication flow.',
         overview: 'Comprehensive verification test for Payload project workflow.',
         categories: [categoryId],
-        portfolioCategory: 'content-production',
+        portfolioCategory: 'content-creation',
         layout: 'social',
         bannerImageUrl: '/images/editorial/piravi-detail.webp',
         contentVideos: [{ title: 'QA vertical reel', format: 'portrait', videoUrl: 'https://www.instagram.com/reel/QAExample/' }],
