@@ -11,6 +11,15 @@ describe('Service portfolios', () => {
     expect(belongsToSection({ portfolioSections: [], servicesSummary: 'Video' }, 'video-production')).toBe(true)
     expect(belongsToSection({ portfolioSections: ['creative-designs'] }, 'creative-designs')).toBe(true)
   })
+  it('groups legacy results and campaign visuals from their content blocks', () => {
+    const project = { servicesSummary: 'Restaurant content', gallery: [
+      { blockType: 'videoResults' },
+      { blockType: 'mediaGrid', gridItems: [{ kind: 'photo', title: 'Seasonal campaign visual' }] },
+    ] }
+    expect(belongsToSection(project, 'performance-marketing')).toBe(true)
+    expect(belongsToSection(project, 'food-photography')).toBe(true)
+    expect(belongsToSection(project, 'creative-designs')).toBe(true)
+  })
   it('keeps images and videos in their corresponding sections', () => {
     const blocks = [{ blockType: 'mediaGrid', gridItems: [{ kind: 'video' }, { kind: 'image' }] }, { blockType: 'videoResults' }]
     expect(sectionGallery(blocks, 'food-photography')[0].gridItems).toEqual([{ kind: 'image' }])

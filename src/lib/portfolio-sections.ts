@@ -10,7 +10,16 @@ export function belongsToSection(project: any, slug: string) {
   if (Array.isArray(project.portfolioSections) && project.portfolioSections.length) return project.portfolioSections.includes(slug)
   const section = portfolioSections.find(item => item.slug === slug)
   const categories = (project.categories || []).map((item: any) => typeof item === 'object' ? item.name : '').join(' ')
-  return Boolean(section?.match.test([project.servicesSummary, categories].filter(Boolean).join(' ')))
+  const summary = [project.servicesSummary, categories].filter(Boolean).join(' ')
+  const blocks = project.gallery || []
+  const gridItems = blocks.flatMap((block: any) => block.blockType === 'mediaGrid' ? block.gridItems || [] : [])
+  if (section?.match.test(summary)) return true
+  if (slug === 'performance-marketing') return blocks.some((block: any) => block.blockType === 'videoResults')
+  if (slug === 'food-photography') return /food|restaurant|culinary|menu/i.test(summary) && gridItems.some((item: any) => item.kind !== 'video')
+  if (slug === 'creative-designs') return gridItems.some((item: any) => /campaign|poster|design|graphic|creative/i.test([item.title, item.caption].filter(Boolean).join(' ')))
+  if (slug === 'video-production') return blocks.some((block: any) => ['video', 'videoResults'].includes(block.blockType))
+  if (slug === 'content-creation') return blocks.length > 0
+  return false
 }
 
 export function sectionGallery(blocks: any[], slug: string) {
@@ -19,7 +28,12 @@ export function sectionGallery(blocks: any[], slug: string) {
     if (block.blockType === 'mediaGrid') {
       const video = slug === 'video-production'
       if (slug === 'performance-marketing') return []
-      const gridItems = (block.gridItems || []).filter((item: any) => video ? item.kind === 'video' : item.kind !== 'video')
+      const gridItems = (block.gridItems || []).filter((item: any) => {
+        if (video) return item.kind === 'video'
+        if (item.kind === 'video') return false
+        if (slug === 'creative-designs') return /campaign|poster|design|graphic|creative/i.test([item.title, item.caption].filter(Boolean).join(' '))
+        return true
+      })
       return gridItems.length ? [{ ...block, gridItems }] : []
     }
     if (slug === 'performance-marketing') return block.blockType === 'videoResults' ? [block] : []

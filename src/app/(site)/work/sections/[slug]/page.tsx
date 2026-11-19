@@ -20,7 +20,7 @@ export default async function PortfolioSectionPage({ params, searchParams }: Pro
   const section = portfolioSections.find(item => item.slug === slug)
   if (!section) notFound()
   const payload = await getPayloadClient()
-  const result = await payload.find({ collection: 'projects', where: { and: [{ _status: { equals: 'published' } }, placementWhere('work')] }, select: { servicesSummary: true, categories: true, portfolioSections: true }, depth: 1, pagination: false, overrideAccess: false, draft: false, sort: ['displayOrder', 'id'] })
+  const result = await payload.find({ collection: 'projects', where: { and: [{ _status: { equals: 'published' } }, placementWhere('work')] }, select: { servicesSummary: true, categories: true, portfolioSections: true, gallery: true }, depth: 1, pagination: false, overrideAccess: false, draft: false, sort: ['displayOrder', 'id'] })
   const projects = result.docs.filter(project => belongsToSection(project, slug))
   const pageCount = Math.max(1, Math.ceil(projects.length / 6))
   const page = Math.min(pageCount, Math.max(1, parseInt((await searchParams).page || '1', 10) || 1))
