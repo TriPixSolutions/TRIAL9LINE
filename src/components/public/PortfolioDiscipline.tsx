@@ -1,75 +1,247 @@
 import { StudioImage } from './Studio'
 import { ProjectVideo } from './ProjectVideo'
-import { resolveSectionVideo } from '@/lib/project-video'
+import { resolveSectionVideo, type ProjectVideoSource } from '@/lib/project-video'
 import { editorialGallery } from '@/lib/editorial-presentation'
 import { mediaUrl } from '@/lib/public-projects'
 
 type Project = Record<string, any>
 
-function ReferenceBoard({ src, alt, width, height }: { src: string; alt: string; width: number; height: number }) {
-  return <img
-    src={src}
-    srcSet={`${src.replace('.webp', '-480.webp')} 480w, ${src.replace('.webp', '-960.webp')} 960w, ${src} ${width}w`}
-    sizes="(max-width: 1280px) 100vw, 1200px"
-    alt={alt}
-    width={width}
-    height={height}
-    loading="lazy"
-  />
+function assetUrl(value: unknown, fallback?: string | null) {
+  if (value && typeof value === 'object') {
+    const asset = value as { cloudinaryUrl?: string; url?: string }
+    return asset.cloudinaryUrl || asset.url || fallback || null
+  }
+  return fallback || null
 }
 
-function entries(projects: Project[]) {
+function legacyEntries(projects: Project[]) {
   return projects.map(project => {
     const blocks = editorialGallery(project, mediaUrl) as any[]
     const result = blocks.find(block => block.blockType === 'videoResults') || blocks.find(block => block.blockType === 'video')
     const media = blocks.flatMap(block => block.blockType === 'mediaGrid' ? block.gridItems || [] : [])
-    const poster = media.find((item: any) => item.kind !== 'video' && item.url)?.url || mediaUrl(project.coverImage, project.coverImageUrl)
-    return { id: project.id, title: project.title, summary: project.editorialHeadline || project.servicesSummary, result, source: result ? resolveSectionVideo(result.videoFile, result.videoUrl, result.videoShape) : null, poster, media }
+    return {
+      id: project.id,
+      title: project.title,
+      summary: project.editorialHeadline || project.servicesSummary,
+      result,
+      source: result ? resolveSectionVideo(result.videoFile, result.videoUrl, result.videoShape) : null,
+      media,
+    }
   })
 }
 
-function FilmCard({ item, index }: { item: ReturnType<typeof entries>[number]; index: number }) {
-  const visual = <>{item.poster && <StudioImage src={item.poster} alt={item.title + ' film still'} sizes="(max-width:700px) 100vw, 50vw" />}<span className="discipline-film-overlay"><span>0{index + 1}</span><strong>{item.title}</strong><small>{item.source?.kind === 'instagram' ? 'Instagram film' : 'Commercial production'} ↗</small></span></>
-  return item.source?.originalUrl
-    ? <a className="discipline-film-card" href={item.source.originalUrl} target="_blank" rel="noopener noreferrer">{visual}</a>
-    : <div className="discipline-film-card">{visual}</div>
+type ContentVideo = {
+  id: string
+  project: string
+  title: string
+  caption?: string
+  source: ProjectVideoSource
 }
 
-function VideoProduction({ projects }: { projects: Project[] }) {
-  const items = entries(projects)
-  return <><div className="discipline-index" aria-label="Production categories"><span>Cinematic films</span><span>Restaurant stories</span><span>Short-form production</span></div><section className="discipline-section"><div className="discipline-heading"><p>01 / Film production</p><h2>Stories made to move.</h2><span>Commercial films, venue stories and food-led production arranged as one watchlist.</span></div><div className="discipline-film-grid">{items.map((item, index) => <FilmCard key={item.id} item={item} index={index} />)}</div></section></>
+function contentVideos(projects: Project[]): ContentVideo[] {
+  const dedicated = projects.flatMap(project => (project.contentVideos || []).flatMap((video: any, index: number) => {
+    const source = resolveSectionVideo(video.videoFile, video.videoUrl, video.format)
+    return source ? [{
+      id: `${project.id}-content-${video.id || index}`,
+      project: project.title,
+      title: video.title || project.title,
+      caption: video.caption,
+      source,
+    }] : []
+  }))
+  if (dedicated.length) return dedicated
+
+  return legacyEntries(projects).flatMap((item, index) => item.source ? [{
+    id: `${item.id}-legacy-${index}`,
+    project: item.title,
+    title: item.result?.heading || item.title,
+    caption: item.result?.caption || item.summary,
+    source: item.source,
+  }] : [])
 }
 
-function ContentCreation({ projects }: { projects: Project[] }) {
-  const items = entries(projects).filter(item => item.source)
-  return <><div className="discipline-index" aria-label="Content categories"><span>Scripted stories</span><span>Trending &amp; funny</span><span>Food content</span></div><section className="discipline-section"><div className="discipline-heading"><p>01 / Social-first content</p><h2>Built for the feed.</h2><span>Reels, scripted moments and menu-led stories made for vertical viewing.</span></div><div className="discipline-reel-grid">{items.map((item, index) => <article key={item.id} className="discipline-reel-card"><div className="discipline-reel-number">{String(index + 1).padStart(2, '0')}</div><ProjectVideo source={item.source!} title={item.result?.heading || item.title + ' reel'} poster={item.poster} sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw" /><h3>{item.title}</h3><p>{item.result?.heading || item.summary}</p></article>)}</div></section></>
+function ContentProduction({ projects }: { projects: Project[] }) {
+  const videos = contentVideos(projects)
+  return <section className="portfolio-showcase content-showcase">
+    <header className="showcase-heading">
+      <h2>Made to be watched.</h2>
+      <p>Films, restaurant stories and social-first reels—presented in their original format.</p>
+    </header>
+    <div className="content-video-grid">
+      {videos.map(video => <article className={video.source.portrait ? 'content-video is-portrait' : 'content-video is-landscape'} key={video.id}>
+        <ProjectVideo source={video.source} title={video.title} instant />
+        <div><strong>{video.title}</strong><span>{video.project}</span>{video.caption && <p>{video.caption}</p>}</div>
+      </article>)}
+    </div>
+  </section>
 }
 
-function compactMetric(value: unknown, fallback: string) {
-  return typeof value === 'number' && Number.isFinite(value) ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(value) : fallback
+function compactMetric(value: unknown, fallback = '—') {
+  return typeof value === 'number' && Number.isFinite(value)
+    ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(value)
+    : fallback
+}
+
+type MarketingReport = {
+  id: string
+  campaign: string
+  project: string
+  period?: string
+  spend?: string
+  reach?: number
+  impressions?: number
+  clicks?: number
+  leads?: number
+  ctr?: number
+  summary?: string
+  image?: string | null
+  illustrative?: boolean
+}
+
+function marketingReports(projects: Project[]): MarketingReport[] {
+  const dedicated = projects.flatMap(project => (project.marketingReports || []).map((report: any, index: number) => ({
+    id: `${project.id}-report-${report.id || index}`,
+    project: project.title,
+    campaign: report.campaignName || project.title,
+    period: report.period,
+    spend: report.spend,
+    reach: report.results?.reach,
+    impressions: report.results?.impressions,
+    clicks: report.results?.clicks,
+    leads: report.results?.leads,
+    ctr: report.results?.ctr,
+    summary: report.summary,
+    image: assetUrl(report.reportImage, report.reportImageUrl),
+  })))
+  if (dedicated.length) return dedicated
+
+  const samples = [
+    { reach: 2400000, impressions: 5100000, clicks: 48300, leads: 1280, ctr: 2.8 },
+    { reach: 1800000, impressions: 3900000, clicks: 37600, leads: 940, ctr: 3.1 },
+    { reach: 860000, impressions: 2100000, clicks: 18900, leads: 610, ctr: 2.4 },
+  ]
+  return legacyEntries(projects).slice(0, 3).map((item, index) => ({
+    id: `${item.id}-sample-report`,
+    project: item.title,
+    campaign: `${item.title} awareness`,
+    period: item.result?.reportingPeriod || 'Portfolio example',
+    reach: item.result?.reach || samples[index].reach,
+    impressions: samples[index].impressions,
+    clicks: samples[index].clicks,
+    leads: samples[index].leads,
+    ctr: samples[index].ctr,
+    summary: 'Illustrative campaign reporting layout',
+    illustrative: true,
+  }))
 }
 
 function PerformanceMarketing({ projects }: { projects: Project[] }) {
-  const items = entries(projects).filter(item => item.result)
-  const sampleViews = ['1.2M', '1.9M', '239K', '780K', '540K', '1M']
-  const sampleReach = ['2.4M', '2.8M', '410K', '1.1M', '860K', '1.7M']
-  const sampleGrowth = [24, 32, 18, 21, 16, 27]
-  return <section className="discipline-section performance-report"><div className="discipline-heading"><p>Illustrative Meta campaign report</p><h2>Creative, with a result.</h2><span>A presentation-ready view of campaign activity. Figures are sample portfolio metrics and can be replaced in the dashboard.</span></div><div className="performance-shell"><div className="performance-summary"><div><span>Campaigns</span><strong>{String(items.length).padStart(2, '0')}</strong><small>Active portfolio set</small></div><div><span>Sample reach</span><strong>4.8M</strong><small>Across featured work</small></div><div><span>Avg. growth</span><strong>+23%</strong><small>Illustrative benchmark</small></div><div className="performance-ring"><span>Engagement</span><strong>8.4%</strong><i aria-hidden="true" /></div></div><div className="performance-table" role="table" aria-label="Campaign performance examples"><div className="performance-row performance-row-head" role="row"><span>Campaign</span><span>Views</span><span>Reach</span><span>Growth</span></div>{items.map((item, index) => <div className="performance-row" role="row" key={item.id}><span><i>{String(index + 1).padStart(2, '0')}</i><strong>{item.title}</strong></span><span>{compactMetric(item.result.views, sampleViews[index] || '—')}</span><span>{compactMetric(item.result.reach, sampleReach[index] || '—')}</span><span className="positive">+{item.result.growth || sampleGrowth[index] || 20}%</span></div>)}</div></div></section>
+  const reports = marketingReports(projects)
+  const totalReach = reports.reduce((sum, report) => sum + (report.reach || 0), 0)
+  const totalClicks = reports.reduce((sum, report) => sum + (report.clicks || 0), 0)
+  const averageCtr = reports.length ? reports.reduce((sum, report) => sum + (report.ctr || 0), 0) / reports.length : 0
+  const illustrative = reports.some(report => report.illustrative)
+
+  return <section className="portfolio-showcase marketing-showcase">
+    <header className="showcase-heading">
+      <h2>Creative that performs.</h2>
+      <p>Campaign results presented with the clarity of a Meta Ads report.</p>
+    </header>
+    <div className="meta-report">
+      <div className="meta-report-bar"><strong>Campaign performance</strong><span>{illustrative ? 'Illustrative portfolio report' : 'Campaign reporting'}</span></div>
+      <div className="meta-kpis">
+        <div><span>Reach</span><strong>{compactMetric(totalReach)}</strong><small>Unique accounts</small></div>
+        <div><span>Link clicks</span><strong>{compactMetric(totalClicks)}</strong><small>Across campaigns</small></div>
+        <div><span>Average CTR</span><strong>{averageCtr.toFixed(1)}%</strong><small>Click-through rate</small></div>
+        <div className="meta-kpi-chart" aria-label="Performance trend"><i /><i /><i /><i /><i /><i /><i /></div>
+      </div>
+      <div className="meta-report-body">
+        <div className="meta-campaign-list">
+          <div className="meta-table-head"><span>Campaign</span><span>Reach</span><span>Clicks</span><span>CTR</span></div>
+          {reports.map(report => <article key={report.id}>
+            <span><strong>{report.campaign}</strong><small>{report.project} · {report.period || 'Current period'}</small></span>
+            <b>{compactMetric(report.reach)}</b><b>{compactMetric(report.clicks)}</b><b>{report.ctr != null ? `${report.ctr}%` : '—'}</b>
+          </article>)}
+        </div>
+        <aside className="meta-result-card">
+          {reports[0]?.image ? <StudioImage src={reports[0].image} alt={`${reports[0].campaign} Meta Ads report`} sizes="(max-width:900px) 100vw, 36vw" /> : <>
+            <span>RESULT OVERVIEW</span>
+            <strong>{compactMetric(reports[0]?.impressions)}</strong>
+            <p>Impressions</p>
+            <div className="meta-bars"><i /><i /><i /><i /><i /><i /><i /><i /></div>
+            <small>{reports[0]?.summary || 'Campaign reporting preview'}</small>
+          </>}
+        </aside>
+      </div>
+    </div>
+    {illustrative && <p className="report-disclaimer">Sample figures are illustrative and can be replaced with confirmed Meta Ads results in the dashboard.</p>}
+  </section>
+}
+
+type PortfolioImage = { id: string; project: string; title?: string; description?: string; url: string }
+
+function foodPhotos(projects: Project[]): PortfolioImage[] {
+  const dedicated = projects.flatMap(project => (project.foodPhotos || []).flatMap((photo: any, index: number) => {
+    const url = assetUrl(photo.photo, photo.photoUrl)
+    return url ? [{ id: `${project.id}-food-${photo.id || index}`, project: project.title, title: photo.title, description: photo.description, url }] : []
+  }))
+  if (dedicated.length) return dedicated
+  return legacyEntries(projects).flatMap(item => item.media.filter((photo: any) => photo.kind !== 'video' && photo.url && !/campaign|poster|design|graphic/i.test([photo.title, photo.caption].filter(Boolean).join(' '))).map((photo: any, index: number) => ({ id: `${item.id}-food-legacy-${index}`, project: item.title, title: photo.title, description: photo.caption, url: photo.url })))
 }
 
 function FoodPhotography({ projects }: { projects: Project[] }) {
-  const photos = entries(projects).flatMap(item => item.media.filter((photo: any) => photo.kind !== 'video' && photo.url && !/campaign|poster|design|graphic/i.test([photo.title, photo.caption].filter(Boolean).join(' '))).map((photo: any) => ({ ...photo, project: item.title })))
-  return <section className="discipline-section"><div className="discipline-heading"><p>Restaurant / Beverages / Desserts</p><h2>Food, with character.</h2><span>Natural-looking restaurant imagery shaped around the dish, the light and the atmosphere.</span></div><figure className="portfolio-reference-board"><ReferenceBoard src="/images/editorial/portfolio-food-board.webp" alt="Trail9ine food photography selection with drinks, biriyani, desserts and restaurant lifestyle photography" width={2560} height={1440} /></figure><div className="food-photo-grid">{photos.map((photo: any, index: number) => <figure key={(photo.id || photo.url) + index} className={index % 5 === 0 ? 'is-wide' : ''}><StudioImage src={photo.url} alt={photo.alt || photo.title || photo.project + ' food photograph'} sizes="(max-width:640px) 100vw, (max-width:1000px) 50vw, 33vw" /><figcaption><strong>{photo.project}</strong><span>{photo.title || 'Restaurant photography'}</span></figcaption></figure>)}</div></section>
+  const photos = foodPhotos(projects)
+  return <section className="portfolio-showcase food-showcase">
+    <header className="showcase-heading">
+      <h2>Food, in focus.</h2>
+      <p>Restaurant photography built around colour, texture and appetite.</p>
+    </header>
+    <div className="food-masonry">
+      {photos.map((photo, index) => <figure className={index % 7 === 0 || index % 7 === 4 ? 'is-large' : ''} key={photo.id}>
+        <StudioImage src={photo.url} alt={photo.title || `${photo.project} food photography`} sizes="(max-width:640px) 100vw, (max-width:1000px) 50vw, 33vw" />
+        <figcaption><strong>{photo.project}</strong>{photo.title && <span>{photo.title}</span>}</figcaption>
+      </figure>)}
+    </div>
+  </section>
+}
+
+function designPosters(projects: Project[]): PortfolioImage[] {
+  const dedicated = projects.flatMap(project => (project.designPosters || []).flatMap((poster: any, index: number) => {
+    const url = assetUrl(poster.poster, poster.posterUrl)
+    return url ? [{ id: `${project.id}-design-${poster.id || index}`, project: project.title, title: poster.title, description: poster.description, url }] : []
+  }))
+  if (dedicated.length) return dedicated
+  const titles = [
+    'Too Tired To Cook?', 'Wrap Your Hunger Away', 'Hummus with Salad', 'Ramadan Campaign',
+    'One Snack?', 'Craving Something Grilled?', 'Broasted Chicken', 'New Year Campaign',
+    'Father’s Day', 'Good Food, Good Mood', 'Chicken Shawaya', 'Hungry?',
+  ]
+  return titles.map((title, index) => ({
+    id: `portfolio-poster-${index + 1}`,
+    project: 'Restaurant campaigns',
+    title,
+    url: `/images/editorial/creative-poster-${String(index + 1).padStart(2, '0')}.webp`,
+  }))
 }
 
 function CreativeDesigns({ projects }: { projects: Project[] }) {
-  const posters = entries(projects).flatMap(item => item.media.filter((poster: any) => poster.kind !== 'video' && poster.url && /campaign|poster|design|graphic|creative/i.test([poster.title, poster.caption].filter(Boolean).join(' '))).map((poster: any) => ({ ...poster, project: item.title })))
-  return <section className="discipline-section"><div className="discipline-heading creative-heading"><p>Campaigns / Social media / Hospitality</p><h2>One studio. Many identities.</h2><span>Campaign posters and social graphics, each shaped around the brand, audience and moment.</span></div><figure className="portfolio-reference-board"><ReferenceBoard src="/images/editorial/portfolio-creative-board.webp" alt="Trail9ine restaurant campaign poster and social graphic selection" width={1672} height={941} /></figure><div className="creative-project-index">{posters.map((poster: any, index: number) => <div key={(poster.id || poster.url) + index}><span>{String(index + 1).padStart(2, '0')}</span><strong>{poster.project}</strong><small>{poster.title || 'Campaign creative'}</small></div>)}</div></section>
+  const posters = designPosters(projects)
+  return <section className="portfolio-showcase design-showcase">
+    <header className="showcase-heading">
+      <h2>Designed to be noticed.</h2>
+      <p>Campaign posters and social graphics, each presented as an individual piece.</p>
+    </header>
+    <div className="poster-grid">
+      {posters.map(poster => <figure key={poster.id}>
+        <div><StudioImage src={poster.url} alt={poster.title || `${poster.project} campaign design`} sizes="(max-width:620px) 100vw, (max-width:1000px) 50vw, 33vw" /></div>
+        <figcaption><strong>{poster.title || poster.project}</strong><span>{poster.project}</span></figcaption>
+      </figure>)}
+    </div>
+  </section>
 }
 
 export function PortfolioDiscipline({ slug, projects }: { slug: string; projects: Project[] }) {
-  if (slug === 'video-production') return <VideoProduction projects={projects} />
-  if (slug === 'content-creation') return <ContentCreation projects={projects} />
+  if (slug === 'content-production') return <ContentProduction projects={projects} />
   if (slug === 'performance-marketing') return <PerformanceMarketing projects={projects} />
   if (slug === 'food-photography') return <FoodPhotography projects={projects} />
   return <CreativeDesigns projects={projects} />

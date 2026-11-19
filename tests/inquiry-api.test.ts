@@ -18,7 +18,7 @@ describe('Durable contact workflow',()=>{
   expect(first.status).toBe(201);expect(second.status).toBe(200)
   expect((await first.json()).reference).toBe((await second.json()).reference)
   const found=await p.find({collection:'inquiries',where:{idempotencyKey:{equals:key}}});expect(found.totalDocs).toBe(1);ids.push(found.docs[0].id)
-  const jobs=await p.find({collection:'notification-outbox',where:{inquiry:{equals:found.docs[0].id}}});expect(jobs.totalDocs).toBe(1);expect(jobs.docs[0].status).toBe('pending')
+  const jobs=await p.find({collection:'notification-outbox',where:{inquiry:{equals:found.docs[0].id}}});expect(jobs.totalDocs).toBe(1);expect(jobs.docs[0].status).toBe('pending');expect(jobs.docs[0].attempts).toBe(1)
   expect(jobs.docs[0].recipient).toBe('studio@example.com')
   const publicSettings=await p.findGlobal({slug:'site-settings',overrideAccess:false})
   expect(publicSettings).not.toHaveProperty('inquiryNotificationEmail')
@@ -28,6 +28,7 @@ describe('Durable contact workflow',()=>{
   const previousKey=process.env.RESEND_API_KEY,previousSimulation=process.env.EMAIL_SIMULATION
   delete process.env.RESEND_API_KEY;process.env.EMAIL_SIMULATION='false'
   try{
+   await p.update({collection:'notification-outbox',id,data:{status:'pending',attempts:0,nextAttemptAt:new Date(0).toISOString(),leaseToken:null,leaseExpiresAt:null}})
    const result=await runNotificationWorker(p,id);expect(result.results[0].success).toBe(false)
    const job=await p.findByID({collection:'notification-outbox',id});expect(job.attempts).toBe(1);expect(job.status).toBe('pending');expect(job.leaseToken).toBeNull()
    expect((await p.findByID({collection:'inquiries',id:ids[0]})).emailStatus).toBe('failed')

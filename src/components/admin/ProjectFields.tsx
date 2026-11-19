@@ -42,7 +42,7 @@ export function PlacementToggle({path,field}:{path:string;field:{label?:string;a
 }
 export function EditorIntro(){
  const title=useFormFields(([fields])=>fields.title?.value as string)
- return <div className="studio-editor-intro"><span className="studio-admin-eyebrow">PROJECT STUDIO</span><h2>{title||'Something worth sharing.'}</h2><p>Start with the story. Add your images. Preview before you publish.</p></div>
+ return <div className="studio-editor-intro"><span className="studio-admin-eyebrow">PORTFOLIO UPLOAD</span><h2>{title||'Add new work.'}</h2><p>Choose the portfolio category first. The upload tab will adapt to the kind of work you are adding.</p></div>
 }
 
 export function SlugField({path}:{path:string}){

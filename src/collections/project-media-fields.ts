@@ -11,6 +11,7 @@ const resultsSection = showFor('videoResults')
 const imageSection = showFor('wideImage', 'captionedImage', 'textBlock')
 const pairSection = showFor('imagePair')
 const reelItem = (_data: unknown, row: { kind?: string }) => row?.kind === 'video'
+const photoItem = (_data: unknown, row: { kind?: string }) => row?.kind !== 'video'
 
 function upload(name: string, label: string, kind: 'image' | 'video' = 'image', condition?: Condition): Field {
   return {
@@ -20,8 +21,8 @@ function upload(name: string, label: string, kind: 'image' | 'video' = 'image', 
   }
 }
 
-function imageLink(name: string, label: string): Field {
-  return { name, label, type: 'text' }
+function imageLink(name: string, label: string, condition?: Condition): Field {
+  return { name, label, type: 'text', admin: { condition } }
 }
 
 function videoLink(condition?: Condition): Field {
@@ -93,8 +94,6 @@ export const projectGalleryField: Field = {
       type: 'group', label: 'Video', admin: { className: 'studio-video-fields', condition: videoSection },
       fields: [
         upload('videoFile', 'Upload or choose a video', 'video'), videoLink(), videoShape(),
-        upload('videoPoster', 'Video thumbnail'),
-        { type: 'collapsible', label: 'Use a thumbnail link', admin: { initCollapsed: true }, fields: [imageLink('videoPosterUrl', 'Thumbnail link')] },
       ],
     },
     {
@@ -133,8 +132,8 @@ export const projectGalleryField: Field = {
           options: [{ label: 'Photo or poster', value: 'photo' }, { label: 'Reel or video', value: 'video' }],
         },
         { name: 'title', type: 'text', label: 'Title' },
-        upload('media', 'Photo or video thumbnail'),
-        imageLink('url', 'Photo or thumbnail link (optional)'),
+        upload('media', 'Upload a photo', 'image', photoItem),
+        imageLink('url', 'Photo link (optional)', photoItem),
         upload('videoFile', 'Upload or choose a video', 'video', reelItem),
         videoLink(reelItem),
         videoShape(reelItem),

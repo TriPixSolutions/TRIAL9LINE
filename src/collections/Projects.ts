@@ -1,8 +1,9 @@
 import type { CollectionConfig } from 'payload'
-import { portfolioSections } from '../lib/portfolio-sections'
+import { normalizePortfolioSections, portfolioSections } from '../lib/portfolio-sections'
 import { revalidatePath } from 'next/cache'
 import { projectLayouts } from '../lib/project-presentation'
 import { projectCoverFields, projectGalleryField } from './project-media-fields'
+import { portfolioContentFields } from './portfolio-content-fields'
 import { privateContent } from '../lib/access'
 
 const formatSlug = (val: string): string =>
@@ -17,8 +18,8 @@ export const Projects: CollectionConfig = {
   labels: { singular: 'Portfolio work', plural: 'Portfolio work' },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', '_status', 'portfolioSections', 'showOnWorks', 'updatedAt'],
-    description: 'Choose portfolio sections, upload work and publish. Works placement controls inclusion in the service portfolios.',
+    defaultColumns: ['title', '_status', 'portfolioCategory', 'showOnWorks', 'updatedAt'],
+    description: 'Choose a portfolio category, upload the matching work and publish it to the website grids.',
     components: { beforeList: ['/src/components/admin/Overview#ProjectGuide'] },
     group: 'Portfolio',
     preview: (doc) => {
@@ -60,8 +61,11 @@ export const Projects: CollectionConfig = {
         }
         return data
       },
-      ({ data, operation }) => {
+      ({ data, originalDoc, operation }) => {
         if (data) {
+          if (!data.portfolioCategory && originalDoc?.portfolioCategory) data.portfolioCategory = originalDoc.portfolioCategory
+          if (!data.portfolioCategory) data.portfolioCategory = normalizePortfolioSections(data.portfolioSections || originalDoc?.portfolioSections)[0]
+          if (data.portfolioCategory) data.portfolioSections = [data.portfolioCategory]
           if (!data.slug && data.title) {
             data.slug = formatSlug(data.title)
           } else if (data.slug) {
@@ -104,7 +108,16 @@ export const Projects: CollectionConfig = {
     ],
   },
   fields: [
-    { name: 'portfolioSections', type: 'select', hasMany: true, label: 'Portfolio sections', options: portfolioSections.map(({ slug, title }) => ({ value: slug, label: title })), admin: { description: 'Choose where this work appears. Older work is grouped from its services and categories until you select sections here.' } },
+    {
+      name: 'portfolioCategory',
+      type: 'select',
+      required: true,
+      label: 'Portfolio category',
+      options: portfolioSections.map(({ slug, title }) => ({ value: slug, label: title })),
+      hooks: { afterRead: [({ value, data }) => value || normalizePortfolioSections(data?.portfolioSections)[0]] },
+      admin: { className: 'studio-category-select', description: 'This choice controls the upload fields and the public portfolio grid.' },
+    },
+    { name: 'portfolioSections', type: 'select', hasMany: true, options: portfolioSections.map(({ slug, title }) => ({ value: slug, label: title })), admin: { hidden: true } },
     {name:'legacyVersionId',type:'text',admin:{hidden:true},access:{read:privateContent}},
     {name:'legacyId',type:'text',unique:true,admin:{hidden:true},access:{read:privateContent}},
     {name:'previousSlugs',type:'array',admin:{hidden:true},fields:[{name:'slug',type:'text',required:true}]},
@@ -191,12 +204,20 @@ export const Projects: CollectionConfig = {
           ],
         },
         {
-          label: '2. Build the page',
+          label: '2. Upload portfolio work',
           fields: [
+            ...portfolioContentFields,
+            {
+              type: 'collapsible',
+              label: 'Advanced project detail page',
+              admin: { initCollapsed: true },
+              fields: [
             { name: 'sectionTemplate', type: 'ui', admin: { components: { Field: '/src/components/admin/ProjectFields#SectionTemplate' } } },
             ...projectCoverFields,
             { name: 'externalLink', type: 'text', label: 'Client website or social link' },
             projectGalleryField,
+              ],
+            },
           ],
         },
         { label:'3. Page appearance', fields:[
@@ -207,9 +228,9 @@ export const Projects: CollectionConfig = {
         {
           label: '4. Visibility & publish',
           fields: [
-            {name:'showOnHome',type:'checkbox',defaultValue:false,label:'Show on Home',admin:{hidden:true}},
+            {name:'showOnHome',type:'checkbox',defaultValue:false,label:'Show on Home',admin:{components:{Field:'/src/components/admin/ProjectFields#PlacementToggle'},description:'Show this published work in the selected work section on the homepage.'}},
             {name:'showOnWorks',type:'checkbox',defaultValue:true,label:'Show on Works',admin:{components:{Field:'/src/components/admin/ProjectFields#PlacementToggle'},description:'Include this published project in the portfolio grid. To make the detail page private, unpublish the project.'}},
-            {name:'homeOrder',type:'number',defaultValue:0,label:'Home order',admin:{hidden:true}},
+            {name:'homeOrder',type:'number',defaultValue:0,label:'Home order',admin:{description:'Lower numbers appear first on the homepage.'}},
             {
               name: 'featured',
               type: 'checkbox',

@@ -3,11 +3,11 @@ import { useState } from 'react'
 import type { ProjectVideoSource } from '@/lib/project-video'
 import { StudioImage } from './Studio'
 
-export function ProjectVideo({ source, title, poster, sizes }: { source: ProjectVideoSource; title: string; poster?: string | null; sizes?: string }) {
+export function ProjectVideo({ source, title, poster, sizes, instant = false }: { source: ProjectVideoSource; title: string; poster?: string | null; sizes?: string; instant?: boolean }) {
   const [active, setActive] = useState(false)
   const [failed, setFailed] = useState(false)
   const provider = { youtube: 'YouTube', instagram: 'Instagram', vimeo: 'Vimeo', file: 'Video' }[source.kind]
-  const showPlayer = active || (source.kind === 'file' && !poster)
+  const showPlayer = instant || active || (source.kind === 'file' && !poster)
   return <div className="project-video-player">
     <div className={'project-video-stage' + (source.portrait ? ' is-portrait' : '') + (source.kind === 'instagram' ? ' is-instagram' : '')}>
       {showPlayer && source.kind === 'file' ? <video className="project-video-frame" src={source.src} controls playsInline autoPlay={active} preload="none" poster={poster || undefined} aria-label={title} onError={() => setFailed(true)}>Your browser cannot play this video. <a href={source.originalUrl}>Open the video</a>.</video> : showPlayer ? <iframe className="project-video-frame" src={source.src + (source.kind === 'youtube' ? '&autoplay=1' : '')} title={title + ' — ' + provider} allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" /> : <button className="video-launch" type="button" onClick={() => setActive(true)} aria-label={source.kind === 'file' ? 'Play ' + title : 'Play ' + title + ' on ' + provider}>

@@ -48,3 +48,4 @@
   .array-field__fields:has(> .studio-results-fields) > .studio-section-story { grid-area: 5 / 1 / 6 / 2; }
   .array-field__fields:has(> .studio-results-fields) > .studio-results-fields { grid-area: 3 / 2 / 6 / 3; }
 }
+.studio-category-select{padding:20px;border:1px solid var(--studio-line);border-radius:10px;background:var(--theme-elevation-50);margin-bottom:18px}.studio-category-select>label{font-size:16px;font-weight:650}.studio-category-select .field-description{max-width:720px}.array-field:has(> .field-label[for*="contentVideos"]),.array-field:has(> .field-label[for*="marketingReports"]),.array-field:has(> .field-label[for*="foodPhotos"]),.array-field:has(> .field-label[for*="designPosters"]){border:1px solid var(--studio-line);border-radius:10px;padding:18px;background:var(--theme-elevation-50)}

@@ -3,6 +3,7 @@ import {createLocalReq} from 'payload'
 import {getPayloadClient} from '@/lib/payload'
 import {inquirySchema,checkRateLimit,generateInquiryReference} from '@/lib/inquiries'
 import { defaultInquiryRecipient } from '@/lib/email'
+import { runNotificationWorker } from '@/lib/notification-worker'
 const message='Thanks for telling us about your project. Your inquiry has been received.'
 export async function POST(req:NextRequest){try{return await submit(req)}catch{return NextResponse.json({success:false,error:'Your inquiry couldn’t be sent. Your details are still here—please try again.'},{status:500})}}
 async function submit(req:NextRequest){
@@ -25,9 +26,11 @@ async function submit(req:NextRequest){
  if(transactionID!==null)localReq.transactionID=transactionID
  try{
   const inquiry=await payload.create({collection:'inquiries',data:{...data,idempotencyKey:key,reference:generateInquiryReference(),leadStatus:'new',emailStatus:'pending'},req:localReq,overrideAccess:true})
-  await payload.create({collection:'notification-outbox',data:{inquiry:inquiry.id,recipient,status:'pending',attempts:0,maxAttempts:5,nextAttemptAt:new Date().toISOString()},req:localReq,overrideAccess:true})
+  const notification=await payload.create({collection:'notification-outbox',data:{inquiry:inquiry.id,recipient,status:'pending',attempts:0,maxAttempts:5,nextAttemptAt:new Date().toISOString()},req:localReq,overrideAccess:true})
   if(transactionID!==null)await payload.db.commitTransaction(transactionID)
-  // Delivery belongs exclusively to the durable worker; it cannot race an immediate send.
+  // Try immediately so normal submissions do not depend on a scheduled worker.
+  // The durable outbox keeps retrying later if the provider is unavailable.
+  await runNotificationWorker(payload,notification.id).catch(()=>null)
   return NextResponse.json({success:true,reference:inquiry.reference,message},{status:201})
  }catch{
   if(transactionID!==null)await payload.db.rollbackTransaction(transactionID)

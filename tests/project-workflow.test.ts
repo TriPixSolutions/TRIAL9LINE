@@ -32,8 +32,10 @@ describe('Project Workflow & Publication Lifecycle', () => {
         editorialHeadline: 'Testing automated project publication flow.',
         overview: 'Comprehensive verification test for Payload project workflow.',
         categories: [categoryId],
+        portfolioCategory: 'content-production',
         layout: 'social',
         bannerImageUrl: '/images/editorial/piravi-detail.webp',
+        contentVideos: [{ title: 'QA vertical reel', format: 'portrait', videoUrl: 'https://www.instagram.com/reel/QAExample/' }],
         gallery: [
           { blockType: 'videoResults', videoUrl: 'https://www.instagram.com/reel/QAExample/', videoSide: 'right', views: 48200, saves: 0, reportingPeriod: 'First 30 days', caption: 'The campaign reel' },
           { blockType: 'mediaGrid', gridItems: [{ kind: 'photo', url: '/images/editorial/piravi-gallery-1.webp', title: 'Campaign still' }] },
@@ -82,6 +84,7 @@ describe('Project Workflow & Publication Lifecycle', () => {
     expect(publishedQuery.docs[0].title).toBe('Vitest Automated Case Study')
     expect(publishedQuery.docs[0].editorialHeadline).toBe('Testing automated project publication flow.')
     expect(publishedQuery.docs[0].bannerImageUrl).toBe('/images/editorial/piravi-detail.webp')
+    expect(publishedQuery.docs[0].contentVideos[0]).toMatchObject({ title: 'QA vertical reel', format: 'portrait' })
     expect(publishedQuery.docs[0].gallery.map((block: any) => block.blockType)).toEqual(['videoResults', 'mediaGrid'])
     expect(publishedQuery.docs[0].gallery[0]).toMatchObject({ views: 48200, saves: 0, videoSide: 'right', caption: 'The campaign reel' })
     expect(publishedQuery.docs[0].gallery[1].gridItems[0]).toMatchObject({ kind: 'photo', title: 'Campaign still' })

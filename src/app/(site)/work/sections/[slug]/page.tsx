@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import Link from 'next/link'
 import { getPayloadClient } from '@/lib/payload'
 import { portfolioSections, belongsToSection } from '@/lib/portfolio-sections'
@@ -10,11 +10,13 @@ import { InquiryCTA, StudioImage } from '@/components/public/Studio'
 type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
+  if (slug === 'video-production' || slug === 'content-creation') return { title: 'Content Production', description: 'Films, reels and social-first stories made for screens of every shape.' }
   const section = portfolioSections.find(item => item.slug === slug)
   return { title: section?.title || 'Work not found', description: section?.description }
 }
 export default async function PortfolioSectionPage({ params }: Props) {
   const { slug } = await params
+  if (slug === 'video-production' || slug === 'content-creation') permanentRedirect('/work/sections/content-production')
   const section = portfolioSections.find(item => item.slug === slug)
   if (!section) notFound()
   const payload = await getPayloadClient()
