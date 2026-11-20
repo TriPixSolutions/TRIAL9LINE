@@ -10,7 +10,7 @@ import { Action, Arrow, InquiryCTA, StudioImage } from '@/components/public/Stud
 import { seoMetadata } from '@/lib/seo'
 export const dynamic = 'force-dynamic'
 export const metadata = seoMetadata({
-  title: 'Creative Marketing Agency Toronto',
+  title: 'Creative Marketing Agency Toronto | Trail9ine Media',
   description: 'Trail9ine Media is a Toronto creative marketing agency specializing in video production, content creation, food photography, design and paid advertising.',
   path: '/',
   keywords: ['restaurant marketing agency Toronto', 'hospitality marketing Toronto'],
