@@ -3,8 +3,20 @@ import { ProjectVideo } from './ProjectVideo'
 import { resolveSectionVideo, type ProjectVideoSource } from '@/lib/project-video'
 import { editorialGallery } from '@/lib/editorial-presentation'
 import { mediaUrl } from '@/lib/public-projects'
+import { PortfolioCategoryFilter, type PortfolioFilterCategory } from './PortfolioCategoryFilter'
 
 type Project = Record<string, any>
+
+function category(value: unknown): PortfolioFilterCategory | null {
+  if (!value || typeof value !== 'object') return null
+  const item = value as { slug?: unknown; name?: unknown; active?: unknown }
+  if (item.active === false || typeof item.slug !== 'string' || typeof item.name !== 'string') return null
+  return { slug: item.slug, name: item.name }
+}
+
+function filterCategories(items: { category?: PortfolioFilterCategory | null }[]) {
+  return [...new Map(items.flatMap(item => item.category ? [[item.category.slug, item.category] as const] : [])).values()]
+}
 
 function assetUrl(value: unknown, fallback?: string | null) {
   if (value && typeof value === 'object') {
@@ -36,6 +48,7 @@ type ContentVideo = {
   title: string
   caption?: string
   source: ProjectVideoSource
+  category?: PortfolioFilterCategory | null
 }
 
 function contentVideos(projects: Project[]): ContentVideo[] {
@@ -47,6 +60,7 @@ function contentVideos(projects: Project[]): ContentVideo[] {
       title: video.title || project.title,
       caption: video.caption,
       source,
+      category: category(video.subcategory),
     }] : []
   }))
   if (dedicated.length) return dedicated
@@ -67,12 +81,12 @@ function VideoPortfolio({ projects, contentCreation = false }: { projects: Proje
       <h2>{contentCreation?'Made for the feed.':'Made to be watched.'}</h2>
       <p>{contentCreation?'Social-first reels and everyday brand stories, presented in their original format.':'Films, commercials and cinematic reels—presented in their original format.'}</p>
     </header>
-    <div className="content-video-grid">
-      {videos.map(video => <article className={video.source.portrait ? 'content-video is-portrait' : 'content-video is-landscape'} key={video.id}>
+    <PortfolioCategoryFilter categories={filterCategories(videos)}><div className="content-video-grid">
+      {videos.map(video => <article data-portfolio-category={video.category?.slug || 'uncategorized'} className={video.source.portrait ? 'content-video is-portrait' : 'content-video is-landscape'} key={video.id}>
         <ProjectVideo source={video.source} title={video.title} instant />
-        <div><strong>{video.title}</strong><span>{video.project}</span>{video.caption && <p>{video.caption}</p>}</div>
+        <div><strong>{video.title}</strong><span>{video.category?.name || video.project}</span>{video.caption && <p>{video.caption}</p>}</div>
       </article>)}
-    </div>
+    </div></PortfolioCategoryFilter>
   </section>
 }
 
@@ -96,6 +110,7 @@ type MarketingReport = {
   summary?: string
   image?: string | null
   illustrative?: boolean
+  category?: PortfolioFilterCategory | null
 }
 
 function marketingReports(projects: Project[]): MarketingReport[] {
@@ -112,6 +127,8 @@ function marketingReports(projects: Project[]): MarketingReport[] {
     ctr: report.results?.ctr,
     summary: report.summary,
     image: assetUrl(report.reportImage, report.reportImageUrl),
+    illustrative: report.isIllustrative === true,
+    category: category(report.subcategory),
   })))
   if (dedicated.length) return dedicated
 
@@ -174,22 +191,22 @@ function PerformanceMarketing({ projects }: { projects: Project[] }) {
         </aside>
       </div>
     </div>
-    <div className="marketing-report-grid">{reports.map(report=><article key={`${report.id}-details`}>
+    <PortfolioCategoryFilter categories={filterCategories(reports)}><div className="marketing-report-grid">{reports.map(report=><article data-portfolio-category={report.category?.slug || 'uncategorized'} key={`${report.id}-details`}>
       <header><div><span>{report.period || 'Campaign report'}</span><h3>{report.campaign}</h3></div>{report.spend&&<strong>{report.spend}<small>Amount spent</small></strong>}</header>
       {report.image&&<div className="marketing-report-image"><StudioImage src={report.image} alt={`${report.campaign} Meta Ads screenshot`} sizes="(max-width:900px) 100vw, 50vw" /></div>}
       <dl>{[['Reach',report.reach],['Impressions',report.impressions],['Link clicks',report.clicks],['Leads',report.leads],['CTR',report.ctr!=null?`${report.ctr}%`:undefined]].map(([label,value])=><div key={String(label)}><dt>{label}</dt><dd>{typeof value==='number'?compactMetric(value):value||'—'}</dd></div>)}</dl>
       {report.summary&&<p>{report.summary}</p>}
-    </article>)}</div>
+    </article>)}</div></PortfolioCategoryFilter>
     {illustrative && <p className="report-disclaimer">Sample figures are illustrative and can be replaced with confirmed Meta Ads results in the dashboard.</p>}
   </section>
 }
 
-type PortfolioImage = { id: string; project: string; title?: string; description?: string; url: string }
+type PortfolioImage = { id: string; project: string; title?: string; description?: string; url: string; category?: PortfolioFilterCategory | null }
 
 function foodPhotos(projects: Project[]): PortfolioImage[] {
   const dedicated = projects.flatMap(project => [...(project.foodPhotos || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((photo: any, index: number) => {
     const url = assetUrl(photo.photo, photo.photoUrl)
-    return url ? [{ id: `${project.id}-food-${photo.id || index}`, project: project.title, title: photo.title, description: photo.description, url }] : []
+    return url ? [{ id: `${project.id}-food-${photo.id || index}`, project: project.title, title: photo.title, description: photo.description, url, category: category(photo.subcategory) }] : []
   }))
   if (dedicated.length) return dedicated
   return legacyEntries(projects).flatMap(item => item.media.filter((photo: any) => photo.kind !== 'video' && photo.url && !/campaign|poster|design|graphic/i.test([photo.title, photo.caption].filter(Boolean).join(' '))).map((photo: any, index: number) => ({ id: `${item.id}-food-legacy-${index}`, project: item.title, title: photo.title, description: photo.caption, url: photo.url })))
@@ -202,19 +219,19 @@ function FoodPhotography({ projects }: { projects: Project[] }) {
       <h2>Food, in focus.</h2>
       <p>Restaurant photography built around colour, texture and appetite.</p>
     </header>
-    <div className="food-masonry">
-      {photos.map((photo, index) => <figure className={index % 7 === 0 || index % 7 === 4 ? 'is-large' : ''} key={photo.id}>
+    <PortfolioCategoryFilter categories={filterCategories(photos)}><div className="food-masonry">
+      {photos.map((photo, index) => <figure data-portfolio-category={photo.category?.slug || 'uncategorized'} className={index % 7 === 0 || index % 7 === 4 ? 'is-large' : ''} key={photo.id}>
         <StudioImage src={photo.url} alt={photo.title || `${photo.project} food photography`} sizes="(max-width:640px) 100vw, (max-width:1000px) 50vw, 33vw" />
         <figcaption><strong>{photo.project}</strong>{photo.title && <span>{photo.title}</span>}</figcaption>
       </figure>)}
-    </div>
+    </div></PortfolioCategoryFilter>
   </section>
 }
 
 function designPosters(projects: Project[]): PortfolioImage[] {
   const dedicated = projects.flatMap(project => [...(project.designPosters || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((poster: any, index: number) => {
     const url = assetUrl(poster.poster, poster.posterUrl)
-    return url ? [{ id: `${project.id}-design-${poster.id || index}`, project: project.title, title: poster.title, description: poster.description, url }] : []
+    return url ? [{ id: `${project.id}-design-${poster.id || index}`, project: project.title, title: poster.title, description: poster.description, url, category: category(poster.subcategory) }] : []
   }))
   if (dedicated.length) return dedicated
   const titles = [
@@ -237,12 +254,12 @@ function CreativeDesigns({ projects }: { projects: Project[] }) {
       <h2>Designed to be noticed.</h2>
       <p>Campaign posters and social graphics, each presented as an individual piece.</p>
     </header>
-    <div className="poster-grid">
-      {posters.map(poster => <figure key={poster.id}>
+    <PortfolioCategoryFilter categories={filterCategories(posters)}><div className="poster-grid">
+      {posters.map(poster => <figure data-portfolio-category={poster.category?.slug || 'uncategorized'} key={poster.id}>
         <div><StudioImage src={poster.url} alt={poster.title || `${poster.project} campaign design`} sizes="(max-width:620px) 100vw, (max-width:1000px) 50vw, 33vw" /></div>
         <figcaption><strong>{poster.title || poster.project}</strong><span>{poster.project}</span></figcaption>
       </figure>)}
-    </div>
+    </div></PortfolioCategoryFilter>
   </section>
 }
 

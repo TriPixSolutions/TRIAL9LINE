@@ -30,6 +30,23 @@ export const Categories: CollectionConfig = {
       },
     },
     {
+      name: 'portfolioParents',
+      type: 'select',
+      hasMany: true,
+      required: true,
+      label: 'Used in portfolio pages',
+      options: [
+        { label: 'Video Production', value: 'video-production' },
+        { label: 'Content Creation', value: 'content-creation' },
+        { label: 'Performance Marketing', value: 'performance-marketing' },
+        { label: 'Food Photography', value: 'food-photography' },
+        { label: 'Creative Designs', value: 'creative-designs' },
+      ],
+      admin: {
+        description: 'Choose every main portfolio page where this subcategory should be available.',
+      },
+    },
+    {
       name: 'displayOrder',
       type: 'number',
       defaultValue: 0,

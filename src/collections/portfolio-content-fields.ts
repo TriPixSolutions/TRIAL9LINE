@@ -36,6 +36,18 @@ function metric(name: string, label: string): Field {
   return { name, label, type: 'number', min: 0, admin: { className: 'studio-metric-input' } }
 }
 
+function subcategory(): Field {
+  return {
+    name: 'subcategory',
+    type: 'relationship',
+    relationTo: 'categories',
+    label: 'Subcategory',
+    admin: {
+      description: 'Choose a category, or create a new one here. It becomes a clickable filter on the public page.',
+    },
+  }
+}
+
 export const portfolioContentFields: Field[] = [
   {
     name: 'contentVideos',
@@ -48,6 +60,7 @@ export const portfolioContentFields: Field[] = [
     },
     fields: [
       { name: 'title', type: 'text', required: true, label: 'Video title' },
+      subcategory(),
       {
         name: 'format',
         type: 'select',
@@ -76,6 +89,8 @@ export const portfolioContentFields: Field[] = [
     },
     fields: [
       { name: 'campaignName', type: 'text', required: true, label: 'Campaign name' },
+      subcategory(),
+      { name: 'isIllustrative', type: 'checkbox', defaultValue: false, label: 'Illustrative / demo data', admin: { description: 'Turn this on for sample figures. The public page will show a clear disclaimer.' } },
       upload('reportImage', 'Upload Meta Ads screenshot', 'image'),
       imageLink('reportImageUrl'),
       { name: 'period', type: 'text', label: 'Reporting period' },
@@ -107,6 +122,7 @@ export const portfolioContentFields: Field[] = [
     },
     fields: [
       upload('photo', 'Upload a photo', 'image'),
+      subcategory(),
       imageLink('photoUrl'),
       { name: 'title', type: 'text', label: 'Dish or photo title' },
       { name: 'description', type: 'text', label: 'Short description (optional)' },
@@ -124,6 +140,7 @@ export const portfolioContentFields: Field[] = [
     },
     fields: [
       upload('poster', 'Upload a poster or design', 'image'),
+      subcategory(),
       imageLink('posterUrl'),
       { name: 'title', type: 'text', label: 'Design title' },
       { name: 'description', type: 'text', label: 'Short description (optional)' },

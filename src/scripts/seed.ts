@@ -7,10 +7,10 @@ async function seed() {
 
   // 1. Seed Categories
   const categoriesData = [
-    { name: 'Video production', slug: 'video', displayOrder: 1, active: true },
-    { name: 'Social media', slug: 'social', displayOrder: 2, active: true },
-    { name: 'Photography', slug: 'photo', displayOrder: 3, active: true },
-    { name: 'Creative campaigns', slug: 'campaigns', displayOrder: 4, active: true },
+    { name: 'Video production', slug: 'video', portfolioParents: ['video-production'], displayOrder: 1, active: true },
+    { name: 'Social media', slug: 'social', portfolioParents: ['content-creation'], displayOrder: 2, active: true },
+    { name: 'Photography', slug: 'photo', portfolioParents: ['food-photography'], displayOrder: 3, active: true },
+    { name: 'Creative campaigns', slug: 'campaigns', portfolioParents: ['creative-designs', 'performance-marketing'], displayOrder: 4, active: true },
   ]
 
   const categoryMap: Record<string, string | number> = {}
