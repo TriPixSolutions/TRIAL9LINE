@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-export const metadata: Metadata = { title: 'Privacy Policy', description: 'How inquiry information is used by Trail9ine Media.' }
+import { seoMetadata } from '@/lib/seo'
+export const metadata: Metadata = seoMetadata({ title: 'Privacy Policy', description: 'Learn how Trail9ine Media collects, uses and protects information submitted through our Toronto creative agency website and inquiry form.', path: '/privacy' })
 export default function PrivacyPage() {
   return <article className="studio-container prose-page"><h1>Privacy policy.</h1>
     <p>When you contact Trail9ine Media, we collect the information you choose to submit: your name, business name, email, optional phone number, service interest and project message.</p>

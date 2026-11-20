@@ -2,7 +2,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { siteServices } from '@/lib/site-content'
 import { Arrow, InquiryCTA, StudioImage } from '@/components/public/Studio'
-export const metadata: Metadata = { title: 'Services & Capabilities', description: 'Social media, video production, food photography, branding and digital marketing from Trail9ine Media, Toronto.' }
+import { seoMetadata } from '@/lib/seo'
+export const metadata: Metadata = seoMetadata({ title: 'Creative Marketing Services Toronto', description: 'Explore video production, content creation, food photography, branding, social media and paid advertising services from Trail9ine Media in Toronto.', path: '/services' })
 export default async function ServicesPage() {
   const studioServices=await siteServices()
   return <>

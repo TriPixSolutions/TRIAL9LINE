@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ContactForm } from '@/components/public/ContactForm'
-export const metadata: Metadata = { title: 'Let’s Talk', description: 'Tell Trail9ine Media about your next creative project. Social media, film, photography, branding and digital marketing in Toronto.' }
+import { seoMetadata } from '@/lib/seo'
+export const metadata: Metadata = seoMetadata({ title: 'Contact a Creative Agency in Toronto', description: 'Contact Trail9ine Media in Toronto for video production, content creation, food photography, branding, social media and digital marketing projects.', path: '/contact' })
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
   const { service } = await searchParams
   return <section className="studio-container contact-grid">

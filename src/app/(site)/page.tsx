@@ -7,7 +7,14 @@ import Link from 'next/link'
 import { studioProcess } from '@/lib/studio-content'
 import { PortfolioSections } from '@/components/public/PortfolioSections'
 import { Action, Arrow, InquiryCTA, StudioImage } from '@/components/public/Studio'
+import { seoMetadata } from '@/lib/seo'
 export const dynamic = 'force-dynamic'
+export const metadata = seoMetadata({
+  title: 'Creative Marketing Agency Toronto',
+  description: 'Trail9ine Media is a Toronto creative marketing agency specializing in video production, content creation, food photography, design and paid advertising.',
+  path: '/',
+  keywords: ['restaurant marketing agency Toronto', 'hospitality marketing Toronto'],
+})
 export default async function HomePage() {
   const [content,studioServices]=await Promise.all([siteGlobal('home-page'),siteServices()])
   const customHero = content.heroImage && !isTemplateImage(content.heroImage) ? content.heroImage : null

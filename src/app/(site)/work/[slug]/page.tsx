@@ -8,6 +8,7 @@ import { agencyAsset, agencyAlt } from '@/lib/agency-imagery'
 import {projectEditorialImage,editorialGallery} from '@/lib/editorial-presentation'
 import { GalleryBlock, type GalleryBlockItem } from '@/components/public/GalleryBlock'
 import { Arrow, InquiryCTA, StudioImage } from '@/components/public/Studio'
+import { seoMetadata } from '@/lib/seo'
 export const dynamic = 'force-dynamic'
 type Props = { params: Promise<{ slug: string }>; searchParams: Promise<{ preview?: string }> }
 async function loadProject(slug: string, preview?: string) {
@@ -24,7 +25,10 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const { slug } = await params
   const query = await searchParams
   const doc = await loadProject(slug, query.preview)
-  return { title: doc?.metaTitle || doc?.title || 'Project not found', description: doc?.metaDescription || doc?.overview, alternates: { canonical: '/work/' + encodeURIComponent(slug) }, ...(query.preview === 'true' ? { robots: { index: false, follow: false } } : {}) }
+  if (!doc) return seoMetadata({ title: 'Project Not Found', description: 'The requested Trail9ine Media project could not be found.', path: `/work/${encodeURIComponent(slug)}`, noIndex: true })
+  const title = doc.metaTitle || `${doc.title} — Toronto Creative Portfolio`
+  const description = doc.metaDescription || `Explore ${doc.title}, a ${doc.servicesSummary || 'creative production and marketing'} project by Trail9ine Media, a creative agency based in Toronto, Canada.`
+  return seoMetadata({ title, description, path: `/work/${encodeURIComponent(slug)}`, noIndex: query.preview === 'true', keywords: [`${doc.title} portfolio`, `${doc.title} Toronto`] })
 }
 export default async function ProjectPage({ params, searchParams }: Props) {
   const { slug } = await params

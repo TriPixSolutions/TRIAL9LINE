@@ -4,7 +4,8 @@ import {isTemplateImage} from '@/lib/editorial-presentation'
 import type { Metadata } from 'next'
 import { Action, InquiryCTA, StudioImage } from '@/components/public/Studio'
 import { studioProcess } from '@/lib/studio-content'
-export const metadata: Metadata = { title: 'About the Studio', description: 'Meet Trail9ine Media, an independent creative and marketing studio founded in Toronto in 2025.' }
+import { seoMetadata } from '@/lib/seo'
+export const metadata: Metadata = seoMetadata({ title: 'About Our Toronto Creative Agency', description: 'Meet Trail9ine Media, a Toronto creative marketing agency founded in 2025 for restaurants, hospitality businesses and ambitious Canadian brands.', path: '/about' })
 export default async function AboutPage() {
   const content=await siteGlobal('about-page')
   return <>

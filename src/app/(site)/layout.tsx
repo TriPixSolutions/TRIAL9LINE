@@ -5,6 +5,7 @@ import '../globals.css'
 import { Header } from '@/components/public/Header'
 import { Footer } from '@/components/public/Footer'
 import { PageMotion } from '@/components/public/PageMotion'
+import { seoMetadata, siteUrl, socialImagePath } from '@/lib/seo'
 
 const display = localFont({
   src: [
@@ -24,16 +25,37 @@ const body = localFont({
   variable: '--font-body', display: 'swap',
 })
 export const dynamic = 'force-dynamic'
+const homeDescription = 'Trail9ine Media is a Toronto creative marketing agency specializing in video production, content creation, food photography, design and paid advertising.'
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'),
-  title: { default: 'TRAIL9INE MEDIA — Creative & Marketing Studio, Toronto', template: '%s | TRAIL9INE MEDIA' },
-  description: 'Film, photography, social media and design for restaurants and ambitious brands. A Toronto creative studio.',
-  icons: { icon: '/images/logo.png' },
-  openGraph: { siteName: 'TRAIL9INE MEDIA', locale: 'en_CA', type: 'website', images: ['/images/editorial/home-hero.webp'] },
+  ...seoMetadata({ title: 'Creative Marketing Agency Toronto', description: homeDescription, path: '/' }),
+  metadataBase: new URL(siteUrl),
+  title: { default: 'Creative Marketing Agency Toronto | Trail9ine Media', template: '%s | Trail9ine Media' },
+  applicationName: 'Trail9ine Media',
+  authors: [{ name: 'Trail9ine Media', url: siteUrl }],
+  creator: 'Trail9ine Media',
+  publisher: 'Trail9ine Media',
+  category: 'Creative Marketing Agency',
+  icons: { icon: '/images/logo.png', apple: '/images/logo.png' },
 }
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const services=await siteServices()
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': ['ProfessionalService', 'LocalBusiness'],
+    '@id': `${siteUrl}/#organization`,
+    name: 'Trail9ine Media',
+    url: siteUrl,
+    logo: `${siteUrl}/images/logo.png`,
+    image: `${siteUrl}${socialImagePath}`,
+    email: 'inquiries@trail9ine.com',
+    description: homeDescription,
+    address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'Ontario', addressCountry: 'CA' },
+    areaServed: [{ '@type': 'City', name: 'Toronto' }, { '@type': 'Country', name: 'Canada' }],
+    sameAs: ['https://instagram.com/trail9ine'],
+    knowsAbout: ['Video production', 'Content creation', 'Food photography', 'Social media marketing', 'Branding and graphic design', 'Paid advertising'],
+  }
   return <html lang="en" className={display.variable + ' ' + body.variable}><body className="studio-site">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
     <a className="skip-link" href="#main-content">Skip to content</a>
     <Header services={services.map(({slug,title})=>({slug,title}))} /><main id="main-content">{children}</main><Footer /><PageMotion />
   </body></html>

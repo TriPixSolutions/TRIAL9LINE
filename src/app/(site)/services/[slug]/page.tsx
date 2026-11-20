@@ -4,12 +4,19 @@ import type { Metadata } from 'next'
 import { siteServices } from '@/lib/site-content'
 import { publicProjects } from '@/lib/public-projects'
 import { Action, Arrow, InquiryCTA, StudioImage } from '@/components/public/Studio'
+import { seoMetadata } from '@/lib/seo'
 export const dynamic = 'force-dynamic'
 type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const service = (await siteServices()).find(s => s.slug === slug)
-  return { title: service ? service.title + ' Toronto' : 'Service not found', description: service?.description }
+  if (!service) return seoMetadata({ title: 'Service Not Found', description: 'The requested Trail9ine Media service could not be found.', path: `/services/${slug}`, noIndex: true })
+  return seoMetadata({
+    title: `${service.title} Toronto`,
+    description: `${service.title} for restaurants, hospitality businesses and ambitious brands in Toronto, Ontario. Strategy and production by Trail9ine Media.`,
+    path: `/services/${slug}`,
+    keywords: [`${service.title} Toronto`, `${service.shortTitle} Canada`],
+  })
 }
 export default async function ServiceDetailPage({ params }: Props) {
   const { slug } = await params
