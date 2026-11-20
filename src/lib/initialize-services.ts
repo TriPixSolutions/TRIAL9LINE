@@ -1,10 +1,12 @@
 import type { Payload } from 'payload'
 import { seedServices } from './seed-services'
+import { seedPortfolioContent } from './seed-portfolio-content'
 
 export async function initializeServices(payload: Payload) {
   try {
     const count = await payload.count({ collection: 'services', overrideAccess: true })
     await seedServices(payload, count.totalDocs ? 'website-designing' : undefined)
+    await seedPortfolioContent(payload)
   } catch (error) {
     // Fresh local/test SQLite databases can initialize before Payload creates
     // collection tables. The normal seed command populates them afterwards.
