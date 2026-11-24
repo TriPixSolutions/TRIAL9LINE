@@ -31,7 +31,7 @@ export const portfolioSections = [
     slug: 'creative-designs',
     title: 'Creative Designs',
     description: 'Posters, menus and social graphics shaped around each brand.',
-    image: '/images/editorial/polish-branding-workstation.webp',
+    image: '/images/editorial/creative-designs-collage.jpg',
     match: /design|brand identity|graphic|poster/i,
   },
 ] as const
