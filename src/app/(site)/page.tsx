@@ -55,12 +55,6 @@ export default async function HomePage() {
         </Link>
       </div>
     </section>
-    <section className="home-clients" aria-labelledby="home-clients-title">
-      <div className="studio-container home-clients-inner">
-        <p id="home-clients-title">Selected clients</p>
-        <div>{clientNames.map((client: string) => <span key={client}>{client}</span>)}</div>
-      </div>
-    </section>
     <section className="studio-container section-pad" id="selected-work">
       <div className="section-intro" data-reveal><div><h2 className="section-title">A little of<br />what we do.</h2></div><p>Film, content, campaigns, photography and design.<br />Explore our work by discipline.</p></div>
       <PortfolioSections />
@@ -70,6 +64,12 @@ export default async function HomePage() {
     <section className="capability-section"><div className="studio-container capability-layout"><div data-reveal><h2 className="section-title">Good thinking.<br />Better making.</h2><p>A single production or a connected brand presence. We bring the right skills to the table.</p><div className="media-frame"><StudioImage src="/images/bts/home-production-set.webp" alt="Trail9ine Media filming food content on location in a Toronto restaurant" sizes="250px" /></div></div>
       <div className="capability-services" data-reveal="capability">{studioServices.map((service, i) => <Link className="service-line" href={'/services/' + service.slug} key={service.slug}><span className="service-index">0{i + 1}</span><h3>{service.shortTitle}</h3><Arrow diagonal /></Link>)}</div>
     </div></section>
+    <section className="home-clients" aria-labelledby="home-clients-title">
+      <div className="studio-container home-clients-inner">
+        <p id="home-clients-title">Selected clients</p>
+        <div>{clientNames.map((client: string) => <span key={client}>{client}</span>)}</div>
+      </div>
+    </section>
     <section className="studio-container section-pad"><div className="section-intro"><div><StudioAccent /><h2 className="section-title">Simple process.<br />Considered work.</h2></div><p>From understanding your business to creating content that represents your brand, we make the process straightforward.</p></div><div className="process-row">{homeProcess.map((step, i) => <div className="process-item" key={step.title} data-reveal><span>0{i + 1}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}</div></section>
     <InquiryCTA />
   </>
