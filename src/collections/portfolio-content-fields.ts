@@ -27,8 +27,22 @@ function videoLink(): Field {
   return {
     name: 'videoUrl',
     type: 'text',
-    label: 'Or paste an Instagram, YouTube, Vimeo or video link',
+    label: 'Or paste an Instagram, YouTube or Vimeo link',
+    admin: { description: 'Choose one: upload the video above, or paste its public link here.' },
     validate: (value: string | null | undefined) => !value || resolveProjectVideo(value) !== null || 'Use a valid Instagram, YouTube, Vimeo, MP4 or WebM link.',
+  }
+}
+
+function instagramPostLink(): Field {
+  return {
+    name: 'instagramUrl',
+    type: 'text',
+    label: 'Or paste an Instagram post link',
+    admin: { description: 'Choose one: upload the poster above, paste a direct image URL, or paste the Instagram post link.' },
+    validate: (value: string | null | undefined) => {
+      const source = resolveProjectVideo(value)
+      return !value || source?.kind === 'instagram' || 'Use a valid Instagram post link.'
+    },
   }
 }
 
@@ -56,7 +70,7 @@ export const portfolioContentFields: Field[] = [
     labels: { singular: 'Video', plural: 'Videos' },
     admin: {
       className: 'studio-category-fields studio-content-videos',
-      description: 'Add the finished videos in display order. No thumbnail is needed—the original player appears in the portfolio grid.',
+      description: 'Add a video in either of two ways: upload the file, or paste its Instagram/YouTube/Vimeo link.',
     },
     fields: [
       { name: 'title', type: 'text', required: true, label: 'Video title' },
@@ -136,12 +150,13 @@ export const portfolioContentFields: Field[] = [
     labels: { singular: 'Design', plural: 'Designs' },
     admin: {
       className: 'studio-category-fields studio-design-posters',
-      description: 'Upload each poster separately. The public page automatically builds the responsive poster grid.',
+      description: 'Add each creative by uploading its image or pasting the original Instagram post link.',
     },
     fields: [
       upload('poster', 'Upload a poster or design', 'image'),
       subcategory(),
       imageLink('posterUrl'),
+      instagramPostLink(),
       { name: 'title', type: 'text', label: 'Design title' },
       { name: 'description', type: 'text', label: 'Short description (optional)' },
       { name: 'displayOrder', type: 'number', label: 'Display order', admin: { description: 'Optional. Lower numbers appear first.' } },

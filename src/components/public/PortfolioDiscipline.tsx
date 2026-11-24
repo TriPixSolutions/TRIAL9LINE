@@ -1,6 +1,6 @@
 import { StudioImage } from './Studio'
 import { ProjectVideo } from './ProjectVideo'
-import { resolveSectionVideo, type ProjectVideoSource } from '@/lib/project-video'
+import { resolveProjectVideo, resolveSectionVideo, type ProjectVideoSource } from '@/lib/project-video'
 import { editorialGallery } from '@/lib/editorial-presentation'
 import { mediaUrl } from '@/lib/public-projects'
 import { PortfolioCategoryFilter, type PortfolioFilterCategory } from './PortfolioCategoryFilter'
@@ -202,6 +202,7 @@ function PerformanceMarketing({ projects }: { projects: Project[] }) {
 }
 
 type PortfolioImage = { id: string; project: string; title?: string; description?: string; url: string; category?: PortfolioFilterCategory | null }
+type DesignPoster = Omit<PortfolioImage, 'url'> & { url?: string | null; source?: ProjectVideoSource | null }
 
 function foodPhotos(projects: Project[]): PortfolioImage[] {
   const dedicated = projects.flatMap(project => [...(project.foodPhotos || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((photo: any, index: number) => {
@@ -228,10 +229,11 @@ function FoodPhotography({ projects }: { projects: Project[] }) {
   </section>
 }
 
-function designPosters(projects: Project[]): PortfolioImage[] {
+function designPosters(projects: Project[]): DesignPoster[] {
   const dedicated = projects.flatMap(project => [...(project.designPosters || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((poster: any, index: number) => {
     const url = assetUrl(poster.poster, poster.posterUrl)
-    return url ? [{ id: `${project.id}-design-${poster.id || index}`, project: project.title, title: poster.title, description: poster.description, url, category: category(poster.subcategory) }] : []
+    const source = resolveProjectVideo(poster.instagramUrl)
+    return url || source ? [{ id: `${project.id}-design-${poster.id || index}`, project: project.title, title: poster.title, description: poster.description, url, source, category: category(poster.subcategory) }] : []
   }))
   if (dedicated.length) return dedicated
   const titles = [
@@ -256,7 +258,7 @@ function CreativeDesigns({ projects }: { projects: Project[] }) {
     </header>
     <PortfolioCategoryFilter categories={filterCategories(posters)}><div className="poster-grid">
       {posters.map(poster => <figure data-portfolio-category={poster.category?.slug || 'uncategorized'} key={poster.id}>
-        <div><StudioImage src={poster.url} alt={poster.title || `${poster.project} campaign design`} sizes="(max-width:620px) 100vw, (max-width:1000px) 50vw, 33vw" /></div>
+        <div>{poster.url ? <StudioImage src={poster.url} alt={poster.title || `${poster.project} campaign design`} sizes="(max-width:620px) 100vw, (max-width:1000px) 50vw, 33vw" /> : poster.source ? <ProjectVideo source={poster.source} title={poster.title || `${poster.project} campaign design`} instant /> : null}</div>
         <figcaption><strong>{poster.title || poster.project}</strong><span>{poster.project}</span></figcaption>
       </figure>)}
     </div></PortfolioCategoryFilter>

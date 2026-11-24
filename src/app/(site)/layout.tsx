@@ -47,7 +47,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     url: siteUrl,
     logo: `${siteUrl}/images/logo.png`,
     image: `${siteUrl}${socialImagePath}`,
-    email: 'inquiries@trail9ine.com',
+    email: 'info@trail9ine.ca',
     description: homeDescription,
     address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'Ontario', addressCountry: 'CA' },
     areaServed: [{ '@type': 'City', name: 'Toronto' }, { '@type': 'Country', name: 'Canada' }],

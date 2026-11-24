@@ -54,7 +54,7 @@ return buildConfig({
   defaultDepth: 1,
   maxDepth: 3,
   upload: { limits: { fileSize: 20 * 1024 * 1024 }, abortOnLimit: true },
-  ...(process.env.RESEND_API_KEY ? { email: resendAdapter({ apiKey: process.env.RESEND_API_KEY, defaultFromAddress: process.env.RESEND_FROM_ADDRESS || 'inquiries@trail9ine.com', defaultFromName: 'Trail9ine Media' }) } : {}),
+  ...(process.env.RESEND_API_KEY ? { email: resendAdapter({ apiKey: process.env.RESEND_API_KEY, defaultFromAddress: process.env.RESEND_FROM_ADDRESS || 'info@trail9ine.ca', defaultFromName: 'Trail9ine Media' }) } : {}),
   secret: process.env.PAYLOAD_SECRET || randomBytes(32).toString('hex'),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

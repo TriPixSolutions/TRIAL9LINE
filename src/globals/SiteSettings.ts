@@ -26,13 +26,14 @@ export const SiteSettings: GlobalConfig = {
     {
       name: 'contactEmail',
       type: 'text',
-      defaultValue: 'inquiries@trail9ine.com',
+      defaultValue: 'info@trail9ine.ca',
       required: true,
     },
     {
       name: 'inquiryNotificationEmail',
       type: 'email',
       label: 'Inquiry notification email',
+      defaultValue: 'info@trail9ine.ca',
       access: { read: ({ req }) => req.user?.role === 'owner' },
       admin: { description: 'New inquiry notifications go to this inbox. Leave blank to use the hosting configuration.' },
     },

@@ -37,5 +37,14 @@ export const HomePage: GlobalConfig = {
       type: 'textarea',
       defaultValue: 'We’re Trail9ine Media—a Toronto agency bringing creative production and marketing together. We help restaurants and ambitious brands build a presence that feels distinctive and consistent.',
     },
+    {
+      name: 'featuredClients',
+      type: 'array',
+      label: 'Clients shown near the top of the homepage',
+      labels: { singular: 'Client', plural: 'Clients' },
+      maxRows: 12,
+      admin: { description: 'Add client names in the order they should appear. No logo upload is required.' },
+      fields: [{ name: 'name', type: 'text', required: true, label: 'Client name' }],
+    },
   ],
 }
