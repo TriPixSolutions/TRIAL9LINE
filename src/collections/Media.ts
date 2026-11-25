@@ -29,7 +29,7 @@ export const Media:CollectionConfig={
   }],
   afterRead:[({doc})=>{if(doc.cloudinaryUrl){doc.url=doc.cloudinaryUrl;doc.thumbnailURL=doc.cloudinaryUrl}return doc}],
   beforeDelete:[async({id,req})=>{
-   const paths=['coverImage','bannerImage','gallery.mediaItem','gallery.mediaLeft','gallery.mediaRight','gallery.videoPoster','gallery.videoFile','gallery.stripImages.media','gallery.gridItems.media','gallery.gridItems.videoFile']
+   const paths=['coverImage','bannerImage','foodPhotos.photo','designPosters.poster','marketingReports.reportImage','contentVideos.videoFile','gallery.mediaItem','gallery.mediaLeft','gallery.mediaRight','gallery.videoPoster','gallery.videoFile','gallery.stripImages.media','gallery.gridItems.media','gallery.gridItems.videoFile']
    const projects=await req.payload.find({collection:'projects',where:{or:paths.map(p=>({[p]:{equals:id}}))},limit:1,depth:0,draft:true,overrideAccess:true,req})
    const published=await req.payload.find({collection:'projects',where:{or:paths.map(p=>({[p]:{equals:id}}))},limit:1,depth:0,draft:false,overrideAccess:true,req})
    const globals=await Promise.all(['home-page','about-page'].map(slug=>req.payload.findGlobal({slug,depth:0,overrideAccess:true,req})))

@@ -79,6 +79,28 @@ async function ensureProject(payload: Payload, data: Record<string, unknown>) {
   await payload.create({ collection: 'projects', overrideAccess: true, data: data as any })
 }
 
+const foodGalleryVersion = 'food-gallery-2026-11-25-v1'
+
+async function ensureFoodPhotographyProject(payload: Payload, data: Record<string, unknown>) {
+  const existing = await payload.find({ collection: 'projects', where: { slug: { equals: String(data.slug) } }, limit: 1, depth: 0, overrideAccess: true })
+  const project = existing.docs[0]
+  if (!project) {
+    await payload.create({ collection: 'projects', overrideAccess: true, data: data as any })
+    return
+  }
+  if (project.legacyVersionId === foodGalleryVersion) return
+  await payload.update({
+    collection: 'projects',
+    id: project.id,
+    overrideAccess: true,
+    data: {
+      foodPhotos: data.foodPhotos,
+      legacyVersionId: foodGalleryVersion,
+      _status: 'published',
+    } as any,
+  })
+}
+
 function videos(entries: string[][], subcategory: string | number, start = 1) {
   return entries.map(([title, videoUrl], index) => ({ title, videoUrl, subcategory, format: 'portrait', displayOrder: start + index }))
 }
@@ -100,18 +122,21 @@ export async function seedPortfolioContent(payload: Payload) {
     showOnWorks: true, displayOrder: 21, _status: 'published',
   })
 
-  await ensureProject(payload, {
+  await ensureFoodPhotographyProject(payload, {
     title: 'Food Photography Portfolio', slug: 'food-photography-portfolio', portfolioCategory: 'food-photography',
     editorialHeadline: 'Food, colour and texture captured with appetite.', servicesSummary: 'Restaurant Food · Beverages · Desserts',
     foodPhotos: [
-      { photoUrl: '/images/portfolio/food/grilled-chicken-rice.webp', title: 'Grilled Chicken & Rice', subcategory: category['restaurant-food'], displayOrder: 1 },
-      { photoUrl: '/images/portfolio/food/beverages.webp', title: 'Signature Beverages', subcategory: category.beverages, displayOrder: 2 },
-      { photoUrl: '/images/portfolio/food/mango-dessert.webp', title: 'Mango Dessert Moment', subcategory: category.desserts, displayOrder: 3 },
-      { photoUrl: '/images/portfolio/food/berry-dessert.webp', title: 'Berry & Cream Dessert', subcategory: category.desserts, displayOrder: 4 },
-      { photoUrl: '/images/portfolio/food/flatbread-chocolate.webp', title: 'Chocolate Berry Flatbread', subcategory: category.desserts, displayOrder: 5 },
-      { photoUrl: '/images/portfolio/food/chocolate-shake.webp', title: 'Chocolate Shake', subcategory: category.beverages, displayOrder: 6 },
+      { photoUrl: '/images/editorial/food-photography/citrus-signature-drinks.webp', title: 'Citrus Signature Drinks', subcategory: category.beverages, photoShape: 'portrait-3-4', photoFit: 'full', displayOrder: 1 },
+      { photoUrl: '/images/editorial/food-photography/chargrilled-chicken-rice.webp', title: 'Chargrilled Chicken & Rice', subcategory: category['restaurant-food'], photoShape: 'portrait-2-3', photoFit: 'full', displayOrder: 2 },
+      { photoUrl: '/images/editorial/food-photography/berry-chocolate-waffle.webp', title: 'Berry Chocolate Waffle', subcategory: category.desserts, photoShape: 'portrait-2-3', photoFit: 'full', displayOrder: 3 },
+      { photoUrl: '/images/editorial/food-photography/chocolate-cream-shake.webp', title: 'Chocolate Cream Shake', subcategory: category.beverages, photoShape: 'portrait-4-5', photoFit: 'full', displayOrder: 4 },
+      { photoUrl: '/images/editorial/food-photography/appam-coconut-milk.webp', title: 'Appam & Coconut Milk', subcategory: category['restaurant-food'], photoShape: 'portrait-3-4', photoFit: 'full', displayOrder: 5 },
+      { photoUrl: '/images/editorial/food-photography/strawberry-signature-drinks.webp', title: 'Strawberry Signature Drinks', subcategory: category.beverages, photoShape: 'portrait-2-3', photoFit: 'full', displayOrder: 6 },
+      { photoUrl: '/images/editorial/food-photography/grilled-rice-platter.webp', title: 'Grilled Rice Platter', subcategory: category['restaurant-food'], photoShape: 'portrait-2-3', photoFit: 'full', displayOrder: 7 },
+      { photoUrl: '/images/editorial/food-photography/royal-breakfast-platter.webp', title: 'Royal Breakfast Platter', subcategory: category['restaurant-food'], photoShape: 'portrait-4-5', photoFit: 'full', displayOrder: 8 },
+      { photoUrl: '/images/editorial/food-photography/chocolate-crunch-dessert.webp', title: 'Chocolate Crunch Dessert', subcategory: category.desserts, photoShape: 'portrait-3-5', photoFit: 'full', displayOrder: 9 },
     ],
-    showOnWorks: true, displayOrder: 22, _status: 'published',
+    showOnWorks: true, displayOrder: 22, legacyVersionId: foodGalleryVersion, _status: 'published',
   })
 
   const loungePosters = ['DfFuDZ2y5rN', 'DekG-nByvqH', 'Dd4RwbgSAjD', 'Dd2BIeUS1sl', 'DbldWW3S-jY', 'DaLzOhdyfTm', 'DZnk7cwCIAU']

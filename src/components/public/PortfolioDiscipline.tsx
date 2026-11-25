@@ -201,13 +201,34 @@ function PerformanceMarketing({ projects }: { projects: Project[] }) {
   </section>
 }
 
-type PortfolioImage = { id: string; project: string; title?: string; description?: string; url: string; category?: PortfolioFilterCategory | null }
+type PortfolioImage = { id: string; project: string; title?: string; description?: string; url: string; category?: PortfolioFilterCategory | null; ratio?: string; fit?: 'full' | 'cover'; position?: string }
 type DesignPoster = Omit<PortfolioImage, 'url'> & { url?: string | null; source?: ProjectVideoSource | null }
+
+function foodPhotoRatio(photo: any) {
+  const media = photo.photo && typeof photo.photo === 'object' ? photo.photo : null
+  if (Number(media?.width) > 0 && Number(media?.height) > 0) return `${media.width} / ${media.height}`
+  return ({
+    'portrait-2-3': '2 / 3',
+    'portrait-3-5': '3 / 5',
+    'portrait-3-4': '3 / 4',
+    'portrait-4-5': '4 / 5',
+  } as Record<string, string>)[photo.photoShape] || '4 / 5'
+}
 
 function foodPhotos(projects: Project[]): PortfolioImage[] {
   const dedicated = projects.flatMap(project => [...(project.foodPhotos || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).flatMap((photo: any, index: number) => {
     const url = assetUrl(photo.photo, photo.photoUrl)
-    return url ? [{ id: `${project.id}-food-${photo.id || index}`, project: project.title, title: photo.title, description: photo.description, url, category: category(photo.subcategory) }] : []
+    return url ? [{
+      id: `${project.id}-food-${photo.id || index}`,
+      project: project.title,
+      title: photo.title,
+      description: photo.description,
+      url,
+      category: category(photo.subcategory),
+      ratio: foodPhotoRatio(photo),
+      fit: photo.photoFit === 'cover' ? 'cover' as const : 'full' as const,
+      position: photo.photoPosition || 'center',
+    }] : []
   }))
   if (dedicated.length) return dedicated
   return legacyEntries(projects).flatMap(item => item.media.filter((photo: any) => photo.kind !== 'video' && photo.url && !/campaign|poster|design|graphic/i.test([photo.title, photo.caption].filter(Boolean).join(' '))).map((photo: any, index: number) => ({ id: `${item.id}-food-legacy-${index}`, project: item.title, title: photo.title, description: photo.caption, url: photo.url })))
@@ -221,9 +242,11 @@ function FoodPhotography({ projects }: { projects: Project[] }) {
       <p>Restaurant photography built around colour, texture and appetite.</p>
     </header>
     <PortfolioCategoryFilter categories={filterCategories(photos)}><div className="food-masonry">
-      {photos.map((photo, index) => <figure data-portfolio-category={photo.category?.slug || 'uncategorized'} className={index % 7 === 0 || index % 7 === 4 ? 'is-large' : ''} key={photo.id}>
-        <StudioImage src={photo.url} alt={photo.title || `${photo.project} food photography`} sizes="(max-width:640px) 100vw, (max-width:1000px) 50vw, 33vw" />
-        <figcaption><strong>{photo.project}</strong>{photo.title && <span>{photo.title}</span>}</figcaption>
+      {photos.map(photo => <figure data-portfolio-category={photo.category?.slug || 'uncategorized'} key={photo.id}>
+        <div className={`food-photo-frame is-${photo.fit || 'full'}`} style={{ aspectRatio: photo.ratio || '4 / 5' }}>
+          <StudioImage src={photo.url} alt={photo.title || `${photo.project} food photography`} sizes="(max-width:640px) 100vw, (max-width:1000px) 50vw, 33vw" position={photo.position} />
+        </div>
+        <figcaption><strong>{photo.title || photo.project}</strong><span>{photo.category?.name || photo.project}</span></figcaption>
       </figure>)}
     </div></PortfolioCategoryFilter>
   </section>
