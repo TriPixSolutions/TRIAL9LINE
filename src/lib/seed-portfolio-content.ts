@@ -11,8 +11,11 @@ const categoryDefinitions: Array<{ name: string; slug: string; parents: Parent[]
   { name: 'Restaurant Food', slug: 'restaurant-food', parents: ['food-photography'] },
   { name: 'Beverages', slug: 'beverages', parents: ['food-photography'] },
   { name: 'Desserts', slug: 'desserts', parents: ['food-photography'] },
-  { name: '90s Lounge Social Posters', slug: '90s-lounge-posters', parents: ['creative-designs'] },
-  { name: 'Tharavadu Social Posters', slug: 'tharavadu-posters', parents: ['creative-designs'] },
+  { name: '90s Lounge', slug: '90s-lounge-posters', parents: ['creative-designs'] },
+  { name: 'Tharavadu', slug: 'tharavadu-posters', parents: ['creative-designs'] },
+  { name: 'Zafoon', slug: 'zafoon-posters', parents: ['creative-designs'] },
+  { name: 'Piravi', slug: 'piravi-posters', parents: ['creative-designs'] },
+  { name: 'Lulu Shawarma', slug: 'lulu-shawarma-posters', parents: ['creative-designs'] },
   { name: 'Awareness Campaigns', slug: 'awareness-campaigns', parents: ['performance-marketing'] },
   { name: 'Lead Generation', slug: 'lead-generation', parents: ['performance-marketing'] },
 ]
@@ -66,7 +69,9 @@ async function ensureCategories(payload: Payload) {
   const ids: Record<string, number | string> = {}
   for (const [index, item] of categoryDefinitions.entries()) {
     const existing = await payload.find({ collection: 'categories', where: { slug: { equals: item.slug } }, limit: 1, depth: 0, overrideAccess: true })
-    const doc = existing.docs[0] || await payload.create({ collection: 'categories', overrideAccess: true, data: { name: item.name, slug: item.slug, portfolioParents: item.parents, displayOrder: index + 1, active: true } as any })
+    let doc = existing.docs[0]
+    if (!doc) doc = await payload.create({ collection: 'categories', overrideAccess: true, data: { name: item.name, slug: item.slug, portfolioParents: item.parents, displayOrder: index + 1, active: true } as any })
+    else if (doc.name !== item.name) doc = await payload.update({ collection: 'categories', id: doc.id, overrideAccess: true, data: { name: item.name } })
     ids[item.slug] = doc.id
   }
   return ids
@@ -80,6 +85,7 @@ async function ensureProject(payload: Payload, data: Record<string, unknown>) {
 }
 
 const foodGalleryVersion = 'food-gallery-2026-11-25-v1'
+const creativeGalleryVersion = 'creative-gallery-2026-11-25-v1'
 
 async function ensureFoodPhotographyProject(payload: Payload, data: Record<string, unknown>) {
   const existing = await payload.find({ collection: 'projects', where: { slug: { equals: String(data.slug) } }, limit: 1, depth: 0, overrideAccess: true })
@@ -99,6 +105,17 @@ async function ensureFoodPhotographyProject(payload: Payload, data: Record<strin
       _status: 'published',
     } as any,
   })
+}
+
+async function ensureCreativeDesignProject(payload: Payload, data: Record<string, unknown>) {
+  const existing = await payload.find({ collection: 'projects', where: { slug: { equals: String(data.slug) } }, limit: 1, depth: 0, overrideAccess: true })
+  const project = existing.docs[0]
+  if (!project) {
+    await payload.create({ collection: 'projects', overrideAccess: true, data: data as any })
+    return
+  }
+  if (project.legacyVersionId === creativeGalleryVersion) return
+  await payload.update({ collection: 'projects', id: project.id, overrideAccess: true, data: { designPosters: data.designPosters, legacyVersionId: creativeGalleryVersion, _status: 'published' } as any })
 }
 
 function videos(entries: string[][], subcategory: string | number, start = 1) {
@@ -139,16 +156,24 @@ export async function seedPortfolioContent(payload: Payload) {
     showOnWorks: true, displayOrder: 22, legacyVersionId: foodGalleryVersion, _status: 'published',
   })
 
-  const loungePosters = ['DfFuDZ2y5rN', 'DekG-nByvqH', 'Dd4RwbgSAjD', 'Dd2BIeUS1sl', 'DbldWW3S-jY', 'DaLzOhdyfTm', 'DZnk7cwCIAU']
-  const tharavaduPosters = ['DfFm5QsS89l', 'DfILTrSyAkw', 'Dc9SeNQSwwO', 'Dd4ROtxS5C-']
-  await ensureProject(payload, {
+  const creativeGroups = [
+    { brand: '90s Lounge', slug: '90s-lounge-posters', files: ['90s-lounge-01', '90s-lounge-02', '90s-lounge-03'] },
+    { brand: 'Tharavadu', slug: 'tharavadu-posters', files: ['tharavadu-01', 'tharavadu-02', 'tharavadu-03'] },
+    { brand: 'Zafoon', slug: 'zafoon-posters', files: ['zafoon-01', 'zafoon-02', 'zafoon-03'], posts: ['DdCoYYwRKQc', 'DcjYicuRDU4', 'DZLXB-VpM5A'] },
+    { brand: 'Piravi', slug: 'piravi-posters', files: ['piravi-01', 'piravi-02', 'piravi-03'], posts: ['DekGQVOxh-l', 'De2IP-zR5RL', 'DeXMqHqRL0u'] },
+    { brand: 'Lulu Shawarma', slug: 'lulu-shawarma-posters', files: ['lulu-shawarma-01', 'lulu-shawarma-02', 'lulu-shawarma-03'], posts: ['DYk5NaFgRyd', 'DYRhzkiAcT0', 'DX16jSqgarN'] },
+  ]
+  await ensureCreativeDesignProject(payload, {
     title: 'Creative Design Portfolio', slug: 'creative-design-portfolio', portfolioCategory: 'creative-designs',
     editorialHeadline: 'Restaurant campaigns designed to stop the scroll.', servicesSummary: 'Social Posters · Promotional Design',
-    designPosters: [
-      ...loungePosters.map((code, index) => ({ posterUrl: `/images/portfolio/designs/${code}.webp`, title: `90s Lounge Campaign ${String(index + 1).padStart(2, '0')}`, subcategory: category['90s-lounge-posters'], displayOrder: index + 1 })),
-      ...tharavaduPosters.map((code, index) => ({ posterUrl: `/images/portfolio/designs/${code}.webp`, title: `Tharavadu Campaign ${String(index + 1).padStart(2, '0')}`, subcategory: category['tharavadu-posters'], displayOrder: loungePosters.length + index + 1 })),
-    ],
-    showOnWorks: true, displayOrder: 23, _status: 'published',
+    designPosters: creativeGroups.flatMap((group, groupIndex) => group.files.map((file, index) => ({
+      posterUrl: `/images/editorial/creative-designs/${file}.webp`,
+      instagramUrl: group.posts?.[index] ? `https://www.instagram.com/p/${group.posts[index]}/` : undefined,
+      title: `${group.brand} Creative ${String(index + 1).padStart(2, '0')}`,
+      subcategory: category[group.slug],
+      displayOrder: groupIndex * 3 + index + 1,
+    }))),
+    showOnWorks: true, displayOrder: 23, legacyVersionId: creativeGalleryVersion, _status: 'published',
   })
 
   await ensureProject(payload, {

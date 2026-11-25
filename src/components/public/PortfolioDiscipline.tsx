@@ -274,16 +274,23 @@ function designPosters(projects: Project[]): DesignPoster[] {
 
 function CreativeDesigns({ projects }: { projects: Project[] }) {
   const posters = designPosters(projects)
+  const groups = [...new Map(posters.map(poster => [poster.category?.slug || 'uncategorized', {
+    category: poster.category || { slug: 'uncategorized', name: poster.project },
+    posters: posters.filter(item => (item.category?.slug || 'uncategorized') === (poster.category?.slug || 'uncategorized')),
+  }])).values()]
   return <section className="portfolio-showcase design-showcase">
     <header className="showcase-heading">
       <h2>Designed to be noticed.</h2>
       <p>Campaign posters and social graphics, each presented as an individual piece.</p>
     </header>
-    <PortfolioCategoryFilter categories={filterCategories(posters)}><div className="poster-grid">
-      {posters.map(poster => <figure data-portfolio-category={poster.category?.slug || 'uncategorized'} key={poster.id}>
-        <div>{poster.url ? <StudioImage src={poster.url} alt={poster.title || `${poster.project} campaign design`} sizes="(max-width:620px) 100vw, (max-width:1000px) 50vw, 33vw" /> : poster.source ? <ProjectVideo source={poster.source} title={poster.title || `${poster.project} campaign design`} instant /> : null}</div>
-        <figcaption><strong>{poster.title || poster.project}</strong><span>{poster.project}</span></figcaption>
-      </figure>)}
+    <PortfolioCategoryFilter categories={filterCategories(posters)}><div className="poster-brand-groups">
+      {groups.map(group => <section className="poster-brand-group" data-portfolio-category={group.category.slug} key={group.category.slug}>
+        <header className="poster-brand-header"><h3>{group.category.name}</h3><span>{String(group.posters.length).padStart(2, '0')} creatives</span></header>
+        <div className="poster-grid">{group.posters.map(poster => <figure key={poster.id}>
+          <div>{poster.url ? <StudioImage src={poster.url} alt={poster.title || `${group.category.name} campaign design`} sizes="(max-width:620px) 100vw, (max-width:1000px) 50vw, 33vw" /> : poster.source ? <ProjectVideo source={poster.source} title={poster.title || `${group.category.name} campaign design`} instant /> : null}</div>
+          <figcaption><strong>{poster.title || group.category.name}</strong><span>{group.category.name}</span></figcaption>
+        </figure>)}</div>
+      </section>)}
     </div></PortfolioCategoryFilter>
   </section>
 }

@@ -1067,6 +1067,10 @@ body.studio-site { margin: 0; background: var(--paper); color: var(--ink); font:
 .food-masonry figcaption { display: flex; justify-content: space-between; gap: 18px; padding: 13px 2px 0; border-top: 1px solid var(--line); }
 .food-masonry figcaption strong { font-size: 15px; }.food-masonry figcaption span { color: var(--muted); font-size: 13px; }
 
+.poster-brand-groups { display: grid; gap: clamp(48px, 7vw, 96px); }
+.poster-brand-header { display: flex; justify-content: space-between; gap: 24px; align-items: baseline; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.poster-brand-header h3 { font-size: clamp(28px, 4vw, 52px); font-weight: 520; letter-spacing: -.055em; }
+.poster-brand-header span { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
 .poster-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 42px) 18px; }
 .poster-grid figure { min-width: 0; }
 .poster-grid figure>div { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #e5e0dc; }

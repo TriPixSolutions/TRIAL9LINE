@@ -50,14 +50,14 @@ function metric(name: string, label: string): Field {
   return { name, label, type: 'number', min: 0, admin: { className: 'studio-metric-input' } }
 }
 
-function subcategory(): Field {
+function subcategory(label = 'Subcategory', description = 'Choose a category, or create a new one here. It becomes a clickable filter on the public page.'): Field {
   return {
     name: 'subcategory',
     type: 'relationship',
     relationTo: 'categories',
-    label: 'Subcategory',
+    label,
     admin: {
-      description: 'Choose a category, or create a new one here. It becomes a clickable filter on the public page.',
+      description,
     },
   }
 }
@@ -190,7 +190,7 @@ export const portfolioContentFields: Field[] = [
     },
     fields: [
       upload('poster', 'Upload a poster or design', 'image'),
-      subcategory(),
+      subcategory('Restaurant / brand', 'Choose the restaurant. Three creatives with the same brand appear together in one row.'),
       imageLink('posterUrl'),
       instagramPostLink(),
       { name: 'title', type: 'text', label: 'Design title' },
