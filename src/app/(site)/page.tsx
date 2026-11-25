@@ -3,6 +3,7 @@ import {mediaUrl} from '@/lib/public-projects'
 import {isTemplateImage} from '@/lib/editorial-presentation'
 import {StudioAccent} from '@/components/public/StudioAccent'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { PortfolioSections } from '@/components/public/PortfolioSections'
 import { Action, Arrow, InquiryCTA, StudioImage } from '@/components/public/Studio'
@@ -14,7 +15,15 @@ export const metadata = seoMetadata({
   path: '/',
   keywords: ['restaurant marketing agency Toronto', 'hospitality marketing Toronto'],
 })
-const defaultClients = ['Tharavadu', '90’s Lounge', 'Piravi', 'Biryani & Barbeque', 'Dosa King', 'Zaitoun']
+const clientLogos = [
+  { name: '90s Lounge', src: '/images/clients/90s-lounge.png' },
+  { name: 'Biryani N BarBQ', src: '/images/clients/biryani-n-barbq.png' },
+  { name: 'Dosa King', src: '/images/clients/dosa-king.png' },
+  { name: 'Kairali', src: '/images/clients/kairali.png' },
+  { name: 'Lulu Shawarma & Meat', src: '/images/clients/lulu-shawarma.png' },
+  { name: 'Piravi Indian Bistro', src: '/images/clients/piravi.png' },
+  { name: 'Tharavadu', src: '/images/clients/tharavadu.png' },
+]
 const homeProcess = [
   { title: 'Discover & Plan', text: 'We learn about your business, audience and goals. Then we develop a creative direction and content plan tailored to your brand.' },
   { title: 'Create & Produce', text: 'From planning and filming to photography and editing, we handle the creative production and prepare the final content for your review.' },
@@ -29,9 +38,6 @@ export default async function HomePage() {
     ? content.heroHeadline
     : 'Creative work\nthat moves brands.'
   const heroLines = String(headline).split('\n').filter(Boolean)
-  const clients = (content.featuredClients || []).map((client: { name?: string }) => client.name?.trim()).filter(Boolean)
-  const clientNames = clients.length ? clients : defaultClients
-
   return <>
     <section className="campaign-hero" aria-labelledby="hero-title">
       <div className="campaign-scene">
@@ -66,8 +72,13 @@ export default async function HomePage() {
     </div></section>
     <section className="home-clients" aria-labelledby="home-clients-title">
       <div className="studio-container home-clients-inner">
-        <p id="home-clients-title">Selected clients</p>
-        <div>{clientNames.map((client: string) => <span key={client}>{client}</span>)}</div>
+        <p className="home-clients-kicker">Selected clients</p>
+        <h2 id="home-clients-title">Brands we’ve helped<br />show up with confidence.</h2>
+        <div className="home-client-grid">
+          {clientLogos.map(client => <div className="home-client-logo" key={client.name}>
+            <Image src={client.src} alt={`${client.name} logo`} width={1000} height={420} sizes="(max-width: 700px) 44vw, (max-width: 1100px) 29vw, 21vw" />
+          </div>)}
+        </div>
       </div>
     </section>
     <section className="studio-container section-pad"><div className="section-intro"><div><StudioAccent /><h2 className="section-title">Simple process.<br />Considered work.</h2></div><p>From understanding your business to creating content that represents your brand, we make the process straightforward.</p></div><div className="process-row">{homeProcess.map((step, i) => <div className="process-item" key={step.title} data-reveal><span>0{i + 1}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}</div></section>
