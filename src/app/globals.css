@@ -84,7 +84,6 @@ body.studio-site { margin: 0; background: var(--paper); color: var(--ink); font:
 .home-clients h2 { max-width:760px; margin-top:24px; font-size:clamp(34px,4.2vw,62px); font-weight:520; line-height:1.06; letter-spacing:-.055em; }
 .home-client-grid { width:min(100%,940px); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); column-gap:clamp(28px,4vw,64px); row-gap:clamp(24px,3vw,42px); margin-top:clamp(40px,5vw,64px); }
 .home-client-logo { min-width:0; height:clamp(70px,7vw,92px); display:grid; place-items:center; }
-.home-client-logo:last-child { grid-column:2; }
 .home-client-logo img { width:min(72%,220px); height:74%; object-fit:contain; opacity:.96; transition:opacity .25s ease, transform .35s ease; }
 @media (hover:hover) { .home-client-logo:hover img { opacity:1; transform:scale(1.025); } }
 .section-pad { padding-block:108px; }

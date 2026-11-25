@@ -23,6 +23,8 @@ const clientLogos = [
   { name: 'Lulu Shawarma & Meat', src: '/images/clients/lulu-shawarma-accent.png' },
   { name: 'Piravi Indian Bistro', src: '/images/clients/piravi-accent.png' },
   { name: 'Tharavadu', src: '/images/clients/tharavadu-accent.png' },
+  { name: 'Fricasse Infused Chicken', src: '/images/clients/fricasse-accent.png' },
+  { name: 'Zafoon Middle Eastern Restaurant', src: '/images/clients/zafoon-accent.png' },
 ]
 const homeProcess = [
   { title: 'Discover & Plan', text: 'We learn about your business, audience and goals. Then we develop a creative direction and content plan tailored to your brand.' },
