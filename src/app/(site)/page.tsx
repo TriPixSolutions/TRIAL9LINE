@@ -16,13 +16,13 @@ export const metadata = seoMetadata({
   keywords: ['restaurant marketing agency Toronto', 'hospitality marketing Toronto'],
 })
 const clientLogos = [
-  { name: '90s Lounge', src: '/images/clients/90s-lounge.png' },
-  { name: 'Biryani N BarBQ', src: '/images/clients/biryani-n-barbq.png' },
-  { name: 'Dosa King', src: '/images/clients/dosa-king.png' },
-  { name: 'Kairali', src: '/images/clients/kairali.png' },
-  { name: 'Lulu Shawarma & Meat', src: '/images/clients/lulu-shawarma.png' },
-  { name: 'Piravi Indian Bistro', src: '/images/clients/piravi.png' },
-  { name: 'Tharavadu', src: '/images/clients/tharavadu.png' },
+  { name: '90s Lounge', src: '/images/clients/90s-lounge-accent.png' },
+  { name: 'Biryani N BarBQ', src: '/images/clients/biryani-n-barbq-accent.png' },
+  { name: 'Dosa King', src: '/images/clients/dosa-king-accent.png' },
+  { name: 'Kairali', src: '/images/clients/kairali-accent.png' },
+  { name: 'Lulu Shawarma & Meat', src: '/images/clients/lulu-shawarma-accent.png' },
+  { name: 'Piravi Indian Bistro', src: '/images/clients/piravi-accent.png' },
+  { name: 'Tharavadu', src: '/images/clients/tharavadu-accent.png' },
 ]
 const homeProcess = [
   { title: 'Discover & Plan', text: 'We learn about your business, audience and goals. Then we develop a creative direction and content plan tailored to your brand.' },
