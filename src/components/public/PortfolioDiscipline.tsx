@@ -107,77 +107,112 @@ type MarketingReport = {
   clicks?: number
   leads?: number
   ctr?: number
+  spendValue?: number
+  costPerLead?: number
   summary?: string
   image?: string | null
   illustrative?: boolean
   category?: PortfolioFilterCategory | null
 }
 
+function moneyValue(value: unknown) {
+  if (typeof value === 'number' && Number.isFinite(value)) return value
+  if (typeof value !== 'string') return undefined
+  const parsed = Number(value.replace(/[^0-9.]/g, ''))
+  return Number.isFinite(parsed) ? parsed : undefined
+}
+
 function marketingReports(projects: Project[]): MarketingReport[] {
-  const dedicated = projects.flatMap(project => [...(project.marketingReports || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).map((report: any, index: number) => ({
-    id: `${project.id}-report-${report.id || index}`,
-    project: project.title,
-    campaign: report.campaignName || project.title,
-    period: report.period,
-    spend: report.spend,
-    reach: report.results?.reach,
-    impressions: report.results?.impressions,
-    clicks: report.results?.clicks,
-    leads: report.results?.leads,
-    ctr: report.results?.ctr,
-    summary: report.summary,
-    image: assetUrl(report.reportImage, report.reportImageUrl),
-    illustrative: report.isIllustrative === true,
-    category: category(report.subcategory),
-  })))
+  const dedicated = projects.flatMap(project => [...(project.marketingReports || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).map((report: any, index: number) => {
+    const spendValue = moneyValue(report.spend)
+    const leads = report.results?.leads
+    return {
+      id: `${project.id}-report-${report.id || index}`,
+      project: project.title,
+      campaign: report.campaignName || project.title,
+      period: report.period,
+      spend: report.spend,
+      reach: report.results?.reach,
+      impressions: report.results?.impressions,
+      clicks: report.results?.clicks,
+      leads,
+      ctr: report.results?.ctr,
+      spendValue,
+      costPerLead: spendValue && leads ? spendValue / leads : undefined,
+      summary: report.summary,
+      image: assetUrl(report.reportImage, report.reportImageUrl),
+      illustrative: report.isIllustrative === true,
+      category: category(report.subcategory),
+    }
+  }))
   if (dedicated.length) return dedicated
 
-  const samples = [
-    { reach: 2400000, impressions: 5100000, clicks: 48300, leads: 1280, ctr: 2.8 },
-    { reach: 1800000, impressions: 3900000, clicks: 37600, leads: 940, ctr: 3.1 },
-    { reach: 860000, impressions: 2100000, clicks: 18900, leads: 610, ctr: 2.4 },
+  return [
+    {
+      id: 'sample-lead-generation',
+      project: 'Paid Social',
+      campaign: 'Restaurant Lead Generation',
+      period: '30-day campaign snapshot',
+      spend: '$4,860',
+      spendValue: 4860,
+      reach: 118400,
+      impressions: 286900,
+      clicks: 5740,
+      leads: 338,
+      ctr: 2.0,
+      costPerLead: 14.38,
+      summary: 'Lead-focused creative paired with audience testing and weekly optimisation.',
+      illustrative: true,
+    },
+    {
+      id: 'sample-catering-enquiries',
+      project: 'Paid Social',
+      campaign: 'Catering Enquiries',
+      period: '30-day campaign snapshot',
+      spend: '$3,240',
+      spendValue: 3240,
+      reach: 76900,
+      impressions: 164700,
+      clicks: 3130,
+      leads: 172,
+      ctr: 1.9,
+      costPerLead: 18.84,
+      summary: 'Conversion-led ads built around high-intent catering and event enquiries.',
+      illustrative: true,
+    },
   ]
-  return legacyEntries(projects).slice(0, 3).map((item, index) => ({
-    id: `${item.id}-sample-report`,
-    project: item.title,
-    campaign: `${item.title} awareness`,
-    period: item.result?.reportingPeriod || 'Portfolio example',
-    reach: item.result?.reach || samples[index].reach,
-    impressions: samples[index].impressions,
-    clicks: samples[index].clicks,
-    leads: samples[index].leads,
-    ctr: samples[index].ctr,
-    summary: 'Illustrative campaign reporting layout',
-    illustrative: true,
-  }))
 }
 
 function PerformanceMarketing({ projects }: { projects: Project[] }) {
   const reports = marketingReports(projects)
   const totalReach = reports.reduce((sum, report) => sum + (report.reach || 0), 0)
-  const totalClicks = reports.reduce((sum, report) => sum + (report.clicks || 0), 0)
+  const totalLeads = reports.reduce((sum, report) => sum + (report.leads || 0), 0)
+  const totalSpend = reports.reduce((sum, report) => sum + (report.spendValue || 0), 0)
+  const averageCostPerLead = totalLeads > 0 && totalSpend > 0
+    ? totalSpend / totalLeads
+    : reports.length ? reports.reduce((sum, report) => sum + (report.costPerLead || 0), 0) / reports.length : 0
   const averageCtr = reports.length ? reports.reduce((sum, report) => sum + (report.ctr || 0), 0) / reports.length : 0
   const illustrative = reports.some(report => report.illustrative)
 
   return <section className="portfolio-showcase marketing-showcase">
     <header className="showcase-heading">
       <h2>Creative that performs.</h2>
-      <p>Campaign results presented with the clarity of a Meta Ads report.</p>
+      <p>Lead generation, cost efficiency and campaign results presented with the clarity of a Meta Ads report.</p>
     </header>
     <div className="meta-report">
-      <div className="meta-report-bar"><strong>Campaign performance</strong><span>{illustrative ? 'Illustrative portfolio report' : 'Campaign reporting'}</span></div>
+      <div className="meta-report-bar"><strong>Campaign performance</strong><span>{illustrative ? 'Sample campaign snapshot' : 'Campaign reporting'}</span></div>
       <div className="meta-kpis">
+        <div><span>Qualified leads</span><strong>{compactMetric(totalLeads)}</strong><small>Across campaigns</small></div>
+        <div><span>Average cost / lead</span><strong>${averageCostPerLead.toFixed(2)}</strong><small>Blended CPL</small></div>
         <div><span>Reach</span><strong>{compactMetric(totalReach)}</strong><small>Unique accounts</small></div>
-        <div><span>Link clicks</span><strong>{compactMetric(totalClicks)}</strong><small>Across campaigns</small></div>
         <div><span>Average CTR</span><strong>{averageCtr.toFixed(1)}%</strong><small>Click-through rate</small></div>
-        <div className="meta-kpi-chart" aria-label="Performance trend"><i /><i /><i /><i /><i /><i /><i /></div>
       </div>
       <div className="meta-report-body">
         <div className="meta-campaign-list">
-          <div className="meta-table-head"><span>Campaign</span><span>Reach</span><span>Clicks</span><span>CTR</span></div>
+          <div className="meta-table-head"><span>Campaign</span><span>Leads</span><span>Cost / lead</span><span>CTR</span></div>
           {reports.map(report => <article key={report.id}>
             <span><strong>{report.campaign}</strong><small>{report.project} · {report.period || 'Current period'}</small></span>
-            <b>{compactMetric(report.reach)}</b><b>{compactMetric(report.clicks)}</b><b>{report.ctr != null ? `${report.ctr}%` : '—'}</b>
+            <b>{compactMetric(report.leads)}</b><b>{report.costPerLead != null ? `$${report.costPerLead.toFixed(2)}` : '—'}</b><b>{report.ctr != null ? `${report.ctr}%` : '—'}</b>
           </article>)}
         </div>
         <aside className="meta-result-card">
@@ -194,10 +229,10 @@ function PerformanceMarketing({ projects }: { projects: Project[] }) {
     <PortfolioCategoryFilter categories={filterCategories(reports)}><div className="marketing-report-grid">{reports.map(report=><article data-portfolio-category={report.category?.slug || 'uncategorized'} key={`${report.id}-details`}>
       <header><div><span>{report.period || 'Campaign report'}</span><h3>{report.campaign}</h3></div>{report.spend&&<strong>{report.spend}<small>Amount spent</small></strong>}</header>
       {report.image&&<div className="marketing-report-image"><StudioImage src={report.image} alt={`${report.campaign} Meta Ads screenshot`} sizes="(max-width:900px) 100vw, 50vw" /></div>}
-      <dl>{[['Reach',report.reach],['Impressions',report.impressions],['Link clicks',report.clicks],['Leads',report.leads],['CTR',report.ctr!=null?`${report.ctr}%`:undefined]].map(([label,value])=><div key={String(label)}><dt>{label}</dt><dd>{typeof value==='number'?compactMetric(value):value||'—'}</dd></div>)}</dl>
+      <dl>{[['Reach',report.reach],['Impressions',report.impressions],['Link clicks',report.clicks],['Leads',report.leads],['Cost / lead',report.costPerLead!=null?`$${report.costPerLead.toFixed(2)}`:undefined],['CTR',report.ctr!=null?`${report.ctr}%`:undefined]].map(([label,value])=><div key={String(label)}><dt>{label}</dt><dd>{typeof value==='number'?compactMetric(value):value||'—'}</dd></div>)}</dl>
       {report.summary&&<p>{report.summary}</p>}
     </article>)}</div></PortfolioCategoryFilter>
-    {illustrative && <p className="report-disclaimer">Sample figures are illustrative and can be replaced with confirmed Meta Ads results in the dashboard.</p>}
+    {illustrative && <p className="report-disclaimer">Representative figures shown for the reporting preview. Replace them with verified live campaign data in the dashboard.</p>}
   </section>
 }
 

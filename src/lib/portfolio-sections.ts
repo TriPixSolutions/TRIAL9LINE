@@ -3,14 +3,14 @@ export const portfolioSections = [
     slug: 'video-production',
     title: 'Video Production',
     description: 'Cinematic films, campaign videos and reels presented in their original format.',
-    image: '/images/editorial/polish-film-compact.webp',
+    image: '/images/editorial/work-video-production.webp',
     match: /video|film|cinema|videography|production/i,
   },
   {
     slug: 'content-creation',
     title: 'Content Creation',
     description: 'Social-first reels and everyday brand stories made for fast-moving feeds.',
-    image: '/images/editorial/service-social-detail.webp',
+    image: '/images/editorial/work-content-creation.webp',
     match: /social|content|reel|short.form/i,
   },
   {
@@ -24,7 +24,7 @@ export const portfolioSections = [
     slug: 'food-photography',
     title: 'Food Photography',
     description: 'Food, ingredients and hospitality captured with a distinctive point of view.',
-    image: '/images/editorial/polish-food-still.webp',
+    image: '/images/editorial/work-food-photography.webp',
     match: /photo/i,
   },
   {
