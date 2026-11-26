@@ -125,23 +125,32 @@ function moneyValue(value: unknown) {
 function marketingReports(projects: Project[]): MarketingReport[] {
   const dedicated = projects.flatMap(project => [...(project.marketingReports || [])].sort((a: any,b: any)=>(a.displayOrder ?? 9999)-(b.displayOrder ?? 9999)).map((report: any, index: number) => {
     const spendValue = moneyValue(report.spend)
-    const leads = report.results?.leads
+    const sample = [
+      { reach: 118400, impressions: 286900, clicks: 5740, leads: 86, ctr: 2.0 },
+      { reach: 76900, impressions: 164700, clicks: 3130, leads: 65, ctr: 1.9 },
+    ][index % 2]
+    const illustrative = report.isIllustrative === true
+    const reach = report.results?.reach ?? (illustrative ? sample.reach : undefined)
+    const impressions = report.results?.impressions ?? (illustrative ? sample.impressions : undefined)
+    const clicks = report.results?.clicks ?? (illustrative ? sample.clicks : undefined)
+    const leads = report.results?.leads ?? (illustrative ? sample.leads : undefined)
+    const ctr = report.results?.ctr ?? (illustrative ? sample.ctr : undefined)
     return {
       id: `${project.id}-report-${report.id || index}`,
       project: project.title,
       campaign: report.campaignName || project.title,
       period: report.period,
       spend: report.spend,
-      reach: report.results?.reach,
-      impressions: report.results?.impressions,
-      clicks: report.results?.clicks,
+      reach,
+      impressions,
+      clicks,
       leads,
-      ctr: report.results?.ctr,
+      ctr,
       spendValue,
       costPerLead: spendValue && leads ? spendValue / leads : undefined,
       summary: report.summary,
       image: assetUrl(report.reportImage, report.reportImageUrl),
-      illustrative: report.isIllustrative === true,
+      illustrative,
       category: category(report.subcategory),
     }
   }))

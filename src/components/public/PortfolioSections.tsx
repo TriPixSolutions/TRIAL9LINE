@@ -9,8 +9,8 @@ export function PortfolioSections({ className = "work-grid" }: { className?: str
         <StudioImage src={section.image} alt={section.title + ' creative work'} sizes="(max-width:540px) 100vw, (max-width:1100px) 50vw, 33vw" />
         {section.slug === 'performance-marketing' && <div className="performance-card-preview" aria-hidden="true">
           <span>Sample campaign snapshot</span>
-          <div><strong>510</strong><small>Leads</small></div>
-          <div><strong>$15.88</strong><small>Cost / lead</small></div>
+          <div><strong>151</strong><small>Leads</small></div>
+          <div><strong>$14.77</strong><small>Cost / lead</small></div>
         </div>}
       </div>
       <div className="project-card-meta"><h3>{section.title}</h3><Arrow diagonal /></div>
