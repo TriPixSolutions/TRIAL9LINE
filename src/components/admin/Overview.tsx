@@ -51,7 +51,7 @@ export async function Overview({payload,user}:{payload:Payload;user:PayloadReque
       {content&&<Link href="/admin/collections/projects?where[_status][equals]=draft"><span>Drafts in progress</span><strong>{String(drafts).padStart(2,'0')}</strong><span>Review drafts ↗</span></Link>}
       {leads&&<Link href="/admin/collections/inquiries"><span>New inquiries</span><strong>{String(newInquiries?.totalDocs||0).padStart(2,'0')}</strong><span>Open inbox ↗</span></Link>}
     </div>
-    <div className="studio-admin-links">{content&&<><Link href="/admin/collections/media">Media library ↗</Link><Link href="/admin/globals/work-page">Works appearance ↗</Link></>}<Link href="/" target="_blank">Visit website ↗</Link></div>
+    <div className="studio-admin-links">{content&&<><Link href="/admin/collections/blogs">Manage blog articles ↗</Link><Link href="/admin/collections/media">Media library ↗</Link><Link href="/admin/globals/work-page">Works appearance ↗</Link></>}<Link href="/" target="_blank">Visit website ↗</Link></div>
   </section>
 }
 

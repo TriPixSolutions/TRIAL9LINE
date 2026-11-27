@@ -44,6 +44,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     '@type': ['ProfessionalService', 'LocalBusiness'],
     '@id': `${siteUrl}/#organization`,
     name: 'Trail9ine Media',
+    alternateName: ['Trail Nine', 'Trail Nine Line', 'Trail9ine'],
     url: siteUrl,
     logo: `${siteUrl}/images/logo.png`,
     image: `${siteUrl}${socialImagePath}`,

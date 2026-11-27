@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "briefing-a-restaurant-shoot",
+    "title": "What should a restaurant put in a creative brief?",
+    "summary": "A one-page brief for a restaurant shoot, from the first customer question to the final edit.",
+    "keywords": "restaurant creative brief, Toronto content creation",
+    "source": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "body": "A restaurant owner planning a Sunday brunch launch could ask for twelve reels. A more revealing detail is that people keep calling to ask whether children can order from the regular menu. The first request gives a crew a quantity. The second gives them a scene to shoot.\n\n## Start with the decision at the table\n\nWrite down who needs the film, what they already know and what would help them book. For the brunch example, show a family ordering, the smaller plate arriving and the actual seating arrangement. Confirm the menu and hours with the floor manager before filming. A beautiful shot of a discontinued special creates work for whoever answers the phone.\n\n## Choose the deliverables last\n\nTrail9ine Media brings photography, video, social content and web design together in Toronto. When briefing those services, give each asset a job. A menu photograph can explain a portion. A reel can show the pace of service. The booking page can answer questions about timing. Google’s guidance on helpful content offers a useful final check. Could someone use what you published to make the decision that brought them there?"
+  },
+  {
+    "slug": "photographing-food-for-a-menu",
+    "title": "The menu photograph that answers a question",
+    "summary": "Plan food photography around portion, texture and the details a diner needs before ordering.",
+    "keywords": "food photography Toronto, restaurant menu photography",
+    "source": "https://www.w3.org/WAI/tutorials/images/decision-tree/",
+    "body": "A tight crop of a dosa can show every crisp bubble and still leave a diner wondering how much food will arrive. Before picking up the camera, put the dish on the table as a guest will receive it. Ask the server which question comes up most often. That answer belongs on the shot list.\n\n## Give the frame a job\n\nFor a sharing platter, pull back far enough to include its sides. For a filled pastry, cut one open and bring the cut face towards the window. Keep a reference plate nearby so the garnish and portion stay consistent between frames. Capture a wider version for the menu and check the smallest mobile crop before clearing the table.\n\n## Write the words beside the picture\n\nW3C’s image decision tree asks what information an image contributes in context. If the description beside a dish already covers everything the photograph communicates, a decorative image can have empty alt text. If the photograph explains how dosas and chutneys are served together, describe that detail. Confirm ingredients with the kitchen before putting them in the menu copy."
+  },
+  {
+    "slug": "editing-a-kitchen-reel",
+    "title": "Editing a kitchen reel that works with the sound off",
+    "summary": "A practical edit plan for cooking videos, with deliberate coverage, useful captions and a phone-screen review.",
+    "keywords": "restaurant video production, social video captions",
+    "source": "https://www.w3.org/WAI/media/av/captions/",
+    "body": "Listen to a pan crackle in an edit suite and the shot feels obvious. Watch it on a muted phone and the same moment can look like someone waiting. Plan a visual cue for the change you want viewers to notice. A cook tilting the pan to reveal a browned edge can carry a whole beat.\n\n## Film the change\n\nFor a short recipe film, capture the ingredient before it touches heat, the action that changes it and the finished texture. Hold each angle long enough to cut on movement. If the cook explains that the onions should turn translucent, get a close shot of that exact stage. It gives the editor a place to cut when the instruction lands.\n\n## Do two playback checks\n\nWatch once muted with captions and once with sound. W3C describes captions as including speech and meaningful non-speech audio. Check dish names manually and identify an off-camera speaker where the voice matters. Move captions away from hands and ingredients. On the second pass, listen for instructions drowned out by music. Both versions should let a viewer follow the same sequence."
+  },
+  {
+    "slug": "reading-a-lead-report",
+    "title": "What did that catering enquiry actually cost?",
+    "summary": "Work through a catering campaign example using cost per lead, conversion rate and booked-event cost.",
+    "keywords": "cost per lead, catering lead generation",
+    "source": "https://support.google.com/google-ads/answer/2684489",
+    "body": "Imagine spending CAD 600 on a catering campaign and receiving 30 enquiry forms. That works out to CAD 20 per lead. Now imagine half the enquiries ask for delivery outside the service area. The arithmetic still holds. The number the catering manager needs for the next budget meeting has changed.\n\n## Follow the enquiry into the booking diary\n\nGive the team three counts for the same group of enquiries. How many forms arrived, how many met the date and service-area requirements, and how many became confirmed events? In this example, 15 suitable enquiries would cost CAD 40 each. Three bookings would cost CAD 200 each in advertising. These are illustrative figures. Keep the event date and the enquiry date in separate columns so late bookings can be traced back.\n\n## Check what the platform counted\n\nGoogle Ads defines conversion rate using conversions divided by eligible ad interactions for the same period. Check the configured conversion action before comparing reports. A phone-button tap, a submitted form and a deposit describe different stages. Compare spend with one defined outcome at a time, then take a handful of enquiries back to the sales team to understand why they did or did not progress."
+  },
+  {
+    "slug": "photographs-for-a-first-visit",
+    "title": "Photograph the last thirty metres to your front door",
+    "summary": "Help first-time visitors recognise a Toronto storefront, find the entrance and understand the room before arriving.",
+    "keywords": "restaurant local search, Google Business Profile photos",
+    "source": "https://support.google.com/business/answer/6103862",
+    "body": "A first-time guest steps off the streetcar with the right address and walks past the restaurant twice. The online gallery has six pictures of dinner and none of the doorway. Start your next photo session outside. Stand where a visitor would first look up from their phone.\n\n## Walk the approach\n\nTake a street-level frame with the sign and its nearest landmark. Follow it with the entrance from the direction most guests approach. If the restaurant is inside a building, photograph the turn after the lobby. Check the pictures at phone size. A sign legible on your monitor may disappear when the storefront becomes a thumbnail.\n\n## Keep the listing useful after the shoot\n\nGoogle’s Business Profile guidance calls for clear, well-lit photographs that represent the business accurately. Review the exterior again after a sign change, construction or a seasonal patio opening. Inside, show the ordering counter or host stand as a visitor sees it. Where access details matter, publish precise written directions alongside the pictures and have a staff member walk the route to verify them."
+  },
+  {
+    "slug": "designing-a-catering-enquiry-form",
+    "title": "What a catering enquiry form really needs",
+    "summary": "Design a short catering enquiry form that gives staff enough detail to make a useful first reply.",
+    "keywords": "catering website design, accessible enquiry forms",
+    "source": "https://www.w3.org/WAI/tutorials/forms/",
+    "body": "Someone planning a team lunch may know the date and approximate headcount but have no idea how many trays to order. A form that requires a tray count asks them to do the caterer’s job. Start with the reply your team wants to send. Which details would let someone check availability and suggest a sensible next step?\n\n## Let uncertainty fit in the form\n\nFor an initial enquiry, a date, guest-count range, delivery area and reply address may be enough. Make dietary details optional and give the customer space to explain. If the exact venue is undecided, a neighbourhood can still help staff check travel time. Reserve final quantities and delivery instructions for the booking conversation.\n\n## Try the unhappy path\n\nW3C’s forms tutorial covers labels, instructions, validation and feedback. Give every field a visible label. Submit the form with one missing detail and read the error aloud. Does it say exactly what to enter? Check that the other answers survive the correction. On success, tell the visitor what happened and how the team will reply. Then check that staff actually received the enquiry."
+  }
+]

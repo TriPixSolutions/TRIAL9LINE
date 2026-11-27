@@ -11,6 +11,7 @@ const navigation = [
   { href: '/work', label: 'Works' },
   { href: '/about', label: 'About Us' },
   { href: '/services', label: 'Services' },
+  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact Us' },
 ]
 

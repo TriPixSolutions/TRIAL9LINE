@@ -144,3 +144,11 @@ Refer to `.env.example` for all configurable variables:
   11. Access control: Unauthorized draft preview verified (401).
   12. Access control: Unauthorized notification retry guarded (403).
   13. Background outbox worker execution verified.
+
+### Blog publishing and search indexing
+
+Owners and editors can use **Dashboard → Manage blog articles** to create, edit, publish, unpublish or delete articles. Choose a stable lowercase slug and separate paragraphs with a blank line. Use a separate paragraph beginning with `## ` for a section heading. The summary and title supply the default search description and title. Both can be overridden in the article editor. New articles are private until Published is checked and saved. The six launch articles are inserted once per database.
+
+The production canonical origin is `https://trail9ine.ca`. Set `NEXT_PUBLIC_SERVER_URL` to this origin in hosting. Published articles automatically appear in `/blog` and `/sitemap.xml`. Unpublishing or deleting removes the URL from both and retires its detail page.
+
+In the verified trail9ine.ca Google Search Console property, open **Sitemaps**, submit `https://trail9ine.ca/sitemap.xml`, then inspect an article URL using **URL Inspection** to check Google's indexing status. Google's crawl and indexing schedule is independent of publication.

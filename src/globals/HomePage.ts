@@ -10,6 +10,7 @@ export const HomePage: GlobalConfig = {
     update: ({ req }) => req.user?.role === 'owner' || req.user?.role === 'editor',
   },
   fields: [
+    { name: 'blogLaunchSeeded', type: 'checkbox', admin: { hidden: true } },
     {name:'homeProjectLimit',type:'number',label:'Selected work: maximum projects',defaultValue:4,min:1,max:12,required:true,admin:{hidden:true}},
     {name:'heroImage',type:'upload',relationTo:'media',label:'Hero image (optional)'},
     {

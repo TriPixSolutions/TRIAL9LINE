@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 
-export const siteUrl = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/$/, '')
+export const siteUrl = (process.env.NEXT_PUBLIC_SERVER_URL || 'https://trail9ine.ca').replace(/\/$/, '')
 export const socialImagePath = '/images/trail9ine-social-share.jpg'
 
 const defaultKeywords = [
+  'Trail9ine Media', 'Trail Nine', 'Trail Nine Line',
   'creative marketing agency Toronto',
   'video production Toronto',
   'content creation Toronto',

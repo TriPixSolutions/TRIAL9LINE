@@ -4,6 +4,7 @@ import {deploymentErrors} from '../scripts/deployment-env.mjs'
 import { buildConfig } from 'payload'
 import { resendAdapter } from '@payloadcms/email-resend'
 import { Services } from './collections/Services'
+import { Blogs } from './collections/Blogs'
 import { WorkPage } from './globals/WorkPage'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -49,7 +50,7 @@ return buildConfig({
       titleSuffix: '— TRAIL9INE MEDIA Staff',
     },
   },
-  collections: [Projects, Media, Categories, Services, Inquiries, Users, NotificationOutbox],
+  collections: [Projects, Blogs, Media, Categories, Services, Inquiries, Users, NotificationOutbox],
   globals: [HomePage, AboutPage, WorkPage, SiteSettings],
   defaultDepth: 1,
   maxDepth: 3,
