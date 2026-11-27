@@ -2,6 +2,7 @@ import {siteServices} from '@/lib/site-content'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import '../globals.css'
+import { EnquiryPopup } from '@/components/public/EnquiryPopup'
 import { Header } from '@/components/public/Header'
 import { Footer } from '@/components/public/Footer'
 import { PageMotion } from '@/components/public/PageMotion'
@@ -58,6 +59,6 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return <html lang="en" className={display.variable + ' ' + body.variable}><body className="studio-site">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
     <a className="skip-link" href="#main-content">Skip to content</a>
-    <Header services={services.map(({slug,title})=>({slug,title}))} /><main id="main-content">{children}</main><Footer /><PageMotion />
+    <Header services={services.map(({slug,title})=>({slug,title}))} /><main id="main-content">{children}</main><Footer /><PageMotion /><EnquiryPopup />
   </body></html>
 }
