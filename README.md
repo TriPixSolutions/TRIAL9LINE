@@ -149,6 +149,6 @@ Refer to `.env.example` for all configurable variables:
 
 Owners and editors can use **Dashboard → Manage blog articles** to create, edit, publish, unpublish or delete articles. Choose a stable lowercase slug and separate paragraphs with a blank line. Use a separate paragraph beginning with `## ` for a section heading. The summary and title supply the default search description and title. Both can be overridden in the article editor. New articles are private until Published is checked and saved. The six launch articles are inserted once per database.
 
-The production canonical origin is `https://trail9ine.ca`. Set `NEXT_PUBLIC_SERVER_URL` to this origin in hosting. Published articles automatically appear in `/blog` and `/sitemap.xml`. Unpublishing or deleting removes the URL from both and retires its detail page.
+The production canonical origin is `https://trail9ine.ca`. Set `NEXT_PUBLIC_SERVER_URL` to this origin in hosting. Published articles automatically appear in `/blog` and `/post-sitemap.xml`. The sitemap index at `/sitemap.xml` lists separate page, post and work sitemaps. Visitors can browse all three groups at `/sitemap`. Unpublishing or deleting removes the URL from both and retires its detail page.
 
 In the verified trail9ine.ca Google Search Console property, open **Sitemaps**, submit `https://trail9ine.ca/sitemap.xml`, then inspect an article URL using **URL Inspection** to check Google's indexing status. Google's crawl and indexing schedule is independent of publication.
